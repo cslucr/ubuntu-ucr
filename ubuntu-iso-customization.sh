@@ -18,7 +18,7 @@ Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración
 
 # Captando parámetros
 # Is in development environment ?
-DEVELOPMENT=$(false)
+DEVELOPMENT=false
 ZIP=""
 
 while getopts z:hd option
@@ -26,7 +26,7 @@ do
  case "${option}"
  in
  z) ZIP=${OPTARG};;
- d) DEVELOPMENT=$(true);;
+ d) DEVELOPMENT=true;;
  h) myhelp
     exit 0 ;;
  esac
@@ -62,7 +62,8 @@ EDIT=${ISONAME%.*}-squashfs
 ## PERSONALIZACION
 
 if [ -z $ZIP ]; then
-    if [ $DEVELOPMENT ]; then
+    if $DEVELOPMENT ; then
+        echo "Modo Local (Desarrollo) activado"
         mkdir ubuntu-ucr-master/
         cp -ar plymouth/ gschema/ *.list ubuntu-16.04-ucr-* ubuntu-ucr-master/
         zip -r $SCRIPTDIR/master.zip ubuntu-ucr-master

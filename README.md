@@ -16,11 +16,11 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/leojimenezcr/ubuntu-ucr/master/screenshot-1.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-1.png)
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/leojimenezcr/ubuntu-ucr/master/screenshot-2.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-2.png)
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/leojimenezcr/ubuntu-ucr/master/screenshot-3.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-3.png)
 
 
 ## Descarga
@@ -55,7 +55,7 @@ Se toma como base Ubuntu por las siguientes razones:
 
 1. Realice una instalación en limpio de Ubuntu 16.04 LTS
 2. Conéctese a Internet
-3. Descargue el proyecto: `wget https://github.com/leojimenezcr/ubuntu-ucr/archive/master.zip`
+3. Descargue el proyecto: `wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip`
 4. Descomprima: `unzip master.zip`
 5. Ingrese al directorio: `cd ubuntu-ucr-master`
 6. De permisos de ejecución al script: `chmod +x ubuntu-16.04-ucr-config.sh`
@@ -66,7 +66,7 @@ Se toma como base Ubuntu por las siguientes razones:
 El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de configuración.
 1. Instale las herramientas requeridas: `sudo apt install squashfs-tools xorriso`
 2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 16.04 con Unity, Gnome-Shell o MATE.
-3. Descargue el script *ubuntu-iso-customization.sh*: `wget https://github.com/leojimenezcr/ubuntu-ucr/raw/master/ubuntu-iso-customization.sh`
+3. Descargue el script *ubuntu-iso-customization.sh*: `wget https://github.com/cslucr/ubuntu-ucr/raw/master/ubuntu-iso-customization.sh`
 3. De permisos de ejecución al script: `chmod +x ubuntu-iso-customization.sh`
 4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-iso-customization.sh ubuntu-16.04.x-desktop-arch.iso`
 

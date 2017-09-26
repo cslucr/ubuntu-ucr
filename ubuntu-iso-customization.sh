@@ -68,7 +68,7 @@ if [ -z $ZIP ]; then
         zip -r $SCRIPTDIR/master.zip ubuntu-ucr-master
         rm -rf ubuntu-ucr-master/
     else
-        wget -O $SCRIPTDIR/master.zip https://github.com/leojimenezcr/ubuntu-ucr/archive/master.zip
+        wget -O $SCRIPTDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
     fi
 else
     cp $ZIP master.zip

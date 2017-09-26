@@ -10,7 +10,7 @@
 # Escrito por la Comunidad de Software Libre de la Universidad de Costa Rica
 # http://softwarelibre.ucr.ac.cr
 #
-# Github: https://github.com/leojimenezcr/ubuntu-ucr
+# Github: https://github.com/cslucr/ubuntu-ucr
 
 # MENSAJE DE ADVERTENCIA
 # pregunta solo si el usuario no puso explicitamente la opcion -y

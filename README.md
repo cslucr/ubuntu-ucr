@@ -51,9 +51,11 @@ Se toma como base Ubuntu por las siguientes razones:
 - Los entornos a utilizar son: Unity (Ubuntu 16.04), Gnome-shell (Ubuntu 18.04+) y MATE, ideal para equipos antiguos.
 
 
-## ¿Cómo ejecutar el script?
+## ¿Cómo ejecutar los scripts?
 
-1. Realice una instalación en limpio de Ubuntu 16.04 LTS
+### En una instalación en limpio:
+
+1. Realice una instalación en limpio de Ubuntu 16.04 LTS, funciona con Unity, Gnome-Shell y MATE.
 2. Conéctese a Internet
 3. Descargue el proyecto: `wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip`
 4. Descomprima: `unzip master.zip`
@@ -61,7 +63,7 @@ Se toma como base Ubuntu por las siguientes razones:
 6. De permisos de ejecución al script: `chmod +x ubuntu-16.04-ucr-config.sh`
 7. Ejecútelo: `./ubuntu-16.04-ucr-config.sh`
 
-### ¿Cómo generar una imagen ISO?
+### Para generar una imagen ISO
 
 El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de configuración.
 1. Instale las herramientas requeridas: `sudo apt install squashfs-tools xorriso`
@@ -70,6 +72,7 @@ El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera u
 3. De permisos de ejecución al script: `chmod +x ubuntu-iso-customization.sh`
 4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-iso-customization.sh ubuntu-16.04.x-desktop-arch.iso`
 
+Para más opciones ejecute `./ubuntu-iso-customization.sh -h`
 
 *Comunidad de Software Libre de la Universidad de Costa Rica*
 

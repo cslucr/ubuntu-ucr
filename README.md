@@ -2,7 +2,7 @@
 
 **Ubuntu UCR** es una propuesta por parte de la *Comunidad de Software Libre de la Universidad de Costa Rica* para ser utilizada en la Institución.
 
-Consiste en una personalización de Ubuntu, la popular distribución GNU/Linux. Este es un sistema operativo innovador y de fácil manejo, además es libre, lo que significa que se puede utilizar con cualquier fin, se puede copiar y distribuir sin restrcción e incluso se puede modificar para ser adaptado a diversas necesidades. La mayoría del software incluido también es de licencia libre.
+Consiste en una personalización de Ubuntu, la popular distribución GNU/Linux. Este es un sistema operativo innovador y de fácil manejo, además es libre, lo que significa que se puede utilizar con cualquier fin, se puede copiar y distribuir sin restricción e incluso se puede modificar para ser adaptado a diversas necesidades. La mayoría del software incluido también es de licencia libre.
 
 Estas son algunas de sus características:
 

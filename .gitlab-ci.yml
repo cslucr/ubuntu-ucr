@@ -1,0 +1,24 @@
+image: ubuntu
+# Se requiere definir las siguientes varibles para el pipeline
+# SSH_PRIVATE_KEY: Llave privada de SSH, generada con keygen
+# SSH_USER: usuario de SSH en el servidor remoto
+# SSH_SERVER: IP o nombre del servidor remoto
+# SSH_RPATH: Ruta remota donde se almacenara el artefacto
+before_script:
+  - apt-get update -qq && apt-get install -y -qq zip wget sudo rsync squashfs-tools xorriso
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  
+  # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
+  # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+job_ubuntu:
+  script: 
+    - wget -O /tmp/ubuntu-16.04.3-desktop-amd64.iso http://espejos.ucr.ac.cr/ubuntu-cd/16.04/ubuntu-16.04.3-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d /tmp/ubuntu-16.04.3-desktop-amd64.iso
+    - 'echo $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+    - 'scp $(find ./ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+  only:
+    - estable

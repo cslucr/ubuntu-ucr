@@ -399,3 +399,9 @@ sudo sed -i \
 -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
 /etc/skel/.bashrc
 
+# Configura el uso horario 
+#
+# Se activa el uso horario para que la fecha esté siempre en hora tica
+
+
+sudo timedatectl set-timezone America/Costa_Rica

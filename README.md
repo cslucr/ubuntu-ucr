@@ -12,7 +12,7 @@ Estas son algunas de sus características:
 - Extras de terceros preinstalados, como tipografías Arial, Times New Roman, etc., plugins Oracle Java, Adobe Flash, o codecs multimedia.
 - Software adicional como Gimp, Google Chrome, Spotify o la herramienta de configuración de AURI y Eduroam.
 - Actualizaciones automáticas del sistema operativo y de todos los programas instalados. Estas son silenciosas y no requieren intervención del usuario.
-
+- Soporte para lectores de firma digital, certificados de la CA nacional y programas instalados del BCCR.
 
 ## Capturas de pantalla
 

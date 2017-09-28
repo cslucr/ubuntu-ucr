@@ -410,10 +410,10 @@ sudo sed -i \
 
 if [ "$arch" == 'x86' ]
 then
-  wget -o firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
+  wget -O firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
 else
-  wget -o firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
+  wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
 fi
 
 sudo dpkg -i firmador-bccr.deb
-sudo apt-get install -f 
+rm firmador-bccr.deb

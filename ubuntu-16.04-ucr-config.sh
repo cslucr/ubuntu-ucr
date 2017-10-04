@@ -110,6 +110,12 @@ sudo sed -i \
 
 packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb libreoffice-help-en-gb libreoffice-style-sifr"
 
+# Firma digital 
+
+sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -'
+sudo sh -c 'echo "deb http://repos.solvosoft.com/ubuntu xenial main" > /etc/apt/sources.list.d/repos-firmadigital.list'
+packages="$packages firmadigitalcr"
+
 # Google Chrome o Chromium
 #
 # Para sistemas de 64bits se anade el repositorio de Google Chrome. Este no
@@ -399,9 +405,19 @@ sudo sed -i \
 -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
 /etc/skel/.bashrc
 
+
 # Configura el uso horario 
 #
 # Se activa el uso horario para que la fecha esté siempre en hora tica
-
-
 sudo timedatectl set-timezone America/Costa_Rica
+
+# Firmador BCCR
+if [ "$arch" == 'x86' ]
+then
+  wget -O firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
+else
+  wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
+fi
+
+sudo dpkg -i firmador-bccr.deb
+rm firmador-bccr.deb

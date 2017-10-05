@@ -22,3 +22,11 @@ job_ubuntu:
     - 'scp $(find ./ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
   only:
     - estable
+job_mate:
+  script: 
+    - wget -O /tmp/ubuntu-mate-16.04-desktop-amd64.iso http://cdimage.ubuntu.com/ubuntu-mate/releases/16.04/release/ubuntu-mate-16.04-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d /tmp/ubuntu-mate-16.04-desktop-amd64.iso
+    - 'echo $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+    - 'scp $(find ./ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+  only:
+    - estable

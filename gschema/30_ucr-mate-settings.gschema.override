@@ -7,6 +7,9 @@ icon-theme='Numix-Circle'
 [org.gnome.desktop.wm.preferences]
 theme='Arc-Darker'
 
+[org.mate.caja.desktop]
+home-icon-visible=false
+
 [org.mate.desktop.interface]
 gtk-theme='Arc-Darker'
 icon-theme='Numix-Circle'

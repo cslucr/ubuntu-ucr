@@ -140,6 +140,13 @@ umount /dev/pts
 # Sale del directorio de edicion
 EOF
 
+# Actualiza cache de APT
+if [[ -d "$APT_CACHE" ]]; then
+  echo "Salvando cache APT: $APT_CACHE"
+  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/"
+fi
+
+
 sudo umount $EDIT/dev
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts
 sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf

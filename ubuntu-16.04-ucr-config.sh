@@ -231,7 +231,7 @@ if grep -q "Unity" /usr/share/xsessions/*;        then packages="$packages unity
 if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
 if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
-purgepackages="$purgepackages evolution evolution-plugins evolution-common libevolution evolution-data-server-online-accounts"
+purgepackages="$purgepackages evolution evolution-plugins evolution-common libevolution evolution-data-server-online-accounts tilda"
 autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"
 
 # Actualizacion del sistema e instalacion de los paquetes indicados

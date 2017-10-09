@@ -226,6 +226,11 @@ packages="$packages spotify-client"
 # - unattended-upgrades para actualizaciones automaticas
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 packages="$packages thunderbird thunderbird-locale-es thunderbird-locale-es-ar thunderbird-locale-en-gb unattended-upgrades caffeine"
+# - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
+if grep -q "Unity" /usr/share/xsessions/*;        then packages="$packages unity-tweak-tool"; fi
+if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
+if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
+
 purgepackages="$purgepackages evolution evolution-plugins evolution-common libevolution evolution-data-server-online-accounts"
 autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"
 

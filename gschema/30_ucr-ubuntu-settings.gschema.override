@@ -6,7 +6,7 @@ time-format = '12-hour'
 favorites = ['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://google-chrome.desktop', 'application://thunderbird.desktop', 'application://libreoffice-writer.desktop', 'application://libreoffice-calc.desktop', 'application://libreoffice-impress.desktop', 'application://spotify.desktop', 'application://auri.desktop', 'unity://running-apps', 'application://org.gnome.Software.desktop', 'unity://expo-icon', 'unity://devices']
 
 [org.gnome.desktop.background]
-picture-uri = 'file:///usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background.jpg'
+picture-uri = 'file:///usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background-cslucr.jpg'
 color-shading-type = 'horizontal'
 primary-color = '#00005d5da4a4'
 secondary-color = '#0000c0c0f3f3'

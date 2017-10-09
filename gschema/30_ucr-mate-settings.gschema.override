@@ -23,7 +23,7 @@ monospace-font-name='Ubuntu Mono 13'
 theme='Arc-Darker'
 
 [org.mate.background]
-picture-filename='/usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background.jpg'
+picture-filename='/usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background-cslucr.jpg'
 
 [org.mate.marco.general]
 theme='Arc-Darker'

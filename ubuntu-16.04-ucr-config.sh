@@ -255,7 +255,7 @@ sudo apt-get update
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
 sudo mkdir -p /usr/share/backgrounds/ucr/
-sudo cp "$BASEDIR"/ubuntu-16.04-ucr-background.jpg /usr/share/backgrounds/ucr/
+sudo cp "$BASEDIR"/ubuntu-16.04-ucr-background.jpg "$BASEDIR"/ubuntu-16.04-ucr-background-cslucr.jpg /usr/share/backgrounds/ucr/
 
 # Unity
 if grep -q "Unity" /usr/share/xsessions/*

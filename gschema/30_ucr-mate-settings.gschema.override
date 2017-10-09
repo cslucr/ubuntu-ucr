@@ -53,6 +53,9 @@ statusbar-visible=true
 antialiasing = 'rgba'
 hinting = 'slight'
 
+[org.mate.mate-menu]
+applet-icon='/usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg'
+
 [org.mate.panel]
 default-layout='redmond-indicators-fresh'
 show-program-list=true

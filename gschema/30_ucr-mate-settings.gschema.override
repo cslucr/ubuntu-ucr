@@ -54,7 +54,7 @@ antialiasing = 'rgba'
 hinting = 'slight'
 
 [org.mate.panel]
-default-layout='ubuntu-mate'
+default-layout='redmond-indicators-fresh'
 show-program-list=true
 
 [org.mate.peripherals-mouse]

@@ -65,7 +65,7 @@ if [ -z $ZIP ]; then
     if $DEVELOPMENT ; then
         echo "Modo Local (Desarrollo) activado"
         mkdir ubuntu-ucr-master/
-        cp -ar plymouth/ gschema/ unity-greeter/ *.list ubuntu-16.04-ucr-* ubuntu-ucr-master/
+        cp -ar plymouth/ gschema/ *.list ubuntu-16.04-ucr-* ubuntu-ucr-master/
         zip -r $SCRIPTDIR/master.zip ubuntu-ucr-master
         rm -rf ubuntu-ucr-master/
     else

@@ -275,9 +275,6 @@ then
   sudo cp "$BASEDIR"/gschema/30_ucr-ubuntu-settings.gschema.override /usr/share/glib-2.0/schemas/
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-  # Logo de la CSLUCR en Unity-Greeter (pantalla de inicio de sesion)
-  sudo cp "$BASEDIR"/unity-greeter/logo.png /usr/share/unity-greeter
-
   # Reinicia todos los valores redefinidos en archivo override para la sesion actual
   # Si no existe una sesion X11 falla y no hace nada
   gsettings reset com.canonical.indicator.datetime show-date

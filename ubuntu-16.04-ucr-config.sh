@@ -391,6 +391,23 @@ Categories=Settings;HardwareSettings;
 Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share/applications/auri.desktop'
 
 
+# Uso Horario 
+#
+# Se activa el uso horario para que la fecha este siempre en hora tica
+sudo timedatectl set-timezone America/Costa_Rica
+
+# Firmador BCCR
+if [ "$arch" == 'x86' ]
+then
+  wget -O firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
+else
+  wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
+fi
+
+sudo dpkg -i firmador-bccr.deb
+rm firmador-bccr.deb
+
+
 # PERFIL PREDETERMINADO
 
 # Aplicaciones al inicio
@@ -405,19 +422,3 @@ sudo sed -i \
 -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
 /etc/skel/.bashrc
 
-
-# Configura el uso horario 
-#
-# Se activa el uso horario para que la fecha esté siempre en hora tica
-sudo timedatectl set-timezone America/Costa_Rica
-
-# Firmador BCCR
-if [ "$arch" == 'x86' ]
-then
-  wget -O firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
-else
-  wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
-fi
-
-sudo dpkg -i firmador-bccr.deb
-rm firmador-bccr.deb

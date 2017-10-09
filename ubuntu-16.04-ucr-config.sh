@@ -360,6 +360,11 @@ then
   sudo cp "$BASEDIR"/gschema/ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
   sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+  # Se sobreescribe icono de menu de inicio de Numix, en su lugar se muestra el logo de Ubuntu
+  sudo mkdir -p /etc/skel/.icons/Numix/24/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/24/places/
+
   
   # Configura pantalla de autenticacion
   sudo sh -c 'echo "[greeter]
@@ -423,4 +428,5 @@ sudo cp $autostart /etc/skel/.config/autostart/
 sudo sed -i \
 -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
 /etc/skel/.bashrc
+
 

@@ -48,6 +48,10 @@ ISOPATH=$(cd "$(dirname "$1")"; pwd)/$(basename "$1")
 SCRIPTPATH=$(readlink -f $0)
 SCRIPTDIR=$(dirname "$SCRIPTPATH")
 
+# directorio para perzonalizacion
+CUSTOMIZATIONDIR=$(pwd)/ubuntu-iso-customization
+mkdir -p $CUSTOMIZATIONDIR
+
 # nombre del archivo ISO original
 ISONAME=$(basename "$ISOPATH")
 # nombre del archivo ISO personalizado,
@@ -64,20 +68,19 @@ EDIT=${ISONAME%.*}-squashfs
 if [ -z $ZIP ]; then
     if $DEVELOPMENT ; then
         echo "Modo Local (Desarrollo) activado"
-        mkdir ubuntu-ucr-master/
-        cp -ar plymouth/ gschema/ *.list ubuntu-16.04-ucr-* ubuntu-ucr-master/
-        zip -r $SCRIPTDIR/master.zip ubuntu-ucr-master
-        rm -rf ubuntu-ucr-master/
+        mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
+        cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
+        zip -r $CUSTOMIZATIONDIR/master.zip $CUSTOMIZATIONDIR/ubuntu-ucr-master
+        rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else
-        wget -O $SCRIPTDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
+        wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
     fi
 else
-    cp $ZIP master.zip
+    cp $ZIP $CUSTOMIZATIONDIR/master.zip
 fi
 
-echo "Se trabajará en el directorio $(pwd)/ubuntu-iso-customization"
-mkdir ubuntu-iso-customization
-cd ubuntu-iso-customization
+echo "Se trabajará en el directorio $CUSTOMIZATIONDIR"
+cd $CUSTOMIZATIONDIR
 mkdir mnt
 sudo mount -o loop $ISOPATH mnt
 mkdir $EXTRACT
@@ -85,7 +88,7 @@ sudo rsync --exclude=/casper/filesystem.squashfs -a mnt/ $EXTRACT
 sudo dd if=$ISOPATH bs=512 count=1 of=$EXTRACT/isolinux/isohdpfx.bin
 sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs
 sudo umount mnt
-sudo mv $SCRIPTDIR/master.zip $EDIT/root
+sudo mv $CUSTOMIZATIONDIR/master.zip $EDIT/root
 sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
 sudo mount --bind /dev/ $EDIT/dev/

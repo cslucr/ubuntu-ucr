@@ -29,7 +29,7 @@ picture-filename='/usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background-cslucr.
 theme='Arc-Darker'
 
 [org.mate.pluma]
-color-scheme='Classic'
+color-scheme='classic'
 display-line-numbers=true
 display-right-margin=false
 highlight-current-line=false

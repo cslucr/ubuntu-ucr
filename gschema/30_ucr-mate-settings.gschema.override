@@ -30,7 +30,7 @@ theme='Arc-Darker'
 
 [org.mate.pluma]
 color-scheme='classic'
-display-line-numbers=true
+display-line-numbers=false
 display-right-margin=false
 highlight-current-line=false
 

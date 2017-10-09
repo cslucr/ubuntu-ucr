@@ -361,9 +361,16 @@ then
   sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-  # Se sobreescribe icono de menu de inicio de Numix, en su lugar se muestra el logo de Ubuntu
-  sudo mkdir -p /etc/skel/.icons/Numix/24/places/
+  # Se sobreescribe icono de menu de inicio de Numix para todos los tamanos, en su lugar se muestra el logo de Ubuntu
+  sudo mkdir -p /etc/skel/.icons/Numix/{16,22,24,32,48,64,96,128}/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/16/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/22/places/
   sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/24/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/32/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/48/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/64/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/96/places/
+  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/128/places/
 
   
   # Configura pantalla de autenticacion

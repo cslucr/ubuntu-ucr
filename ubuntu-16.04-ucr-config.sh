@@ -365,6 +365,20 @@ then
   sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
+  # Favoritos de menu avanzado
+  mkdir -p /etc/skel/.config/mate-menu
+  sudo sh -c 'location:/usr/share/applications/firefox.desktop
+location:/usr/share/applications/google-chrome.desktop
+location:/usr/share/applications/thunderbird.desktop
+location:/usr/share/applications/spotify.desktop
+separator
+location:/usr/share/applications/libreoffice-writer.desktop
+location:/usr/share/applications/libreoffice-calc.desktop
+location:/usr/share/applications/libreoffice-impress.desktop
+separator
+location:/usr/share/applications/mate-display-properties.desktop
+location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/applications.list' 
+
   # Se sobreescribe icono de menu de inicio de Numix para todos los tamanos, en su lugar se muestra el logo de Ubuntu
   sudo mkdir -p /etc/skel/.icons/Numix/{16,22,24,32,48,64,96,128}/places/
   sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/16/places/
@@ -375,7 +389,6 @@ then
   sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/64/places/
   sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/96/places/
   sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/128/places/
-
   
   # Configura pantalla de autenticacion
   sudo sh -c 'echo "[greeter]

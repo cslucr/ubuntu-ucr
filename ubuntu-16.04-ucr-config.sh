@@ -41,14 +41,9 @@ do
  esac
 done
 
-if [ -z $1 ]; then
-  myhelp
-  exit 1
-fi
-
 # MENSAJE DE ADVERTENCIA
 # pregunta solo si el usuario no puso explicitamente la opcion -y
-if NOFORCE
+if $NOFORCE
 then
   echo ""
   echo "Este script podría sobreescribir la configuración actual, se recomienda ejecutarlo en una instalación limpia. Si este no es un sistema recién instalado o no ha realizado un respaldo, cancele la ejecución."

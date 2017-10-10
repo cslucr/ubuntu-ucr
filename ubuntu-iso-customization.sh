@@ -74,7 +74,7 @@ if [ -z $ZIP ]; then
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-        zip -r $CUSTOMIZATIONDIR/master.zip $CUSTOMIZATIONDIR/ubuntu-ucr-master
+        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; )
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else
         wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
@@ -144,6 +144,7 @@ EOF
 if [[ -d "$APT_CACHE" ]]; then
   echo "Salvando cache APT: $APT_CACHE"
   rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/"
+  rm -r "${EDIT}/apt/"
 fi
 
 

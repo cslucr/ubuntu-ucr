@@ -428,6 +428,12 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 sudo timedatectl set-timezone America/Costa_Rica
 
 # Complementos para LibreOffice
+# LanguageTool.oxt (corrector gramatical)
+# ultima version en https://www.languagetool.org/download/
+wget https://www.languagetool.org/download/LanguageTool-3.9.oxt
+sudo unopkg add LanguageTool-3.9.oxt
+rm LanguageTool-3.9.oxt
+
 # es_Any.oxt (ortografia, separacion y sinonimos)
 # ultima version en https://github.com/sbosio/rla-es/releases
 wget https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt

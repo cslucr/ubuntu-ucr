@@ -428,9 +428,11 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 sudo timedatectl set-timezone America/Costa_Rica
 
 # Complementos para LibreOffice
-wget https://www.languagetool.org/download/LanguageTool-stable.oxt
-sudo unopkg add LanguageTool-stable.oxt
-rm LanguageTool-stable.oxt
+# LanguageTool.oxt (corrector gramatical)
+# ultima version en https://www.languagetool.org/download/
+wget https://www.languagetool.org/download/LanguageTool-3.9.oxt
+sudo unopkg add LanguageTool-3.9.oxt
+rm LanguageTool-3.9.oxt
 
 # Firmador BCCR
 if [ "$arch" == 'x86' ]

@@ -2,8 +2,6 @@
 gtk-theme='Arc-Darker'
 icon-theme='Numix-Circle'
 
-
-
 [org.gnome.desktop.wm.preferences]
 theme='Arc-Darker'
 
@@ -60,7 +58,7 @@ hinting = 'slight'
 applet-icon='/usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg'
 
 [org.mate.panel]
-default-layout='redmond-indicators-fresh'
+default-layout='redmond-fresh'
 object-id-list=['mate-menu', 'showdesktopapplet', 'window-list', 'notification-area', 'indicatorappletcomplete', 'clock']
 show-program-list=true
 toplevel-id-list=['bottom']

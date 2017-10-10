@@ -440,6 +440,13 @@ wget https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt
 sudo unopkg add --shared es_ANY.oxt
 rm es_ANY.oxt
 
+# Calc
+# Este complemento permite eliminar las celdas vacias de una tabla en una hoja de calculo
+# ultima version en https://extensions.libreoffice.org/extensions/tools-for-calc-edit
+wget https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
+sudo unopkg add --shared toolsforedit.oxt
+rm toolsforedit.oxt
+
 # Firmador BCCR
 if [ "$arch" == 'x86' ]
 then

@@ -5,8 +5,7 @@ image: ubuntu
 # SSH_SERVER: IP o nombre del servidor remoto
 # SSH_RPATH: Ruta remota donde se almacenara el artefacto
 before_script:
-  - apt-get update -qq && apt-get install -y -qq zip wget sudo rsync squashfs-tools xorriso
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - apt-get update -qq && apt-get install -y -qq zip wget sudo rsync squashfs-tools xorriso openssh-client
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   
@@ -14,19 +13,29 @@ before_script:
   # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
   - mkdir -p ~/.ssh
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+after_script:
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - 'echo "$(pwd) - $SSH_USER@$SSH_SERVER:$SSH_RPATH"'
+  - 'scp $(find ubuntu-iso-customization/ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+  - 'rm -r ubuntu-iso-customization/ '
+
+cache:
+  paths:
+  - cache/
+
 job_ubuntu:
-  script: 
-    - wget -O /tmp/ubuntu-16.04.3-desktop-amd64.iso http://espejos.ucr.ac.cr/ubuntu-cd/16.04/ubuntu-16.04.3-desktop-amd64.iso
-    - bash ./ubuntu-iso-customization.sh -d /tmp/ubuntu-16.04.3-desktop-amd64.iso
-    - 'echo $SSH_USER@$SSH_SERVER:$SSH_RPATH'
-    - 'scp $(find ./ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+  script:
+    - mkdir -p cache/apt/ 
+    - test -f  cache/ubuntu-16.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-16.04.3-desktop-amd64.iso http://espejos.ucr.ac.cr/ubuntu-cd/16.04/ubuntu-16.04.3-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-16.04.3-desktop-amd64.iso
   only:
     - estable
+
 job_mate:
-  script: 
-    - wget -O /tmp/ubuntu-mate-16.04-desktop-amd64.iso http://cdimage.ubuntu.com/ubuntu-mate/releases/16.04/release/ubuntu-mate-16.04-desktop-amd64.iso
-    - bash ./ubuntu-iso-customization.sh -d /tmp/ubuntu-mate-16.04-desktop-amd64.iso
-    - 'echo $SSH_USER@$SSH_SERVER:$SSH_RPATH'
-    - 'scp $(find ./ -name *ucr*.iso) $SSH_USER@$SSH_SERVER:$SSH_RPATH'
+  script:
+    - mkdir -p cache/apt/
+    - test -f  cache/ubuntu-16.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-mate-16.04-desktop-amd64.iso http://cdimage.ubuntu.com/ubuntu-mate/releases/16.04/release/ubuntu-mate-16.04-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-mate-16.04-desktop-amd64.iso
   only:
     - estable

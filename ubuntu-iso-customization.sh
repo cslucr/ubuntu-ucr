@@ -11,6 +11,7 @@ Opciones:
 
   -d modo desarrollo, crea un zip apartir de la carpeta actual
   -z archivo.zip el archivo zip como repositorio
+  -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
   -h muestra esta ayuda
 
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
@@ -20,13 +21,16 @@ Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración
 # Is in development environment ?
 DEVELOPMENT=false
 ZIP=""
+APT_CACHE=""
+APT_CACHE_CHROOT=""
 
-while getopts z:hd option
+while getopts zc:hd option
 do
  case "${option}"
  in
  z) ZIP=${OPTARG};;
  d) DEVELOPMENT=true;;
+ c) APT_CACHE=${OPTARG};;
  h) myhelp
     exit 0 ;;
  esac
@@ -70,7 +74,7 @@ if [ -z $ZIP ]; then
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-        zip -r $CUSTOMIZATIONDIR/master.zip $CUSTOMIZATIONDIR/ubuntu-ucr-master
+        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; )
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else
         wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
@@ -78,6 +82,11 @@ if [ -z $ZIP ]; then
 else
     cp $ZIP $CUSTOMIZATIONDIR/master.zip
 fi
+if [[ -d "$APT_CACHE" ]]; then
+  echo "Usando cache APT: $APT_CACHE"
+  APT_CACHE=$(readlink -f $APT_CACHE)
+fi
+
 
 echo "Se trabajará en el directorio $CUSTOMIZATIONDIR"
 cd $CUSTOMIZATIONDIR
@@ -92,6 +101,14 @@ sudo mv $CUSTOMIZATIONDIR/master.zip $EDIT/root
 sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
 sudo mount --bind /dev/ $EDIT/dev/
+
+# Usa cache de APT
+if [[ -n "$APT_CACHE" ]]; then
+  mkdir -p $EDIT/apt/
+  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "${EDIT}/apt/"
+  APT_CACHE_CHROOT=" -c '/apt/'"
+fi
+
 
 # Ejecuta ordenes dentro de directorio de edicion
 cat << EOF | sudo chroot $EDIT
@@ -109,7 +126,7 @@ cd ~
 # Descarga y ejecuta script de personalizacion ubuntu-ucr.
 # Puede omitir el script y en su lugar realizar una personalizacion manual
 unzip master.zip && rm master.zip
-bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh -y
+bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh -y $APT_CACHE_CHROOT
 rm -r ubuntu-ucr-master
 
 rm -rf /tmp/* ~/.bash_history
@@ -122,6 +139,14 @@ umount /sys
 umount /dev/pts
 # Sale del directorio de edicion
 EOF
+
+# Actualiza cache de APT
+if [[ -d "$APT_CACHE" ]]; then
+  echo "Salvando cache APT: $APT_CACHE"
+  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/"
+  rm -r "${EDIT}/apt/"
+fi
+
 
 sudo umount $EDIT/dev
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts

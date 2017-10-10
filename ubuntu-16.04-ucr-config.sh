@@ -12,9 +12,38 @@
 #
 # Github: https://github.com/cslucr/ubuntu-ucr
 
+# Mensaje de ayuda en el uso de la aplicación.
+function myhelp(){
+  echo "Modo de empleo: $0 <opciones>
+
+Opciones:
+
+  -y no cuestiona, fuerza la sobreescritura de configuraciones
+  -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
+  -h muestra esta ayuda
+
+Toma una instalación fresca de Ubuntu y la personaliza.";
+}
+
+# Captando parámetros
+# Is in development environment ?
+NOFORCE=true
+APT_CACHE=""
+
+while getopts c:hy option
+do
+ case "${option}"
+ in
+ y) NOFORCE=false;;
+ c) APT_CACHE=${OPTARG};;
+ h) myhelp
+    exit 0 ;;
+ esac
+done
+
 # MENSAJE DE ADVERTENCIA
 # pregunta solo si el usuario no puso explicitamente la opcion -y
-if [[ $1 != "-y" ]]
+if $NOFORCE
 then
   echo ""
   echo "Este script podría sobreescribir la configuración actual, se recomienda ejecutarlo en una instalación limpia. Si este no es un sistema recién instalado o no ha realizado un respaldo, cancele la ejecución."
@@ -24,6 +53,12 @@ then
   then
     exit
   fi
+fi
+
+if [[ -d "$APT_CACHE" ]]; then
+  echo "Usando cache APT: $APT_CACHE"
+  APT_CACHE=$(readlink -f $APT_CACHE)
+  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "/var/cache/apt/"
 fi
 
 # VARIABLES
@@ -252,6 +287,11 @@ sudo apt-get -y dist-upgrade
 sudo apt-get -y install $packages
 sudo apt-get -y purge $purgepackages
 sudo apt-get -y autoremove
+# Salva el cache de APT
+if [[ -d "$APT_CACHE" ]]; then
+  echo "Salvando cache APT: $APT_CACHE"
+  rsync -a --link-dest="${APT_CACHE}/" "/var/cache/apt/" "${APT_CACHE}/"
+fi
 sudo apt-get clean
 
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal

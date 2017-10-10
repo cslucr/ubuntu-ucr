@@ -427,6 +427,11 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 # Se activa el uso horario para que la fecha este siempre en hora tica
 sudo timedatectl set-timezone America/Costa_Rica
 
+# Complementos para LibreOffice
+wget https://www.languagetool.org/download/LanguageTool-stable.oxt
+sudo unopkg add LanguageTool-stable.oxt
+rm LanguageTool-stable.oxt
+
 # Firmador BCCR
 if [ "$arch" == 'x86' ]
 then

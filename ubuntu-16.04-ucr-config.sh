@@ -427,6 +427,14 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 # Se activa el uso horario para que la fecha este siempre en hora tica
 sudo timedatectl set-timezone America/Costa_Rica
 
+# Complemento Calc
+# Este complemento permite eliminar las celdas vacias de una tabla en una hoja de calculo
+# ultima version en https://extensions.libreoffice.org/extensions/tools-for-calc-edit
+wget https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
+sudo unopkg add --shared toolsforedit.oxt
+rm toolsforedit.oxt
+
+
 # Firmador BCCR
 if [ "$arch" == 'x86' ]
 then

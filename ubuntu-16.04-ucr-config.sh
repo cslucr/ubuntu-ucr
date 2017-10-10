@@ -110,10 +110,14 @@ sudo sed -i \
 
 packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb libreoffice-help-en-gb libreoffice-style-sifr"
 
-# Firma digital 
-
+# Firma digital
 sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -'
 sudo sh -c 'echo "deb http://repos.solvosoft.com/ubuntu xenial main" > /etc/apt/sources.list.d/repos-firmadigital.list'
+
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"solvosoft.com:";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
+
 packages="$packages firmadigitalcr"
 
 # Google Chrome o Chromium

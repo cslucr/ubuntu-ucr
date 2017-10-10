@@ -434,6 +434,12 @@ wget https://www.languagetool.org/download/LanguageTool-3.9.oxt
 sudo unopkg add LanguageTool-3.9.oxt
 rm LanguageTool-3.9.oxt
 
+# es_Any.oxt (ortografia, separacion y sinonimos)
+# ultima version en https://github.com/sbosio/rla-es/releases
+wget https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt
+sudo unopkg add --shared es_ANY.oxt
+rm es_ANY.oxt
+
 # Firmador BCCR
 if [ "$arch" == 'x86' ]
 then

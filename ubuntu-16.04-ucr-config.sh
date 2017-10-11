@@ -114,7 +114,7 @@ packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb li
 # Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
 # ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
 wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
-sudo unopkg add --shared sun_odf_template_pack_es.oxt
+sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
 rm sun_odf_template_pack_es.oxt
 
 # Firma digital

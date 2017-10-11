@@ -132,7 +132,7 @@ cd ~
 # Descarga y ejecuta script de personalizacion ubuntu-ucr.
 # Puede omitir el script y en su lugar realizar una personalizacion manual
 unzip master.zip && rm master.zip
-bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh -y $APT_CACHE_CHROOT
+bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh -y $APT_CACHE_CHROOT || exit 1
 rm -r ubuntu-ucr-master
 
 rm -rf /tmp/* ~/.bash_history

@@ -17,6 +17,12 @@ Opciones:
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
 }
 
+# Mensajes de error y salida del script
+error_exit(){
+	echo "${1:-"Error desconocido"}" 1>&2
+	exit 1
+}
+
 # Captando parámetros
 # Is in development environment ?
 DEVELOPMENT=false
@@ -74,13 +80,13 @@ if [ -z $ZIP ]; then
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; )
+        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; ) || error_exit "No pude generar master.zip"
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else
-        wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip
+        wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip || error_exit "No pude descargar master.zip"
     fi
 else
-    cp $ZIP $CUSTOMIZATIONDIR/master.zip
+    cp $ZIP $CUSTOMIZATIONDIR/master.zip || error_exit "No pude copiar master.zip desde $ZIP "
 fi
 if [[ -d "$APT_CACHE" ]]; then
   echo "Usando cache APT: $APT_CACHE"
@@ -91,11 +97,11 @@ fi
 echo "Se trabajará en el directorio $CUSTOMIZATIONDIR"
 cd $CUSTOMIZATIONDIR
 mkdir mnt
-sudo mount -o loop $ISOPATH mnt
+sudo mount -o loop $ISOPATH mnt || error_exit "Error al montar ISO $ISOPATH"
 mkdir $EXTRACT
 sudo rsync --exclude=/casper/filesystem.squashfs -a mnt/ $EXTRACT
 sudo dd if=$ISOPATH bs=512 count=1 of=$EXTRACT/isolinux/isohdpfx.bin
-sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs
+sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs || error_exit "Error al desempaquetar Squashfs"
 sudo umount mnt
 sudo mv $CUSTOMIZATIONDIR/master.zip $EDIT/root
 sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
@@ -105,13 +111,13 @@ sudo mount --bind /dev/ $EDIT/dev/
 # Usa cache de APT
 if [[ -n "$APT_CACHE" ]]; then
   mkdir -p $EDIT/apt/
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "${EDIT}/apt/"
+  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "${EDIT}/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
   APT_CACHE_CHROOT=" -c '/apt/'"
 fi
 
 
 # Ejecuta ordenes dentro de directorio de edicion
-cat << EOF | sudo chroot $EDIT
+cat << EOF | sudo chroot $EDIT || error_exit "Personalización fallida"
 mount -t proc none /proc
 mount -t sysfs none /sys
 mount -t devpts none /dev/pts
@@ -143,8 +149,8 @@ EOF
 # Actualiza cache de APT
 if [[ -d "$APT_CACHE" ]]; then
   echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/"
-  rm -r "${EDIT}/apt/"
+  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/" || error_exit "Error al salvar el cache APT hacia ${APT_CACHE}"
+  rm -r "${EDIT}/apt/" || error_exit "Error al liberar cache de APT en ${EDIT}"
 fi
 
 
@@ -156,12 +162,12 @@ sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf
 # regenera manifest
 sudo chmod +w $EXTRACT/casper/filesystem.manifest
 sudo chroot $EDIT dpkg-query -W --showformat='${Package} ${Version}\n' | sudo tee $EXTRACT/casper/filesystem.manifest
-sudo cp $EXTRACT/casper/filesystem.manifest $EXTRACT/casper/filesystem.manifest-desktop
+sudo cp $EXTRACT/casper/filesystem.manifest $EXTRACT/casper/filesystem.manifest-desktop 
 sudo sed -i '/ubiquity/d' $EXTRACT/casper/filesystem.manifest-desktop
 sudo sed -i '/casper/d' $EXTRACT/casper/filesystem.manifest-desktop
 
 # Comprime el sistema de archivos recien editado
-sudo mksquashfs $EDIT $EXTRACT/casper/filesystem.squashfs -b 1048576
+sudo mksquashfs $EDIT $EXTRACT/casper/filesystem.squashfs -b 1048576 || error_exit "Error al generar Squashfs"
 printf $(sudo du -sx --block-size=1 $EDIT | cut -f1) | sudo tee $EXTRACT/casper/filesystem.size
 cd $EXTRACT
 sudo rm md5sum.txt
@@ -170,7 +176,7 @@ find -type f -print0 | sudo xargs -0 md5sum | grep -v isolinux/boot.cat | sudo t
 sudo xorriso -as mkisofs -isohybrid-mbr isolinux/isohdpfx.bin \
 -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 \
 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot \
--isohybrid-gpt-basdat -o ../$CUSTOMISONAME .
+-isohybrid-gpt-basdat -o ../$CUSTOMISONAME .  || error_exit "Error al generar ISO en ${CUSTOMISONAME}"
 
 echo "Generando sumas de verificación";
 cd ..
@@ -178,3 +184,4 @@ md5sum $CUSTOMISONAME >> MD5SUMS
 sha1sum $CUSTOMISONAME >> SHA1SUMS
 sha256sum $CUSTOMISONAME >> SHA256SUMS
 
+exit 0

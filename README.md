@@ -13,6 +13,7 @@ Estas son algunas de sus características:
 - Software adicional como Gimp, Google Chrome, Spotify o la herramienta de configuración de AURI y Eduroam.
 - Actualizaciones automáticas del sistema operativo y de todos los programas instalados. Estas son silenciosas y no requieren intervención del usuario.
 - Soporte para lectores de firma digital, certificados de la CA nacional y programas instalados del BCCR.
+- Complementos para LibreOffice como sinónimos, corrección ortográfica, entre otros; los cuales permiten tener un mejor aprovechamiento de la herramienta.
 
 ## Capturas de pantalla
 

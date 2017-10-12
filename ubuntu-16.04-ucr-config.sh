@@ -154,9 +154,9 @@ packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb li
 # Plantillas
 # Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
 # ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
-#wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
-#sudo unopkg add --shared sun_odf_template_pack_es.oxt
-#rm sun_odf_template_pack_es.oxt
+wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
+sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
+rm sun_odf_template_pack_es.oxt
 
 # Firma digital
 sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"
@@ -484,7 +484,7 @@ sudo timedatectl set-timezone America/Costa_Rica
 # LanguageTool.oxt (corrector gramatical)
 # ultima version en https://www.languagetool.org/download/
 wget https://www.languagetool.org/download/LanguageTool-3.9.oxt
-sudo unopkg add LanguageTool-3.9.oxt
+sudo unopkg add --shared LanguageTool-3.9.oxt
 rm LanguageTool-3.9.oxt
 
 # es_Any.oxt (ortografia, separacion y sinonimos)

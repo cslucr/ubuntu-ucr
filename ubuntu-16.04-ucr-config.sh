@@ -25,6 +25,12 @@ Opciones:
 Toma una instalación fresca de Ubuntu y la personaliza.";
 }
 
+# Mensajes de error y salida del script
+error_exit(){
+	echo "${1:-"Error desconocido"}" 1>&2
+	exit 1
+}
+
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true
@@ -51,14 +57,14 @@ then
   read -p "¿Desea continuar? [s/N] " -r
   if [[ ! $REPLY =~ ^[SsYy]$ ]]
   then
-    exit
+    exit 1
   fi
 fi
 
 if [[ -d "$APT_CACHE" ]]; then
   echo "Usando cache APT: $APT_CACHE"
   APT_CACHE=$(readlink -f $APT_CACHE)
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "/var/cache/apt/"
+  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "/var/cache/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
 fi
 
 # VARIABLES
@@ -124,7 +130,7 @@ packages="$packages ubuntu-restricted-extras"
 # Oracle Java 8
 #
 # Se sustituye la version de Java por la desarrollada por Oracle.
-sudo add-apt-repository -y ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/java || error_exit "Error al agregar PPA: webupd8team/java"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-webupd8team-java:${distro_codename}";/' \
@@ -137,7 +143,7 @@ packages="$packages oracle-java8-installer"
 #
 # Se anade el repositorio de LibreOffice para actualizar a la ultima version
 # estable. Los repositorios de Ubuntu 16.04 tienen una version antigua.
-sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-3
+sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-3 || error_exit "Error al agregar PPA: libreoffice/libreoffice-5-3"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-5-3:${distro_codename}";/' \
@@ -148,12 +154,12 @@ packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb li
 # Plantillas
 # Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
 # ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
-wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
-sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
-rm sun_odf_template_pack_es.oxt
+#wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
+#sudo unopkg add --shared sun_odf_template_pack_es.oxt
+#rm sun_odf_template_pack_es.oxt
 
 # Firma digital
-sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -'
+sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"
 sudo sh -c 'echo "deb http://repos.solvosoft.com/ubuntu xenial main" > /etc/apt/sources.list.d/repos-firmadigital.list'
 
 sudo sed -i \
@@ -170,7 +176,7 @@ packages="$packages firmadigitalcr"
 if [ "$arch" == 'x86_64' ]
 then
   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
 
   sudo sed -i \
   -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
@@ -184,7 +190,7 @@ fi
 # Shotwell
 #
 # Ultima version estable
-sudo add-apt-repository -y ppa:yg-jensge/shotwell
+sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-yg-jensge-shotwell:${distro_codename}";/' \
@@ -196,7 +202,7 @@ purgepackages="$purgepackages gnome-photos"
 # Rhythmbox
 #
 # Ultima version estable
-sudo add-apt-repository -y ppa:fossfreedom/rhythmbox
+sudo add-apt-repository -y ppa:fossfreedom/rhythmbox || error_exit "Error al agregar PPA: fossfreedom/rhythmbox"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-fossfreedom-rhythmbox:${distro_codename}";/' \
@@ -210,7 +216,7 @@ purgepackages="$purgepackages gnome-music"
 # Añade el repositorio de dropbox, pero no instala el paquete. Si no que
 # lo deja disponible para cuando un usuario requiera utilizarlo.
 sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ xenial main" > /etc/apt/sources.list.d/dropbox.list'
-sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
+sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E || error_exit "Error al agregar llave para repositorio dropbox"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Dropbox.com:wily";/' \
@@ -221,7 +227,7 @@ sudo sed -i \
 # GIMP
 #
 # Ultima version estable
-sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
+sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp-edge:${distro_codename}";/' \
@@ -233,7 +239,7 @@ packages="$packages gimp"
 #
 # Popular tema gtk que ofrece un mayor atractivo visual. Este se configura,
 # una vez instalado, en la seccion de Gnome-shell.
-sudo add-apt-repository -y ppa:noobslab/themes
+sudo add-apt-repository -y ppa:noobslab/themes || error_exit "Error al agregar PPA: noobslab/themes"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-noobslab-themes:${distro_codename}";/' \
@@ -246,7 +252,7 @@ packages="$packages arc-theme"
 # Conjundo de iconos visualmente atractivos y de facil lectura. El paquete
 # incluye todos o casi todos los iconos utilizados. Este paquete se configura,
 # una vez instalado, en la seccion de Gnome-shell.
-sudo add-apt-repository -y ppa:numix/ppa
+sudo add-apt-repository -y ppa:numix/ppa || error_exit "Error al agregar PPA: numix/ppa"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-numix:${distro_codename}";/' \
@@ -259,7 +265,7 @@ packages="$packages numix-icon-theme numix-icon-theme-circle"
 # Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
 # ancho de banda.
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 || error_exit "Error al agregar llave para repositorio spotify"
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
@@ -282,15 +288,15 @@ autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applic
 
 # Actualizacion del sistema e instalacion de los paquetes indicados
 sudo cp "$BASEDIR"/sources-mirror-ucr.list /etc/apt/sources.list.d/ # temporal, en caso que no este configurado
-sudo apt-get update
-sudo apt-get -y dist-upgrade
-sudo apt-get -y install $packages
-sudo apt-get -y purge $purgepackages
-sudo apt-get -y autoremove
+sudo apt-get update || error_exit "Error al actualizar lista de paquetes"
+sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativo"
+sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
+sudo apt-get -y purge $purgepackages || error_exit "Error al purgar paquetes"
+sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Salva el cache de APT
 if [[ -d "$APT_CACHE" ]]; then
   echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "/var/cache/apt/" "${APT_CACHE}/"
+  rsync -a --link-dest="${APT_CACHE}/" "/var/cache/apt/" "${APT_CACHE}/" || error_exit "Error salvar cache APT hacia ${APT_CACHE}"
 fi
 sudo apt-get clean
 
@@ -320,11 +326,11 @@ then
   sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
   sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
 
-  sudo update-grub
+  sudo update-grub || error_exit "Error al actualizar grub"
 
   # Copia esquema que sobrescribe configuracion de Unity y lo compila
   sudo cp "$BASEDIR"/gschema/30_ucr-ubuntu-settings.gschema.override /usr/share/glib-2.0/schemas/
-  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Reinicia todos los valores redefinidos en archivo override para la sesion actual
   # Si no existe una sesion X11 falla y no hace nada
@@ -365,7 +371,7 @@ then
 
   # Copia esquema que sobrescribe configuracion de Gnome-shell y lo compila
   sudo cp "$BASEDIR"/gschema/30_ucr-gnome-default-settings.gschema.override /usr/share/glib-2.0/schemas/
-  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Reinicia todos los valores redefinidos en archivo override para la sesion actual
   # Si no existe una sesion X11 falla y no hace nada
@@ -410,7 +416,7 @@ then
   sudo cp "$BASEDIR"/gschema/30_ucr-mate-settings.gschema.override /usr/share/glib-2.0/schemas/
   sudo cp "$BASEDIR"/gschema/ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
   sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
-  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Favoritos de menu avanzado
   mkdir -p /etc/skel/.config/mate-menu
@@ -502,7 +508,7 @@ else
   wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
 fi
 
-sudo dpkg -i firmador-bccr.deb
+sudo dpkg -i firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
 rm firmador-bccr.deb
 
 
@@ -520,4 +526,4 @@ sudo sed -i \
 -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
 /etc/skel/.bashrc
 
-
+exit 0

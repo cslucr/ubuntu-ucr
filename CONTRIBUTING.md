@@ -37,9 +37,9 @@ Nuestros estándares son simples:
  * **Mantenga el orden**: El script de personalización está dividio en secciones, esto para mantener el orden. Antes de añadir su código, revise cuál es la sección más adecuada para hacerlo.
  * **Mantenga el enfoque**: La personalización está enfocada en el uso común, por ejemplo para docentes, oficina, etc.
  * **Documente**, eso ayudará a otros colaboradores:
-  * Documentación interna.
-  * Mensaje de cada _commit_
-  * Archivo README si es necesario.
+   * Documentación interna.
+   * Mensaje de cada _commit_
+   * Archivo README si es necesario.
  * Realice un **pull request** por cada cambio. Sugerencia: haga un _branch_ en su repositorio local por cada uno.
 
 ## Issues: Haga pruebas, sugiera una mejora, reporte un error

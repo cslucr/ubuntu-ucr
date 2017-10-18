@@ -2,7 +2,7 @@
 
 ¿Quiere hacer su aporte? Para la [#CSLUCR](https://twitter.com/search?q=%23CSLUCR) es un honor recibir sus contribuciones. ¡Muchas gracias! 😀
 
-Desde sugerir una idea, hasta hacer un cambio, todo es bienvenido. Hay varias cosa por hacer: documentación, apariencia visual, scripting, pruebas del producto.
+Desde sugerir una idea, hasta hacer un cambio, todo es bienvenido. Hay varias cosas por hacer: documentación, apariencia visual, scripting, pruebas del producto.
 
 No es necesario ser un usuario técnico para contribuir. Necesitamos probar el sistema, así que simplemente instálelo y denos su retroalimentación.
 

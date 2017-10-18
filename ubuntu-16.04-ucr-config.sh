@@ -267,6 +267,13 @@ packages="$packages numix-icon-theme numix-icon-theme-circle"
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 || error_exit "Error al agregar llave para repositorio spotify"
 
+# Driver comunes
+# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
+# y dispositivos de audio
+
+packages="$packages linux-firmware firmware-b43-installer"
+
+
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades

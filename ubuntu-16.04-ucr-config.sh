@@ -61,12 +61,6 @@ then
   fi
 fi
 
-if [[ -d "$APT_CACHE" ]]; then
-  echo "Usando cache APT: $APT_CACHE"
-  APT_CACHE=$(readlink -f $APT_CACHE)
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "/var/cache/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
-fi
-
 # VARIABLES
 
 # Identifica el directorio en el que se esta ejecutando
@@ -273,6 +267,12 @@ sudo sed -i \
 
 packages="$packages spotify-client"
 
+# Driver comunes
+# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
+# y dispositivos de audio
+
+packages="$packages linux-firmware firmware-b43-installer"
+
 # Paquetes varios
 # - Thunderbird, al ser multiplataforma, su perfil se puede migrar facilmente
 # - unattended-upgrades para actualizaciones automaticas
@@ -296,9 +296,10 @@ sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar
 # Salva el cache de APT
 if [[ -d "$APT_CACHE" ]]; then
   echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "/var/cache/apt/" "${APT_CACHE}/" || error_exit "Error salvar cache APT hacia ${APT_CACHE}"
+else
+  sudo apt-get clean
 fi
-sudo apt-get clean
+
 
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save

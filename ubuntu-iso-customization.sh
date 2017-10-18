@@ -16,11 +16,11 @@ Opciones:
 
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
 }
-
+CLOSE_ERROR=0
 # Mensajes de error y salida del script
 error_exit(){
 	echo "${1:-"Error desconocido"}" 1>&2
-	exit 1
+	CLOSE_ERROR=1
 }
 
 # Captando parámetros
@@ -108,11 +108,12 @@ sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
 sudo mount --bind /dev/ $EDIT/dev/
 
+
 # Usa cache de APT
 if [[ -n "$APT_CACHE" ]]; then
-  mkdir -p $EDIT/apt/
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "${EDIT}/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
-  APT_CACHE_CHROOT=" -c '/apt/'"
+  sudo mv $EDIT/var/cache/apt $EDIT/var/cache/apt.bak
+  sudo mkdir $EDIT/var/cache/apt
+  sudo mount --bind ${APT_CACHE} $EDIT/var/cache/apt
 fi
 
 
@@ -149,10 +150,10 @@ EOF
 # Actualiza cache de APT
 if [[ -d "$APT_CACHE" ]]; then
   echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/" || error_exit "Error al salvar el cache APT hacia ${APT_CACHE}"
-  rm -r "${EDIT}/apt/" || error_exit "Error al liberar cache de APT en ${EDIT}"
+  sudo umount $EDIT/var/cache/apt
+  sudo rmdir $EDIT/var/cache/apt
+  sudo mv $EDIT/var/cache/apt.bak $EDIT/var/cache/apt
 fi
-
 
 sudo umount $EDIT/dev
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts

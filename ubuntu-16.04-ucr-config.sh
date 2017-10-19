@@ -31,6 +31,8 @@ error_exit(){
 	exit 1
 }
 
+# PRE-PROCESAMIENTO
+
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true
@@ -92,6 +94,7 @@ purgepackages=""
 #  autostart="$autostart ruta1 ruta2 ruta2"
 autostart=""
 
+# PROCESAMIENTO
 
 # REPOSITORIOS Y PAQUETES
 
@@ -150,13 +153,6 @@ sudo sed -i \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb libreoffice-help-en-gb libreoffice-style-sifr"
-
-# Plantillas
-# Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
-# ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
-wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
-sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
-rm sun_odf_template_pack_es.oxt
 
 # Firma digital
 sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -'
@@ -473,6 +469,7 @@ Type=Application
 Categories=Settings;HardwareSettings;
 Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share/applications/auri.desktop'
 
+# POST-PROCESAMIENTO
 
 # Uso Horario 
 #
@@ -498,6 +495,13 @@ rm es_ANY.oxt
 wget https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
 sudo unopkg add --shared toolsforedit.oxt
 rm toolsforedit.oxt
+
+# Plantillas
+# Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
+# ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
+wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
+sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
+rm sun_odf_template_pack_es.oxt
 
 # Firmador BCCR
 if [ "$arch" == 'x86' ]

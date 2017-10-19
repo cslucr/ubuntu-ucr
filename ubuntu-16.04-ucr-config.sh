@@ -25,6 +25,16 @@ Opciones:
 Toma una instalación fresca de Ubuntu y la personaliza.";
 }
 
+# Mensajes de error y salida del script
+error_exit(){
+	echo "${1:-"Error desconocido"}" 1>&2
+	exit 1
+}
+
+log_error(){
+	exec 2> >(tee -a ${LOG_FILE} >&2)
+}
+
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true
@@ -305,8 +315,7 @@ sudo apt-get update
 # facilmente con el Editor de dconf (apt install dconf-editor)
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
-sudo mkdir -p /usr/share/backgrounds/ucr/
-sudo cp "$BASEDIR"/ubuntu-16.04-ucr-background.jpg "$BASEDIR"/ubuntu-16.04-ucr-background-cslucr.jpg /usr/share/backgrounds/ucr/
+sudo cp "$BASEDIR"/backgrounds/* /usr/share/backgrounds/
 
 # Unity
 if grep -q "Unity" /usr/share/xsessions/*
@@ -439,7 +448,7 @@ location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/app
   
   # Configura pantalla de autenticacion
   sudo sh -c 'echo "[greeter]
-background = /usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background.jpg
+background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
 icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
 fi
 

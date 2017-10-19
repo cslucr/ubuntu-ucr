@@ -314,7 +314,7 @@ sudo apt-get update
 # facilmente con el Editor de dconf (apt install dconf-editor)
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
-sudo cp "$BASEDIR"/backgrounds/* /usr/share/backgrounds/
+sudo cp "$BASEDIR"/backgrounds/*.jpg "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
 
 # Unity
 if grep -q "Unity" /usr/share/xsessions/*

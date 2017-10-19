@@ -31,10 +31,6 @@ error_exit(){
 	exit 1
 }
 
-log_error(){
-	exec 2> >(tee -a ${LOG_FILE} >&2)
-}
-
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true

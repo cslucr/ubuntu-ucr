@@ -276,6 +276,17 @@ sudo sed -i \
 
 packages="$packages spotify-client"
 
+# Shutter
+#
+#Herramienta para capturar la pantalla o solo secciones de ella. También permite editar la captura
+sudo add-apt-repository -y ppa:shutter/ppa || error_exit "Error al agregar llave para repositorio Shutter"
+
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-shutter/ppa";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
+
+packages="$packages shutter"
+
 # Paquetes varios
 # - Thunderbird, al ser multiplataforma, su perfil se puede migrar facilmente
 # - unattended-upgrades para actualizaciones automaticas

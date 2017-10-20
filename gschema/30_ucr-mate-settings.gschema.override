@@ -56,6 +56,7 @@ hinting = 'slight'
 
 [org.mate.mate-menu]
 applet-icon='/usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg'
+start-with-favorites=true
 theme-name='Arc-Dark'
 
 [org.mate.panel]

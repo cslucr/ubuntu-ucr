@@ -282,7 +282,7 @@ packages="$packages spotify-client"
 sudo add-apt-repository -y ppa:shutter/ppa || error_exit "Error al agregar llave para repositorio Shutter"
 
 sudo sed -i \
--e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-shutter/ppa";/' \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-shutter:${distro_codename}";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages shutter"

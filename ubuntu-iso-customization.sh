@@ -129,6 +129,7 @@ fi
 
 # Usa cache para Wget
 if [ $WGET_CACHED ]; then
+    echo "Usando cache WGET: $WGET_CACHE"
     if [ "$(ls -A $WGET_CACHE)" ]; then  # esta vacio, crear una copia
       echo "ok, wget"  
     else 

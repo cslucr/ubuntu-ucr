@@ -36,14 +36,17 @@ error_exit(){
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true
-APT_CACHE=""
+APT_CACHE=false
+WGET_CACHED=false
+WGET_CACHE=/tmp/wget_cache/
 
-while getopts c:hy option
+while getopts chyw option
 do
  case "${option}"
  in
  y) NOFORCE=false;;
- c) APT_CACHE=${OPTARG};;
+ c) APT_CACHE=true;;
+ w) WGET_CACHED=true;;
  h) myhelp
     exit 0 ;;
  esac
@@ -61,12 +64,6 @@ then
   then
     exit 1
   fi
-fi
-
-if [[ -d "$APT_CACHE" ]]; then
-  echo "Usando cache APT: $APT_CACHE"
-  APT_CACHE=$(readlink -f $APT_CACHE)
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "/var/cache/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
 fi
 
 # VARIABLES
@@ -277,6 +274,12 @@ sudo sed -i \
 
 packages="$packages spotify-client"
 
+# Driver comunes
+# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
+# y dispositivos de audio
+
+packages="$packages linux-firmware firmware-b43-installer"
+
 # Paquetes varios
 # - Thunderbird, al ser multiplataforma, su perfil se puede migrar facilmente
 # - unattended-upgrades para actualizaciones automaticas
@@ -298,11 +301,12 @@ sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de p
 sudo apt-get -y purge $purgepackages || error_exit "Error al purgar paquetes"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Salva el cache de APT
-if [[ -d "$APT_CACHE" ]]; then
+if [ $APT_CACHE ]; then
   echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "/var/cache/apt/" "${APT_CACHE}/" || error_exit "Error salvar cache APT hacia ${APT_CACHE}"
+else
+  sudo apt-get clean
 fi
-sudo apt-get clean
+
 
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save
@@ -363,15 +367,20 @@ then
   #
   # Como instalar una extension desde la linea de comandos:
   #  http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
-  sudo wget -O TopIcons@phocean.net.shell-extension.zip "https://extensions.gnome.org/download-extension/TopIcons@phocean.net.shell-extension.zip?version_tag=6608"
-  sudo unzip TopIcons@phocean.net.shell-extension.zip -d /usr/share/gnome-shell/extensions/TopIcons@phocean.net/
+  sudo wget -c -O $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip "https://extensions.gnome.org/download-extension/TopIcons@phocean.net.shell-extension.zip?version_tag=6608"
+  sudo unzip $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip -d /usr/share/gnome-shell/extensions/TopIcons@phocean.net/
   sudo chmod -R 755 /usr/share/gnome-shell/extensions/TopIcons@phocean.net/
-  sudo rm TopIcons@phocean.net.shell-extension.zip
+  
 
-  sudo wget -O mediaplayer@patapon.info.v57.shell-extension.zip "https://extensions.gnome.org/download-extension/mediaplayer@patapon.info.shell-extension.zip?version_tag=7152"
-  sudo unzip mediaplayer@patapon.info.v57.shell-extension.zip -d /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
+  sudo wget -c -O $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip "https://extensions.gnome.org/download-extension/mediaplayer@patapon.info.shell-extension.zip?version_tag=7152"
+  sudo unzip $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip -d /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
   sudo chmod -R 755 /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
-  sudo rm mediaplayer@patapon.info.v57.shell-extension.zip
+  
+
+  if [ ! $WGET_CACHED ]; then
+    sudo rm $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip
+    sudo rm $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip
+  fi
 
   # Copia esquema que sobrescribe configuracion de Gnome-shell y lo compila
   sudo cp "$BASEDIR"/gschema/30_ucr-gnome-default-settings.gschema.override /usr/share/glib-2.0/schemas/
@@ -467,7 +476,9 @@ sudo sed -i \
 #
 # Descarga la herramienta de configuracion de AURI y Eduroam y crea el
 # respectivo .desktop para que se muestre entre las apliciones.
-wget --no-check-certificate -qO- https://ci.ucr.ac.cr/auri/instaladores/AURI-eduroam-UCR-Linux.tar.gz | sudo tar zx -C /opt
+wget -c -O $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz --no-check-certificate -q https://ci.ucr.ac.cr/auri/instaladores/AURI-eduroam-UCR-Linux.tar.gz 
+sudo tar -C /opt zxf $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
+
 
 sudo sh -c 'echo "[Desktop Entry]
 Name=Configurar AURI
@@ -489,40 +500,48 @@ sudo timedatectl set-timezone America/Costa_Rica
 # Complementos para LibreOffice
 # LanguageTool.oxt (corrector gramatical)
 # ultima version en https://www.languagetool.org/download/
-wget https://www.languagetool.org/download/LanguageTool-3.9.oxt
-sudo unopkg add --shared LanguageTool-3.9.oxt
-rm LanguageTool-3.9.oxt
+wget -c -O $WGET_CACHE/LanguageTool-3.9.oxt https://www.languagetool.org/download/LanguageTool-3.9.oxt
+sudo unopkg add --shared $WGET_CACHE/LanguageTool-3.9.oxt
 
 # es_Any.oxt (ortografia, separacion y sinonimos)
 # ultima version en https://github.com/sbosio/rla-es/releases
-wget https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt
-sudo unopkg add --shared es_ANY.oxt
-rm es_ANY.oxt
+wget -c -O $WGET_CACHE/es_ANY.oxt https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt
+sudo unopkg add --shared $WGET_CACHE/es_ANY.oxt
+
 
 # Calc
 # Este complemento permite eliminar las celdas vacias de una tabla en una hoja de calculo
 # ultima version en https://extensions.libreoffice.org/extensions/tools-for-calc-edit
-wget https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
-sudo unopkg add --shared toolsforedit.oxt
-rm toolsforedit.oxt
+wget -c -O $WGET_CACHE/toolsforedit.oxt "https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt"
+sudo unopkg add --shared $WGET_CACHE/toolsforedit.oxt
+
 
 # Plantillas
 # Agrega mas diferentes tipos de plantillas para presentaciones, hojas de calculo, entre otras.
 # ultima version en https://extensions.openoffice.org/en/project/SunTemplatepack_1_es
-wget -O sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
-sudo unopkg add -s --shared sun_odf_template_pack_es.oxt
-rm sun_odf_template_pack_es.oxt
+wget -c -O $WGET_CACHE/sun_odf_template_pack_es.oxt https://sourceforge.net/projects/aoo-extensions/files/301/1/sun_odf_template_pack_es.oxt/download
+sudo unopkg add -s --shared $WGET_CACHE/sun_odf_template_pack_es.oxt
+
 
 # Firmador BCCR
 if [ "$arch" == 'x86' ]
 then
-  wget -O firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
+  wget -c -O $WGET_CACHE/firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
 else
-  wget -O firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
+  wget -c -O $WGET_CACHE/firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
 fi
 
-sudo dpkg -i firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
-rm firmador-bccr.deb
+sudo dpkg -i $WGET_CACHE/firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
+
+
+if [ ! $WGET_CACHED ]; then
+    rm $WGET_CACHE/sun_odf_template_pack_es.oxt
+    rm $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
+    rm $WGET_CACHE/LanguageTool-3.9.oxt
+    rm $WGET_CACHE/es_ANY.oxt
+    rm $WGET_CACHE/toolsforedit.oxt
+    rm $WGET_CACHE/firmador-bccr.deb
+fi
 
 
 # PERFIL PREDETERMINADO

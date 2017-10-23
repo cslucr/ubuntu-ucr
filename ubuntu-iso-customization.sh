@@ -12,15 +12,17 @@ Opciones:
   -d modo desarrollo, crea un zip apartir de la carpeta actual
   -z archivo.zip el archivo zip como repositorio
   -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
+  -w directorio_cache Ruta absoluta al directorio donde se encuentra el cache de WGET a utilizar
   -h muestra esta ayuda
 
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
 }
-
+CLOSE_ERROR=0
 # Mensajes de error y salida del script
 error_exit(){
 	echo "${1:-"Error desconocido"}" 1>&2
-	exit 1
+	CLOSE_ERROR=1
+    exit 1
 }
 
 # Captando parámetros
@@ -28,15 +30,22 @@ error_exit(){
 DEVELOPMENT=false
 ZIP=""
 APT_CACHE=""
-APT_CACHE_CHROOT=""
-
-while getopts zc:hd option
+APT_CACHED=false
+BUILDER_ARGUMENTS="-y "
+WGET_CACHED=false
+WGET_CACHE_GUEST=/tmp/wget_cache/ 
+while getopts zc:hdw: option
 do
  case "${option}"
  in
  z) ZIP=${OPTARG};;
  d) DEVELOPMENT=true;;
- c) APT_CACHE=${OPTARG};;
+ c) APT_CACHE=$(readlink -f ${OPTARG})
+    APT_CACHED=true
+    BUILDER_ARGUMENTS=$BUILDER_ARGUMENTS" -c" ;;
+ w) WGET_CACHE=$(readlink -f ${OPTARG})
+    WGET_CACHED=true
+    BUILDER_ARGUMENTS=$BUILDER_ARGUMENTS" -w" ;;
  h) myhelp
     exit 0 ;;
  esac
@@ -88,10 +97,6 @@ if [ -z $ZIP ]; then
 else
     cp $ZIP $CUSTOMIZATIONDIR/master.zip || error_exit "No pude copiar master.zip desde $ZIP "
 fi
-if [[ -d "$APT_CACHE" ]]; then
-  echo "Usando cache APT: $APT_CACHE"
-  APT_CACHE=$(readlink -f $APT_CACHE)
-fi
 
 
 echo "Se trabajará en el directorio $CUSTOMIZATIONDIR"
@@ -108,14 +113,36 @@ sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
 sudo mount --bind /dev/ $EDIT/dev/
 
+
 # Usa cache de APT
-if [[ -n "$APT_CACHE" ]]; then
-  mkdir -p $EDIT/apt/
-  rsync -a --link-dest="${APT_CACHE}/" "${APT_CACHE}/" "${EDIT}/apt/" || error_exit "Error al sincronizar cache APT desde ${APT_CACHE}"
-  APT_CACHE_CHROOT=" -c '/apt/'"
+if [ $APT_CACHED ]; then
+  echo "Usando cache APT: $APT_CACHE"
+    if [ "$(ls -A $APT_CACHE)" ]; then  # esta vacio, crear una copia
+      echo "ok, apt"  
+    else 
+      sudo rsync -a $EDIT/var/cache/apt/ $APT_CACHE
+    fi
+  sudo mv $EDIT/var/cache/apt $EDIT/var/cache/apt.bak
+  sudo mkdir -p $EDIT/var/cache/apt
+  sudo mount --bind $APT_CACHE $EDIT/var/cache/apt
 fi
 
-
+# Usa cache para Wget
+if [ $WGET_CACHED ]; then
+    echo "Usando cache WGET: $WGET_CACHE"
+    if [ "$(ls -A $WGET_CACHE)" ]; then  # esta vacio, crear una copia
+      echo "ok, wget"  
+    else 
+      sudo rsync -a $EDIT$WGET_CACHE_GUEST $WGET_CACHE
+    fi
+    if [ -d "$EDIT$WGET_CACHE_GUEST" ]; then
+        sudo mv $EDIT$WGET_CACHE_GUEST $EDIT$WGET_CACHE_GUEST.bak
+    fi
+    sudo mkdir -p $EDIT$WGET_CACHE_GUEST
+    sudo mount --bind $WGET_CACHE $EDIT$WGET_CACHE_GUEST
+else
+    sudo mkdir -p $EDIT$WGET_CACHE_GUEST
+fi
 # Ejecuta ordenes dentro de directorio de edicion
 cat << EOF | sudo chroot $EDIT || error_exit "Personalización fallida"
 mount -t proc none /proc
@@ -132,10 +159,9 @@ cd ~
 # Descarga y ejecuta script de personalizacion ubuntu-ucr.
 # Puede omitir el script y en su lugar realizar una personalizacion manual
 unzip master.zip && rm master.zip
-bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh -y $APT_CACHE_CHROOT || exit 1
-rm -r ubuntu-ucr-master
+bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh $BUILDER_ARGUMENTS || exit 1
+rm -r ubuntu-ucr-master ~/.bash_history
 
-rm -rf /tmp/* ~/.bash_history
 rm /var/lib/dbus/machine-id
 rm /sbin/initctl
 dpkg-divert --rename --remove /sbin/initctl
@@ -147,17 +173,28 @@ umount /dev/pts
 EOF
 
 # Actualiza cache de APT
-if [[ -d "$APT_CACHE" ]]; then
-  echo "Salvando cache APT: $APT_CACHE"
-  rsync -a --link-dest="${APT_CACHE}/" "${EDIT}/apt/" "${APT_CACHE}/" || error_exit "Error al salvar el cache APT hacia ${APT_CACHE}"
-  rm -r "${EDIT}/apt/" || error_exit "Error al liberar cache de APT en ${EDIT}"
+if [ $APT_CACHED ]; then
+  echo "Desmontando cache APT: $APT_CACHE"
+  sudo umount $EDIT/var/cache/apt
+  sudo rmdir $EDIT/var/cache/apt
+  sudo mv $EDIT/var/cache/apt.bak $EDIT/var/cache/apt
+fi
+
+# Actualiza cache de WGET
+if [ $WGET_CACHED ]; then
+   echo "Desmontando cache WGET: $WGET_CACHE"
+   sudo umount $EDIT$WGET_CACHE_GUEST
+   sudo rmdir $EDIT$WGET_CACHE_GUEST
+   if [ -d "$EDIT$WGET_CACHE_GUEST.bak" ]; then
+        sudo mv $EDIT$WGET_CACHE_GUEST.bak $EDIT$WGET_CACHE_GUEST
+   fi
 fi
 
 
 sudo umount $EDIT/dev
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts
 sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf
-
+sudo rm -rf $EDIT/tmp/* ~/.bash_history
 # CREACION DE NUEVA IMAGEN ISO
 # regenera manifest
 sudo chmod +w $EXTRACT/casper/filesystem.manifest

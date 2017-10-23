@@ -13,7 +13,6 @@ Opciones:
   -z archivo.zip el archivo zip como repositorio
   -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
   -w directorio_cache Ruta absoluta al directorio donde se encuentra el cache de WGET a utilizar
-  -s directorio_cache Ruta absoluta al directorio donde se encuentra el cache de UNSQUASHFS a utilizar
   -h muestra esta ayuda
 
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
@@ -23,6 +22,7 @@ CLOSE_ERROR=0
 error_exit(){
 	echo "${1:-"Error desconocido"}" 1>&2
 	CLOSE_ERROR=1
+    exit 1
 }
 
 # Captando parámetros
@@ -140,6 +140,8 @@ if [ $WGET_CACHED ]; then
     fi
     sudo mkdir -p $EDIT$WGET_CACHE_GUEST
     sudo mount --bind $WGET_CACHE $EDIT$WGET_CACHE_GUEST
+else
+    sudo mkdir -p $EDIT$WGET_CACHE_GUEST
 fi
 # Ejecuta ordenes dentro de directorio de edicion
 cat << EOF | sudo chroot $EDIT || error_exit "Personalización fallida"
@@ -178,6 +180,7 @@ if [ $APT_CACHED ]; then
   sudo mv $EDIT/var/cache/apt.bak $EDIT/var/cache/apt
 fi
 
+# Actualiza cache de WGET
 if [ $WGET_CACHED ]; then
    echo "Desmontando cache WGET: $WGET_CACHE"
    sudo umount $EDIT$WGET_CACHE_GUEST

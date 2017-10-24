@@ -536,7 +536,7 @@ else
 fi
 
 sudo dpkg -i $WGET_CACHE/firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
-
+sudo rm /etc/xdg/autostart/Firmador-BCCR.desktop
 
 if [ ! $WGET_CACHED ]; then
     rm $WGET_CACHE/sun_odf_template_pack_es.oxt

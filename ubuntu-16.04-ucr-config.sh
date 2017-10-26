@@ -430,15 +430,23 @@ then
 
   sudo update-grub
 
+  # Basado en https://lauri.võsandi.com/2015/03/dconf.html
+  sudo mkdir -p /etc/dconf/db/mate.d/lock/
+  sudo mkdir -p /etc/dconf/profile/
+  sudo echo "user-db:user" > /etc/dconf/profile/user
+  sudo echo "system-db:mate" >> /etc/dconf/profile/user
+  sudo cp "$BASEDIR"/gschema/panel /etc/dconf/db/mate.d/panel
+  sudo dconf update
+
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
   sudo cp "$BASEDIR"/gschema/30_ucr-mate-settings.gschema.override /usr/share/glib-2.0/schemas/
-  sudo cp "$BASEDIR"/gschema/ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
   sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
+  sudo rm /usr/share/glib-2.0/schemas/ubuntu-mate.gschema.override
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Favoritos de menu avanzado
   mkdir -p /etc/skel/.config/mate-menu
-  sudo sh -c 'location:/usr/share/applications/firefox.desktop
+  sudo sh -c 'echo "location:/usr/share/applications/firefox.desktop
 location:/usr/share/applications/google-chrome.desktop
 location:/usr/share/applications/thunderbird.desktop
 location:/usr/share/applications/spotify.desktop
@@ -481,7 +489,7 @@ sudo sed -i \
 # Descarga la herramienta de configuracion de AURI y Eduroam y crea el
 # respectivo .desktop para que se muestre entre las apliciones.
 wget -c -O $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz --no-check-certificate -q https://ci.ucr.ac.cr/auri/instaladores/AURI-eduroam-UCR-Linux.tar.gz 
-sudo tar -C /opt zxf $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
+sudo tar -C /opt -zxf $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
 
 
 sudo sh -c 'echo "[Desktop Entry]

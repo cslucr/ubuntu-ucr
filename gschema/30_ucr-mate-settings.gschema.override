@@ -1,39 +1,141 @@
-[org.gnome.desktop.interface]
-gtk-theme='Arc-Darker'
-icon-theme='Numix-Circle'
-
-[org.gnome.desktop.wm.preferences]
-theme='Arc-Darker'
+[org.gnome.crypto.pgp]
+keyservers=['hkp://keyserver.ubuntu.com:11371', 'hkp://pool.sks-keyservers.net', 'ldap://keyserver.pgp.com']
 
 [org.mate.caja.desktop]
+font='Ubuntu 11'
+computer-icon-visible=false
 home-icon-visible=false
+trash-icon-visible=false
 
-[org.mate.desktop.interface]
-gtk-theme='Arc-Darker'
-icon-theme='Numix-Circle'
+[org.mate.control-center.appearance]
+more-backgrounds-url='https://ubuntu-mate.community/c/multimedia/artwork'
+
+[org.mate.dictionary]
+print-font='Ubuntu 12'
+
+[org.mate.media-handling]
+autorun-x-content-start-app=['x-content/software','x-content/video-bluray.xml','x-content/video-dvd.xml', 'x-content/video-hddvd.xml','x-content/video-svcd.xml','x-content/video-vcd.xml']
 
 [org.mate.interface]
-icon-theme='Numix-Circle'
 gtk-theme='Arc-Darker'
+icon-theme='Numix-Circle'
 gtk-decoration-layout='menu:minimize,maximize,close'
 font-name='Ubuntu 11'
 document-font-name='Ubuntu 11'
 monospace-font-name='Ubuntu Mono 13'
 
-[org.gnome.desktop.wm.preferences]
+[org.mate.Marco.general]
+center-new-windows=false
+compositing-manager=true
+side-by-side-tiling=true
 theme='Arc-Darker'
+titlebar-font='Ubuntu Medium 11'
 
 [org.mate.background]
-picture-filename='/usr/share/backgrounds/ucr/ubuntu-16.04-ucr-background-cslucr.jpg'
+picture-filename='/usr/share/backgrounds/ubuntu-16.04-ucr-background-cslucr.jpg'
 
-[org.mate.marco.general]
-theme='Arc-Darker'
+[org.mate.Marco.global-keybindings]
+run-command-terminal='<Control><Alt>t'
+switch-panels='disabled'
+switch-windows='<Alt>Tab'
+switch-windows-all='<Control><Alt>Tab'
+switch-windows-all-backward='<Control><Alt><Shift>Tab'
+switch-windows-backward='<Alt><Shift>Tab'
+
+[org.mate.Marco.window-keybindings]
+move-to-center='<Control><Alt>KP_Begin'
+move-to-corner-ne='<Control><Alt>KP_Page_Up'
+move-to-corner-nw='<Control><Alt>KP_Home'
+move-to-corner-se='<Control><Alt>KP_Page_Down'
+move-to-corner-sw='<Control><Alt>KP_End'
+move-to-side-n='<Control><Alt>KP_Up'
+move-to-side-s='<Control><Alt>KP_Down'
+tile-to-side-e='<Control><Alt>KP_Right'
+tile-to-side-w='<Control><Alt>KP_Left'
+
+[org.mate.NotificationDaemon]
+theme='slider'
+
+[org.mate.maximus]
+no-maximize=true
+undecorate=false
 
 [org.mate.pluma]
 color-scheme='classic'
 display-line-numbers=false
 display-right-margin=false
 highlight-current-line=false
+editor-font='Ubuntu Mono 13'
+print-font-body-pango='Ubuntu Mono 9'
+print-font-header-pango='Ubuntu 11'
+print-font-numbers-pango='Ubuntu 8'
+
+[org.mate.screensaver]
+lock-delay=1
+mode='single'
+themes=['screensavers-footlogo-floaters']
+
+[org.mate.sound]
+theme-name='ubuntu'
+event-sounds=true
+input-feedback-sounds=true
+
+[org.mate.session]
+idle-delay=30
+
+[org.mate.SettingsDaemon.plugins.media-keys]
+magnifier='<Alt><Mod4>m'
+screenreader='<Alt><Mod4>s'
+on-screen-keyboard='<Alt><Mod4>k'
+
+[org.mate.system-monitor]
+show-tree=true
+solaris-mode=true
+
+[org.gnome.rhythmbox.plugins]
+active-plugins=['artsearch', 'audiocd','audioscrobbler','cd-recorder','daap','dbus-media-server','generic-player','ipod','iradio','mmkeys','mpris','mtpdevice','notification','power-manager']
+
+[org.gtk.Settings.FileChooser]
+show-hidden=false
+show-size-column=true
+sort-directories-first=true
+
+[org.mate.control-center.appearance]
+more-backgrounds-url='https://ubuntu-mate.community/c/multimedia/artwork'
+
+[org.mate.dictionary]
+print-font='Ubuntu 12'
+
+[org.mate.terminal.profile]
+allow-bold=false
+use-system-font=true
+
+[org.gnome.rhythmbox.encoding-settings]
+media-type-presets={'audio/x-vorbis':'Ubuntu', 'audio/mpeg':'Ubuntu'}
+
+[org.gnome.rhythmbox.rhythmdb]
+monitor-library=true
+
+
+[org.gnome.Charmap]
+font='Ubuntu 22'
+
+[org.yorba.shotwell.printing]
+titles-font='Ubuntu Bold 12'
+
+
+[org.gnome.desktop.interface]
+gtk-theme='Arc-Darker'
+icon-theme='Numix-Circle'
+cursor-theme='DMZ-White'
+document-font-name='Ubuntu 11'
+font-name='Ubuntu 11'
+monospace-font-name='Ubuntu Mono 13'
+
+[org.gnome.desktop.wm.preferences]
+button-layout='menu:minimize,maximize,close'
+theme='Arc-Darker'
+titlebar-font='Ubuntu Bold 11'
 
 [org.mate.applications-at-mobility]
 exec='onboard'
@@ -59,89 +161,6 @@ applet-icon='/usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg'
 start-with-favorites=true
 theme-name='Arc-Dark'
 
-[org.mate.panel]
-default-layout='redmond-fresh'
-object-id-list=['mate-menu', 'showdesktopapplet', 'firefox', 'thunderbird', 'window-list', 'notification-area', 'clock', 'object-1', 'object-0']
-show-program-list=true
-toplevel-id-list=['bottom']
-
-[org.mate.panel.object:/org/mate/panel/objects/mate-menu/]
-locked=true
-position=0
-toplevel-id='bottom'
-applet-iid='MateMenuAppletFactory::MateMenuApplet'
-object-type='applet'
-
-[org.mate.panel.object:/org/mate/panel/objects/showdesktopapplet/]
-locked=true
-position=10
-toplevel-id='bottom'
-applet-iid='WnckletFactory::ShowDesktopApplet'
-object-type='applet'
-
-[org.mate.panel.object:/org/mate/panel/objects/firefox/]
-locked=true
-position=108
-launcher-location='/usr/share/applications/firefox.desktop'
-toplevel-id='bottom'
-object-type='launcher'
-menu-path='applications:/'
-
-[org.mate.panel.object:/org/mate/panel/objects/object-0/]
-locked=true
-position=140
-launcher-location='/usr/share/applications/google-chrome.desktop'
-panel-right-stick=false
-toplevel-id='bottom'
-object-type='launcher'
-
-[org.mate.panel.object:/org/mate/panel/objects/thunderbird/]
-locked=true
-position=172
-launcher-location='/usr/share/applications/thunderbird.desktop'
-toplevel-id='bottom'
-object-type='launcher'
-menu-path='applications:/'
-
-[org.mate.panel.object:/org/mate/panel/objects/object-1/]
-locked=true
-position=140
-launcher-location='/usr/share/applications/libreoffice-startcenter.desktop'
-panel-right-stick=false
-toplevel-id='bottom'
-object-type='launcher'
-
-[org.mate.panel.object:/org/mate/panel/objects/window-list/]
-locked=true
-position=236
-toplevel-id='bottom'
-applet-iid='WnckletFactory::WindowListApplet'
-object-type='applet'
-
-[org.mate.panel.object:/org/mate/panel/objects/notification-area/]
-locked=true
-position=10
-panel-right-stick=true
-toplevel-id='bottom'
-applet-iid='NotificationAreaAppletFactory::NotificationArea'
-object-type='applet'
-
-[org.mate.panel.object:/org/mate/panel/objects/clock/]
-locked=true
-position=0
-panel-right-stick=true
-toplevel-id='bottom'
-applet-iid='ClockAppletFactory::ClockApplet'
-object-type='applet'
-
-[org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/]
-y=0
-orientation='top'
-expand=true
-y-bottom=-1
-size=24
-screen=0
-
 [org.mate.peripherals-mouse]
 cursor-theme='DMZ-White'
 
@@ -151,3 +170,18 @@ default-font='Ubuntu 10'
 [org.mate.peripherals-touchpad]
 disable-while-typing=true
 tap-to-click=true
+
+[com.ubuntu.update-manager]
+show-details=true
+show-versions=true
+
+[net.launchpad.plank.dock.settings]
+dock-items=['desktop.dockitem','clock.dockitem','firefox.dockitem','matecc.dockitem']
+hide-mode='window-dodge'
+show-dock-item=true
+theme='Ubuntu-MATE'
+
+[org.mate.panel.general]
+default-layout='redmond-fresh'
+
+

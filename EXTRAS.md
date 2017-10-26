@@ -1,0 +1,1 @@
+# Cosas que hacer despu'es de instalar Ubuntu UCR

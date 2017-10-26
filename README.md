@@ -75,6 +75,8 @@ El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera u
 
 Para más opciones ejecute `./ubuntu-iso-customization.sh -h`
 
+Para explorar otros tipos de software o cosas que hacer después de instalar Ubuntu UCR, puede leer el archivo 'Extras' en la documentación
+
 *Comunidad de Software Libre de la Universidad de Costa Rica*
 
 *http://softwarelibre.ucr.ac.cr*

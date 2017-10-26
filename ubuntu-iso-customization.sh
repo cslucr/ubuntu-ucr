@@ -88,7 +88,7 @@ if [ -z $ZIP ]; then
     if $DEVELOPMENT ; then
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-        cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
+        cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/backgrounds $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; ) || error_exit "No pude generar master.zip"
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else

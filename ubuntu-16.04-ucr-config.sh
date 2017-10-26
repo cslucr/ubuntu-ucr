@@ -309,9 +309,9 @@ autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applic
 # Actualizacion del sistema e instalacion de los paquetes indicados
 sudo cp "$BASEDIR"/sources-mirror-ucr.list /etc/apt/sources.list.d/ # temporal, en caso que no este configurado
 sudo apt-get update || error_exit "Error al actualizar lista de paquetes"
+sudo apt-get -y purge $purgepackages || error_exit "Error al purgar paquetes"
 sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativo"
 sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
-sudo apt-get -y purge $purgepackages || error_exit "Error al purgar paquetes"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Salva el cache de APT
 if [ $APT_CACHE ]; then

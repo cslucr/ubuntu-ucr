@@ -18,7 +18,7 @@ object-type='applet'
 
 [org/mate/panel/objects/firefox]
 locked=true
-position=108
+position=101
 launcher-location='/usr/share/applications/firefox.desktop'
 toplevel-id='bottom'
 object-type='launcher'
@@ -26,7 +26,7 @@ menu-path='applications:/'
 
 [org/mate/panel/objects/google-chrome]
 locked=true
-position=140
+position=125
 launcher-location='/usr/share/applications/google-chrome.desktop'
 panel-right-stick=false
 toplevel-id='bottom'
@@ -34,7 +34,7 @@ object-type='launcher'
 
 [org/mate/panel/objects/thunderbird]
 locked=true
-position=172
+position=149
 launcher-location='/usr/share/applications/thunderbird.desktop'
 toplevel-id='bottom'
 object-type='launcher'
@@ -43,7 +43,7 @@ menu-path='applications:/'
 
 [org/mate/panel/objects/libreoffice-startcenter]
 locked=true
-position=140
+position=173
 launcher-location='/usr/share/applications/libreoffice-startcenter.desktop'
 panel-right-stick=false
 toplevel-id='bottom'
@@ -51,7 +51,7 @@ object-type='launcher'
 
 [org/mate/panel/objects/window-list]
 locked=true
-position=236
+position=197
 toplevel-id='bottom'
 applet-iid='WnckletFactory::WindowListApplet'
 object-type='applet'

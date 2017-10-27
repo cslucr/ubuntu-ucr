@@ -2,10 +2,6 @@
 toplevel-id-list=['bottom']
 object-id-list=['mate-menu', 'firefox', 'google-chrome', 'thunderbird', 'libreoffice-startcenter', 'window-list', 'notification-area', 'indicators', 'clock']
 
-[org/mate/panel/toplevels/bottom]
-orientation='top'
-size=30
-
 [org/mate/panel/objects/mate-menu]
 locked=true
 position=0

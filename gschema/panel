@@ -1,6 +1,6 @@
 [org/mate/panel/general]
 toplevel-id-list=['bottom']
-object-id-list=['mate-menu', 'firefox', 'google-chrome', 'thunderbird', 'libreoffice-startcenter', 'window-list', 'notification-area', 'indicators', 'clock']
+object-id-list=['mate-menu', 'showdesktopapplet', 'firefox', 'google-chrome', 'thunderbird', 'libreoffice-startcenter', 'window-list', 'notification-area', 'indicators', 'clock']
 
 [org/mate/panel/objects/mate-menu]
 locked=true

@@ -11,7 +11,6 @@ Estas son algunas de sus características:
 - Versiones actualizadas del software base, como LibreOffice, Mozilla Firefox, Shotwell, Rhythmbox y otros.
 - Extras de terceros preinstalados, como tipografías Arial, Times New Roman, etc., plugins Oracle Java, Adobe Flash, o codecs multimedia.
 - Software adicional como Gimp, Google Chrome, VLC, Spotify o la herramienta de configuración de AURI y Eduroam.
-- Software para la captura de pantalla y facilitar la edición de las mismas, como Shutter.
 - Actualizaciones automáticas del sistema operativo y de todos los programas instalados. Estas son silenciosas y no requieren intervención del usuario.
 - Soporte para lectores de firma digital, certificados de la CA nacional y programas instalados del BCCR.
 - Complementos para LibreOffice como sinónimos, corrección ortográfica, entre otros; los cuales permiten tener un mejor aprovechamiento de la herramienta.

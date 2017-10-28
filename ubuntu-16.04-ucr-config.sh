@@ -284,6 +284,12 @@ packages="$packages shutter"
 
 packages="$packages linux-firmware firmware-b43-installer"
 
+# VLC
+#
+#Programa para reproducción de videos
+
+packages="$packages vlc"
+
 # Paquetes varios
 # - Thunderbird, al ser multiplataforma, su perfil se puede migrar facilmente
 # - unattended-upgrades para actualizaciones automaticas

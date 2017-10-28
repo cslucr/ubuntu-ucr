@@ -151,6 +151,9 @@ sudo sed -i \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages libreoffice libreoffice-l10n-en-za libreoffice-l10n-en-gb libreoffice-help-en-gb libreoffice-style-sifr"
+purgepackages="$purgepackages libreoffice-help-fr libreoffice-help-it libreoffice-help-pt libreoffice-help-pt-br libreoffice-help-ru
+libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb
+libreoffice-l10n-en-za libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw"
 
 # Firma digital
 sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"
@@ -295,10 +298,6 @@ if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome
 if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 purgepackages="$purgepackages evolution evolution-plugins evolution-common libevolution evolution-data-server-online-accounts tilda
-libreoffice-help-fr libreoffice-help-it libreoffice-help-pt libreoffice-help-pt-br libreoffice-help-ru
-libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb
-libreoffice-l10n-en-za libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br
-libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw
 firefox-locale-de firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans
 thunderbird-locale-de thunderbird-locale-en-gb thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-fr 
 thunderbird-locale-it thunderbird-locale-pt thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-ru 

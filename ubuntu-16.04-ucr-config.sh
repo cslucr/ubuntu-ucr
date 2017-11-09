@@ -480,6 +480,12 @@ location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/app
   sudo sh -c 'echo "[greeter]
 background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
 icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
+
+  # Parche para instalar version mas reciente de Arc-theme, que corrige error de bordes en MATE
+  wget https://launchpad.net/ubuntu/+source/arc-theme/20170302-0ubuntu1/+build/12391551/+files/arc-theme_20170302-0ubuntu1_all.deb
+  sudo dpkg -i arc-theme_20170302-0ubuntu1_all.deb
+  rm arc-theme_20170302-0ubuntu1_all.deb
+
 fi
 
 

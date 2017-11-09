@@ -18,11 +18,29 @@ Opciones:
 Toma una imagen de Ubuntu, la personaliza de acuerdo al script de configuración y genera el archivo ISO personalizado para ser distribuido.";
 }
 CLOSE_ERROR=0
+
 # Mensajes de error y salida del script
 error_exit(){
 	echo "${1:-"Error desconocido"}" 1>&2
 	CLOSE_ERROR=1
     exit 1
+}
+
+# Desmontaje de sistemas de archivos
+function umountmntfs() {
+  sudo umount mnt
+}
+function umountcachefs() {
+  if [ $APT_CACHED ]; then sudo umount $EDIT/var/cache/apt; fi
+  if [ $WGET_CACHED ]; then sudo umount $EDIT$WGET_CACHE_GUEST; fi
+}
+function umountdevfs() {
+  sudo umount $EDIT/dev
+}
+function umountchrootfs() {
+  umount /proc || umount -lf /proc
+  umount /sys
+  umount /dev/pts
 }
 
 # Captando parámetros
@@ -89,7 +107,7 @@ if [ -z $ZIP ]; then
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/backgrounds $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; ) || error_exit "No pude generar master.zip"
+        ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; ) || error_exit "Error al generar master.zip"
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
     else
         wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip || error_exit "No pude descargar master.zip"
@@ -106,8 +124,9 @@ sudo mount -o loop $ISOPATH mnt || error_exit "Error al montar ISO $ISOPATH"
 mkdir $EXTRACT
 sudo rsync --exclude=/casper/filesystem.squashfs -a mnt/ $EXTRACT
 sudo dd if=$ISOPATH bs=512 count=1 of=$EXTRACT/isolinux/isohdpfx.bin
-sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs || error_exit "Error al desempaquetar Squashfs"
-sudo umount mnt
+sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs || (umountmntfs; error_exit "Error al desempaquetar Squashfs")
+umountmntfs
+  #sudo umount mnt
 sudo mv $CUSTOMIZATIONDIR/master.zip $EDIT/root
 sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
@@ -144,7 +163,7 @@ else
     sudo mkdir -p $EDIT$WGET_CACHE_GUEST
 fi
 # Ejecuta ordenes dentro de directorio de edicion
-cat << EOF | sudo chroot $EDIT || error_exit "Personalización fallida"
+cat << EOF | sudo chroot $EDIT || (umountchrootfs; umountcachefs; umountdevfs; error_exit "Personalización fallida")
 mount -t proc none /proc
 mount -t sysfs none /sys
 mount -t devpts none /dev/pts
@@ -166,9 +185,10 @@ rm /var/lib/dbus/machine-id
 rm /sbin/initctl
 dpkg-divert --rename --remove /sbin/initctl
 
-umount /proc || umount -lf /proc
-umount /sys
-umount /dev/pts
+umountchrootfs
+  #umount /proc || umount -lf /proc
+  #umount /sys
+  #umount /dev/pts
 # Sale del directorio de edicion
 EOF
 
@@ -190,12 +210,14 @@ if [ $WGET_CACHED ]; then
    fi
 fi
 
-
-sudo umount $EDIT/dev
+umountdevfs
+  #sudo umount $EDIT/dev
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts
 sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf
 sudo rm -rf $EDIT/tmp/* ~/.bash_history
+
 # CREACION DE NUEVA IMAGEN ISO
+
 # regenera manifest
 sudo chmod +w $EXTRACT/casper/filesystem.manifest
 sudo chroot $EDIT dpkg-query -W --showformat='${Package} ${Version}\n' | sudo tee $EXTRACT/casper/filesystem.manifest

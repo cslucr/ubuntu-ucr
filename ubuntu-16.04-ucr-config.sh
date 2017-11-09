@@ -482,9 +482,8 @@ background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
 icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
 
   # Parche para instalar version mas reciente de Arc-theme, que corrige error de bordes en MATE
-  wget https://launchpad.net/ubuntu/+source/arc-theme/20170302-0ubuntu1/+build/12391551/+files/arc-theme_20170302-0ubuntu1_all.deb
-  sudo dpkg -i arc-theme_20170302-0ubuntu1_all.deb
-  rm arc-theme_20170302-0ubuntu1_all.deb
+  wget -c -O $WGET_CACHE/arc-theme_20170302-0ubuntu1_all.deb https://launchpad.net/ubuntu/+source/arc-theme/20170302-0ubuntu1/+build/12391551/+files/arc-theme_20170302-0ubuntu1_all.deb
+  sudo dpkg -i $WGET_CACHE/arc-theme_20170302-0ubuntu1_all.deb
 
 fi
 
@@ -560,12 +559,13 @@ sudo dpkg -i $WGET_CACHE/firmador-bccr.deb || error_exit "Error al instalar firm
 sudo rm /etc/xdg/autostart/Firmador-BCCR.desktop
 
 if [ ! $WGET_CACHED ]; then
-    rm $WGET_CACHE/sun_odf_template_pack_es.oxt
-    rm $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
-    rm $WGET_CACHE/LanguageTool-3.9.oxt
-    rm $WGET_CACHE/es_ANY.oxt
-    rm $WGET_CACHE/toolsforedit.oxt
-    rm $WGET_CACHE/firmador-bccr.deb
+  rm $WGET_CACHE/sun_odf_template_pack_es.oxt
+  rm $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
+  rm $WGET_CACHE/LanguageTool-3.9.oxt
+  rm $WGET_CACHE/es_ANY.oxt
+  rm $WGET_CACHE/toolsforedit.oxt
+  rm $WGET_CACHE/firmador-bccr.deb
+  if grep -q "MATE" /usr/share/xsessions/*; then rm $WGET_CACHE/arc-theme_20170302-0ubuntu1_all.deb; fi
 fi
 
 

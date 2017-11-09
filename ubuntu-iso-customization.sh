@@ -37,11 +37,6 @@ function umountcachefs() {
 function umountdevfs() {
   sudo umount $EDIT/dev
 }
-function umountchrootfs() {
-  umount /proc || umount -lf /proc
-  umount /sys
-  umount /dev/pts
-}
 
 # Captando parámetros
 # Is in development environment ?
@@ -163,7 +158,13 @@ else
     sudo mkdir -p $EDIT$WGET_CACHE_GUEST
 fi
 # Ejecuta ordenes dentro de directorio de edicion
-cat << EOF | sudo chroot $EDIT || (umountchrootfs; umountcachefs; umountdevfs; error_exit "Personalización fallida")
+cat << EOF | sudo chroot $EDIT || (umountcachefs; umountdevfs; error_exit "Personalización fallida")
+function umountchrootfs() {
+  umount /proc || umount -lf /proc
+  umount /sys
+  umount /dev/pts
+}
+
 mount -t proc none /proc
 mount -t sysfs none /sys
 mount -t devpts none /dev/pts
@@ -178,7 +179,7 @@ cd ~
 # Descarga y ejecuta script de personalizacion ubuntu-ucr.
 # Puede omitir el script y en su lugar realizar una personalizacion manual
 unzip master.zip && rm master.zip
-bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh $BUILDER_ARGUMENTS || exit 1
+bash ubuntu-ucr-master/ubuntu-16.04-ucr-config.sh $BUILDER_ARGUMENTS || (umountchrootfs; exit 1)
 rm -r ubuntu-ucr-master ~/.bash_history
 
 rm /var/lib/dbus/machine-id

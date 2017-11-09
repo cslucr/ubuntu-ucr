@@ -121,7 +121,6 @@ sudo rsync --exclude=/casper/filesystem.squashfs -a mnt/ $EXTRACT
 sudo dd if=$ISOPATH bs=512 count=1 of=$EXTRACT/isolinux/isohdpfx.bin
 sudo unsquashfs -d $EDIT mnt/casper/filesystem.squashfs || (umountmntfs; error_exit "Error al desempaquetar Squashfs")
 umountmntfs
-  #sudo umount mnt
 sudo mv $CUSTOMIZATIONDIR/master.zip $EDIT/root
 sudo mv $EDIT/etc/resolv.conf $EDIT/etc/resolv.conf.bak
 sudo cp /etc/resolv.conf /etc/hosts $EDIT/etc/
@@ -157,6 +156,7 @@ if [ $WGET_CACHED ]; then
 else
     sudo mkdir -p $EDIT$WGET_CACHE_GUEST
 fi
+
 # Ejecuta ordenes dentro de directorio de edicion
 cat << EOF | sudo chroot $EDIT || (umountcachefs; umountdevfs; error_exit "Personalización fallida")
 function umountchrootfs() {
@@ -187,9 +187,7 @@ rm /sbin/initctl
 dpkg-divert --rename --remove /sbin/initctl
 
 umountchrootfs
-  #umount /proc || umount -lf /proc
-  #umount /sys
-  #umount /dev/pts
+
 # Sale del directorio de edicion
 EOF
 
@@ -212,7 +210,7 @@ if [ $WGET_CACHED ]; then
 fi
 
 umountdevfs
-  #sudo umount $EDIT/dev
+
 sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts
 sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf
 sudo rm -rf $EDIT/tmp/* ~/.bash_history

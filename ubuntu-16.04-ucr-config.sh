@@ -315,7 +315,7 @@ sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativ
 sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Cuando no se guarda el cache apt, se limpia
-if [ !$APT_CACHE ]; then
+if [ ! $APT_CACHE ]; then
   sudo apt-get clean
 fi
 

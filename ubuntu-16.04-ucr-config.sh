@@ -116,7 +116,7 @@ autostart=""
 #
 sudo sed -i \
 -e 's/^\/\/."\${distro_id}:\${distro_codename}-updates";/\t"\${distro_id}:\${distro_codename}-updates";/' \
--e 's/^\/\/Unattended-Upgrade::MinimalSteps "true";/Unattended-Upgrade::MinimalSteps "true";/'\
+-e 's/^\/\/Unattended-Upgrade::MinimalSteps "true";/Unattended-Upgrade::MinimalSteps "true";/' \
 -e 's/^\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades
 

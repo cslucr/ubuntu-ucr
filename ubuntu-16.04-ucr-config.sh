@@ -314,13 +314,10 @@ sudo apt-get -y purge $purgepackages || error_exit "Error al purgar paquetes"
 sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativo"
 sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
-# Salva el cache de APT
-if [ $APT_CACHE ]; then
-  echo "Salvando cache APT: $APT_CACHE"
-else
+# Cuando no se guarda el cache apt, se limpia
+if [ !$APT_CACHE ]; then
   sudo apt-get clean
 fi
-
 
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
 sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save

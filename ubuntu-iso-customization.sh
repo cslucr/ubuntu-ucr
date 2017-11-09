@@ -215,6 +215,7 @@ sudo rm $EDIT/etc/resolv.conf $EDIT/etc/hosts
 sudo mv $EDIT/etc/resolv.conf.bak $EDIT/etc/resolv.conf
 sudo rm -rf $EDIT/tmp/* ~/.bash_history
 
+
 # CREACION DE NUEVA IMAGEN ISO
 
 # regenera manifest

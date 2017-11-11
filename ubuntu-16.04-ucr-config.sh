@@ -319,7 +319,7 @@ sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativ
 sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Cuando no se guarda el cache apt, se limpia
-if [ ! $APT_CACHE ]; then
+if ! $APT_CACHE ; then
   sudo apt-get clean
 fi
 
@@ -392,7 +392,7 @@ then
   sudo chmod -R 755 /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
   
 
-  if [ ! $WGET_CACHED ]; then
+  if ! $WGET_CACHED ; then
     sudo rm $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip
     sudo rm $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip
   fi
@@ -562,7 +562,7 @@ fi
 sudo dpkg -i $WGET_CACHE/firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
 sudo rm /etc/xdg/autostart/Firmador-BCCR.desktop
 
-if [ ! $WGET_CACHED ]; then
+if ! $WGET_CACHED ; then
   rm $WGET_CACHE/sun_odf_template_pack_es.oxt
   rm $WGET_CACHE/AURI-eduroam-UCR-Linux.tar.gz 
   rm $WGET_CACHE/LanguageTool-3.9.oxt

@@ -20,6 +20,7 @@ Opciones:
 
   -y no cuestiona, fuerza la sobreescritura de configuraciones
   -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
+  -w directorio_cache Ruta absoluta al directorio donde se encuentra el cache a utilizar con wget
   -h muestra esta ayuda
 
 Toma una instalación fresca de Ubuntu y la personaliza.";

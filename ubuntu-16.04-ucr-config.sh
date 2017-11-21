@@ -453,7 +453,7 @@ then
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Favoritos de menu avanzado
-  mkdir -p /etc/skel/.config/mate-menu
+  sudo mkdir -p /etc/skel/.config/mate-menu
   sudo sh -c 'echo "location:/usr/share/applications/firefox.desktop
 location:/usr/share/applications/google-chrome.desktop
 location:/usr/share/applications/thunderbird.desktop
@@ -483,7 +483,7 @@ background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
 icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
 
   # Parche para instalar version mas reciente de Arc-theme, que corrige error de bordes en MATE
- wget -c -O $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb
+  wget -c -O $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb
   sudo dpkg -i $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb
 
 fi

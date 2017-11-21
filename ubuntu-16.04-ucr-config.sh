@@ -441,8 +441,8 @@ then
   # Basado en https://lauri.võsandi.com/2015/03/dconf.html
   sudo mkdir -p /etc/dconf/db/mate.d/lock/
   sudo mkdir -p /etc/dconf/profile/
-  sudo echo "user-db:user" > /etc/dconf/profile/user
-  sudo echo "system-db:mate" >> /etc/dconf/profile/user
+  sudo sh -c 'echo "user-db:user" > /etc/dconf/profile/user'
+  sudo sh -c 'echo "system-db:mate" >> /etc/dconf/profile/user'
   sudo cp "$BASEDIR"/gschema/panel /etc/dconf/db/mate.d/panel
   sudo dconf update
 

@@ -28,13 +28,16 @@ error_exit(){
 
 # Desmontaje de sistemas de archivos
 function umountmntfs() {
+  echo "Desmontando mnt"
   sudo umount mnt
 }
 function umountcachefs() {
+  echo "Desmontando directorios de cachés, cuando aplica"
   if [ $APT_CACHED ]; then sudo umount $EDIT/var/cache/apt; fi
   if [ $WGET_CACHED ]; then sudo umount $EDIT$WGET_CACHE_GUEST; fi
 }
 function umountdevfs() {
+  echo "Desmontando dev"
   sudo umount $EDIT/dev
 }
 

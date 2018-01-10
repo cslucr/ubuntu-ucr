@@ -19,7 +19,7 @@ function myhelp(){
 Opciones:
 
   -y no cuestiona, fuerza la sobreescritura de configuraciones
-  -c directorio_cache Ruta absoluta al directorio donde se encuentra el cache de APT a utilizar
+  -c evita que se limpie el cache de APT. En caso que se quiera reutilizar
   -w directorio_cache Ruta absoluta al directorio donde se encuentra el cache a utilizar con wget
   -h muestra esta ayuda
 
@@ -37,17 +37,18 @@ error_exit(){
 # Captando parámetros
 # Is in development environment ?
 NOFORCE=true
-APT_CACHE=false
+APT_CACHED=false
 WGET_CACHED=false
 WGET_CACHE=/tmp/wget_cache
 
-while getopts chyw option
+while getopts w:ych: option
 do
  case "${option}"
  in
  y) NOFORCE=false;;
- c) APT_CACHE=true;;
- w) WGET_CACHED=true;;
+ c) APT_CACHED=true;;
+ w) WGET_CACHED=true
+    WGET_CACHE=$(readlink -f ${OPTARG}) ;;
  h) myhelp
     exit 0 ;;
  esac
@@ -91,6 +92,9 @@ purgepackages=""
 # al cargar sesion, de la forma:
 #  autostart="$autostart ruta1 ruta2 ruta2"
 autostart=""
+
+# Crea directorio a donde descargar archivos con wget
+mkdir -p $WGET_CACHE || error_exit "Error al crear directorio para cache de wget"
 
 # PROCESAMIENTO
 
@@ -316,7 +320,7 @@ sudo apt-get -y dist-upgrade || error_exit "Error al actualizar sistema operativ
 sudo apt-get -y install $packages || error_exit "Error al instalar paquetes de personalización"
 sudo apt-get -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 # Cuando no se guarda el cache apt, se limpia
-if ! $APT_CACHE ; then
+if ! $APT_CACHED ; then
   sudo apt-get clean
 fi
 

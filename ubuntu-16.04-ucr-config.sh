@@ -305,7 +305,9 @@ packages="$packages linux-firmware firmware-b43-installer"
 # - unattended-upgrades para actualizaciones automaticas
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
+# - grub-efi para evitar error de dependencias
 packages="$packages thunderbird thunderbird-locale-es thunderbird-locale-es-ar thunderbird-locale-en-gb unattended-upgrades caffeine vlc"
+if [ "$arch" == 'x86_64' ]; then packages="$packages grub-efi-amd64"; else packages="$packages grub-efi-ia32"; fi
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
 if grep -q "Unity" /usr/share/xsessions/*;        then packages="$packages unity-tweak-tool"; fi
 if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi

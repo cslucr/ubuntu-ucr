@@ -131,7 +131,7 @@ sudo mount --bind /dev/ $EDIT/dev/
 
 
 # Usa cache de APT
-if [ $APT_CACHED ]; then
+if $APT_CACHED ; then
   echo "Usando cache APT: $APT_CACHE"
     if [ "$(ls -A $APT_CACHE)" ]; then  # esta vacio, crear una copia
       echo "ok, apt"  
@@ -144,7 +144,7 @@ if [ $APT_CACHED ]; then
 fi
 
 # Usa cache para Wget
-if [ $WGET_CACHED ]; then
+if $WGET_CACHED ; then
     echo "Usando cache WGET: $WGET_CACHE"
     if [ "$(ls -A $WGET_CACHE)" ]; then  # esta vacio, crear una copia
       echo "ok, wget"  

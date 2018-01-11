@@ -229,7 +229,14 @@ sudo sed -i \
 # GIMP
 #
 # Ultima version estable
-sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
+#sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
+
+#sudo sed -i \
+#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
+#/etc/apt/apt.conf.d/50unattended-upgrades
+
+# Ultima version inestable que anade nuevas caracteristicas y en las pruebas ha trabajado muy estable
+sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp-edge
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp-edge:${distro_codename}";/' \

@@ -100,17 +100,17 @@ EDIT=${ISONAME%.*}-squashfs
 
 ## PERSONALIZACION
 
-if [ -z $ZIP ]; then
-    if $DEVELOPMENT ; then
+if [ -z $ZIP ]; then # si no se indico un archivo master.zip personalizado
+    if $DEVELOPMENT ; then # master.zip a partir de repositorio local
         echo "Modo Local (Desarrollo) activado"
         mkdir $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         cp -ar $SCRIPTDIR/plymouth/ $SCRIPTDIR/backgrounds $SCRIPTDIR/gschema/ $SCRIPTDIR/*.list ubuntu-16.04-ucr-* $CUSTOMIZATIONDIR/ubuntu-ucr-master/
         ( cd $CUSTOMIZATIONDIR; zip -r master.zip ubuntu-ucr-master; ) || error_exit "Error al generar master.zip"
         rm -rf $CUSTOMIZATIONDIR/ubuntu-ucr-master/
-    else
+    else # descarga master.zip
         wget -O $CUSTOMIZATIONDIR/master.zip https://github.com/cslucr/ubuntu-ucr/archive/master.zip || error_exit "No pude descargar master.zip"
     fi
-else
+else # archivo master.zip personalizado
     cp $ZIP $CUSTOMIZATIONDIR/master.zip || error_exit "No pude copiar master.zip desde $ZIP "
 fi
 

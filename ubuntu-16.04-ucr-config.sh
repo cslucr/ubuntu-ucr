@@ -155,10 +155,9 @@ sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-5-3:${distro_codename}";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
-packages="$packages libreoffice libreoffice-help-en-gb libreoffice-style-sifr"
+packages="$packages libreoffice libreoffice-help-en-gb libreoffice-l10n-en-za hunspell-en-ca mythes-en-au hunspell-en-gb hunspell-en-za hunspell-en-au hyphen-en-gb libreoffice-style-sifr"
 purgepackages="$purgepackages libreoffice-help-fr libreoffice-help-it libreoffice-help-pt libreoffice-help-pt-br libreoffice-help-ru
-libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb
-libreoffice-l10n-en-za libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw"
+libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw"
 
 # Firma digital
 sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"
@@ -242,7 +241,7 @@ sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp-edge:${distro_codename}";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
-packages="$packages gimp"
+packages="$packages gimp gimp-help-es gimp-help-en-gb gimp-help-en"
 
 # Arc gtk theme
 #
@@ -306,7 +305,7 @@ packages="$packages linux-firmware firmware-b43-installer"
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
 # - grub-efi para evitar error de dependencias
-packages="$packages thunderbird thunderbird-locale-es thunderbird-locale-es-ar thunderbird-locale-en-gb unattended-upgrades caffeine vlc"
+packages="$packages thunderbird thunderbird-locale-es thunderbird-locale-es-es thunderbird-locale-es-ar thunderbird-locale-en-gb unattended-upgrades caffeine vlc"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
 if grep -q "Unity" /usr/share/xsessions/*;        then packages="$packages unity-tweak-tool"; fi
 if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi

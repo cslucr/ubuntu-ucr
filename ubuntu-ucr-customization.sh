@@ -131,8 +131,8 @@ sudo sed -i \
 #
 # Se aprueba previamente la licencia de uso de las tipografias Microsoft
 # utilizando la herramienta debconf-set-selections
-# echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-# packages="$packages ubuntu-restricted-extras"
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+packages="$packages ubuntu-restricted-extras"
 
 # Oracle Java 8
 #

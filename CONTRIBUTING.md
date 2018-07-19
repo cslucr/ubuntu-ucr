@@ -23,8 +23,8 @@ chmod +x script.sh
 
 Estos son los scripts que utilizamos:
 
-* **ubuntu-16.04-ucr-config.sh**: ejecútelo en una instalación limpia de Ubuntu y aplicará toda la personalización. Este también copiará los archivos incluidos en el proyecto, como fondos de pantalla, tema de arranque o archivos de configuración.
-* **ubuntu-iso-customization.sh**: toma una imagen ISO de Ubuntu y genera una nueva imagen, con nuestra personalización, lista para ser instalada. Ejecute `./ubuntu-iso-customization.sh -h` para ver las opciones disponibles.
+* **ubuntu-ucr-customization.sh**: ejecútelo en una instalación limpia de Ubuntu y aplicará toda la personalización. Este también copiará los archivos incluidos en el proyecto, como fondos de pantalla, tema de arranque o archivos de configuración.
+* **ubuntu-ucr-iso-generator.sh**: toma una imagen ISO de Ubuntu y genera una nueva imagen, con nuestra personalización, lista para ser instalada. Ejecute `./ubuntu-ucr-iso-generator.sh -h` para ver las opciones disponibles.
 
 **No tengo idea de cómo entrarle ¿Por dónde comienzo?**. La respuesta es simple: [DuckDuckGléelo](https://duckduckgo.com/) (o [Googléelo](https://www.google.com/)). De esta manera hemos aprendido que con archivos _gschemas_ podemos cambiar la configuración predeterminado del entorno, o que con _unopkg_ es posible instalar complementos para LibreOffice.
 
@@ -46,7 +46,7 @@ Nuestros estándares son simples:
 
 **No es necesario saber modificar el proyecto para contribuir**. Las pruebas son sumamente importantes, instale Ubuntu UCR en su computadora y reporte sus observaciones.
 
-Podrá observar que el proyecto cuenta con una sección de _issues_. Aquí usted podrá sugerir un aspecto por mejorar, reportar un problema que se haya encontrado o bien, puede realizar consultas. Al crear un _issue_, puede añadir etiquetas (_enhancement_, _bug_, _question_, ...) que faciliten la identificación de cada uno.
+Podrá observar que el proyecto cuenta con una sección de _issues_. Aquí usted podrá sugerir un aspecto por mejorar, reportar un problema que se haya encontrado o bien, puede realizar consultas.
 
 Cada _issue_ permite añadir respuestas, por lo que aquí mismo se puede discutir un tema para ampliar conceptos, evacuar dudas o llegar a acuerdos.
 
@@ -80,7 +80,7 @@ Así se crea un nuevo _branch_:
 git branch miaporte
 ```
 
-Si ejecuta `git branch` si más parámetros, mostrará las ramas existentes (el `*` indica la rama actual):
+Si ejecuta `git branch` sin más parámetros, mostrará las ramas existentes (el `*` indica la rama actual):
 ```
 git branch
 * master
@@ -101,9 +101,9 @@ git branch
 
 Cada cambio deberíamos registrarlo en un _commit_, un _commit_ puede contener modificaciones de uno o más archivos. No incluya múltiples cambios en un solo _commit_.
 
-Por ejemplo, si editamos los archivos `ubuntu-16.04-ucr-config.sh` y `README.md`, preparamos el _commit_ así:
+Por ejemplo, si editamos los archivos `ubuntu-ucr-customization.sh` y `README.md`, preparamos el _commit_ así:
 ```
-git add ubuntu-16.04-ucr-config.sh README.md
+git add ubuntu-ucr-customization.sh README.md
 ```
 Y hacemos el _commit_ de esta manera:
 ```
@@ -121,7 +121,7 @@ git push origin miaporte
 ```
 Si ingresamos a nuestro repositorio (`https://github.com/miusuario/ubuntu-ucr`) podremos ver la nueva rama y los cambios reflejados en esta.
 
-A la par de la rama podremos ver un botón `New pul request`. Presionándolo se nos mostrará un formulario para hacer el envío. Añada una descripción lo más completa posible explicando los cambios y el por qué de estos.
+A la par de la rama podremos ver un botón `New pull request`. Presionándolo se nos mostrará un formulario para hacer el envío. Añada una descripción lo más completa posible explicando los cambios y el por qué de estos.
 
 Un mantenedor del proyecto revisará el _pull request_. Si este tiene dudas o sugerencias añadirá una respuesta al mismo.
 

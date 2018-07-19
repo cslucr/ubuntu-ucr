@@ -17,11 +17,7 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-1.png)
-
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-2.png)
-
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-3.png)
+Próximamente
 
 
 ## Descarga
@@ -54,27 +50,27 @@ Se toma como base Ubuntu por las siguientes razones:
 
 ## ¿Cómo ejecutar los scripts?
 
-### En una instalación en limpio:
+### Para personalizar una instalación en limpio:
 
-1. Realice una instalación en limpio de Ubuntu 16.04 LTS, funciona con Unity, Gnome-Shell y MATE.
+1. Realice una instalación en limpio de Ubuntu 18.04 LTS, funciona con Gnome-Shell y MATE.
 2. Conéctese a Internet
 3. Descargue el proyecto: `wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip`
 4. Descomprima: `unzip master.zip`
 5. Ingrese al directorio: `cd ubuntu-ucr-master`
-6. De permisos de ejecución al script: `chmod +x ubuntu-16.04-ucr-config.sh`
-7. Ejecútelo: `./ubuntu-16.04-ucr-config.sh`
+6. De permisos de ejecución al script: `chmod +x ubuntu-ucr-customization.sh`
+7. Ejecútelo: `./ubuntu-ucr-customization.sh`
 8. Siga las instrucciones
 
 ### Para generar una imagen ISO
 
-El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de configuración.
+El script *ubuntu-ucr-iso-generator.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de perzonalización.
 1. Instale las herramientas requeridas: `sudo apt install squashfs-tools xorriso`
-2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 16.04 con Unity, Gnome-Shell o MATE.
-3. Descargue el script *ubuntu-iso-customization.sh*: `wget https://github.com/cslucr/ubuntu-ucr/raw/master/ubuntu-iso-customization.sh`
-3. De permisos de ejecución al script: `chmod +x ubuntu-iso-customization.sh`
-4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-iso-customization.sh ubuntu-16.04.x-desktop-arch.iso`
+2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 18.04 con Gnome-Shell o MATE.
+3. Descargue el script *ubuntu-ucr-iso-generator.sh*: `wget https://github.com/cslucr/ubuntu-ucr/raw/master/ubuntu-ucr-iso-generator.sh`
+3. De permisos de ejecución al script: `chmod +x ubuntu-ucr-iso-generator.sh`
+4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-ucr-iso-generator.sh ubuntu-18.04.x-desktop-arch.iso`
 
-Para más opciones ejecute `./ubuntu-iso-customization.sh -h`
+Para más opciones ejecute `./ubuntu-ucr-iso-generator.sh -h`
 
 *Comunidad de Software Libre de la Universidad de Costa Rica*
 

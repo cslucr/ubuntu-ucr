@@ -248,22 +248,11 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45
 
 packages="$packages spotify-client"
 
-# Shutter
-#
-#Herramienta para capturar la pantalla o solo secciones de ella. También permite editar la captura
-# sudo add-apt-repository -y ppa:shutter/ppa || error_exit "Error al agregar llave para repositorio Shutter"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-shutter:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages shutter"
-
 # Driver comunes
 # Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
 # y dispositivos de audio
 
-# packages="$packages linux-firmware firmware-b43-installer"
+packages="$packages linux-firmware firmware-b43-installer"
 
 
 # Paquetes varios

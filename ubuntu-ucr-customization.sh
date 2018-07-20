@@ -193,48 +193,22 @@ sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agrega
 packages="$packages shotwell"
 
 
-# Rhythmbox
-#
-# Ultima version estable
-# sudo add-apt-repository -y ppa:fossfreedom/rhythmbox || error_exit "Error al agregar PPA: fossfreedom/rhythmbox"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-fossfreedom-rhythmbox:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages rhythmbox rhythmbox-plugins"
-# purgepackages="$purgepackages gnome-music"
-
 # Dropbox
 #
 # Añade el repositorio de dropbox, pero no instala el paquete. Si no que
 # lo deja disponible para cuando un usuario requiera utilizarlo.
-# sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ xenial main" > /etc/apt/sources.list.d/dropbox.list'
-# sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E || error_exit "Error al agregar llave para repositorio dropbox"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Dropbox.com:wily";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-
-#packages="$packages dropbox"
+# TODO: El paquete existe pero no el repositorio.
 
 # GIMP
 #
 # Ultima version estable
-#sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
+sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
 
 #sudo sed -i \
 #-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
 #/etc/apt/apt.conf.d/50unattended-upgrades
 
-# Ultima version inestable que anade nuevas caracteristicas y en las pruebas ha trabajado muy estable
-# sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp-edge
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp-edge:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages gimp gimp-help-es gimp-help-en-gb gimp-help-en"
+packages="$packages gimp"
 
 # Arc gtk theme
 #

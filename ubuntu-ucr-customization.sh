@@ -239,14 +239,14 @@ packages="$packages gimp"
 #
 # Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
 # ancho de banda.
-# echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 || error_exit "Error al agregar llave para repositorio spotify"
-#
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 || error_exit "Error al agregar llave para repositorio spotify"
+
 # sudo sed -i \
 # -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
 # /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages spotify-client"
+
+packages="$packages spotify-client"
 
 # Shutter
 #

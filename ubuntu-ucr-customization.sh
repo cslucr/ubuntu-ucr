@@ -444,7 +444,7 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 # Uso Horario
 #
 # Se activa el uso horario para que la fecha este siempre en hora tica
-# sudo timedatectl set-timezone America/Costa_Rica
+sudo timedatectl set-timezone America/Costa_Rica
 
 # Complementos para LibreOffice
 # LanguageTool.oxt (corrector gramatical)

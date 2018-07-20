@@ -146,19 +146,18 @@ sudo add-apt-repository -y ppa:webupd8team/java || error_exit "Error al agregar 
 echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 packages="$packages oracle-java8-installer"
 
-# LibreOffice 5.4
+# LibreOffice 6 (Fresh)
 #
-# Se anade el repositorio de LibreOffice para actualizar a la ultima version
-# enterprise. Los repositorios de Ubuntu 16.04 tienen una version antigua.
-# sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-4 || error_exit "Error al agregar PPA: libreoffice/libreoffice-5-4"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-5-4:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages libreoffice libreoffice-help-en-gb libreoffice-l10n-en-za hunspell-en-ca mythes-en-au hunspell-en-gb hunspell-en-za hunspell-en-au hyphen-en-gb libreoffice-style-sifr"
-# purgepackages="$purgepackages libreoffice-help-fr libreoffice-help-it libreoffice-help-pt libreoffice-help-pt-br libreoffice-help-ru
-# libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw"
+# Ante la dificultad de hacer un downgrade a la version Enterprise (5.4), se
+# mantiene la rama Fresh (6.x.x) y se anade el repositorio de
+# LibreOffice Packgin team, esto para obtener las ultimas actualizaciones.
+sudo add-apt-repository -y ppa:libreoffice/ppa || error_exit "Error al agregar PPA: libreoffice/ppa"
+
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice:${distro_codename}";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
+
+packages="$packages libreoffice"
 
 # Firma digital
 # sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"

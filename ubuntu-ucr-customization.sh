@@ -256,15 +256,13 @@ packages="$packages linux-firmware firmware-b43-installer"
 
 
 # Paquetes varios
-# - Thunderbird, al ser multiplataforma, su perfil se puede migrar facilmente
 # - unattended-upgrades para actualizaciones automaticas
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
-packages="$packages shutter"
-  # packages="$packages thunderbird thunderbird-locale-es thunderbird-locale-es-es thunderbird-locale-es-ar thunderbird-locale-en-gb unattended-upgrades caffeine vlc"
+packages="$packages unattended-upgrades caffeine vlc shutter"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
-  # if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
+  if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 # Paquetes innecesarios

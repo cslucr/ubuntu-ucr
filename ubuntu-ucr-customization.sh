@@ -160,33 +160,26 @@ sudo sed -i \
 packages="$packages libreoffice"
 
 # Firma digital
-# sudo bash -c 'wget -O - http://repos.solvosoft.com/firmadigitalcr.gpg.key | apt-key add -' || error_exit "Error al agregar llave para repositorio firmadigitalcr"
-# sudo sh -c 'echo "deb http://repos.solvosoft.com/ubuntu xenial main" > /etc/apt/sources.list.d/repos-firmadigital.list'
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"solvosoft.com:";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages firmadigitalcr"
+# TODO
 
 # Google Chrome o Chromium
 #
 # Para sistemas de 64bits se anade el repositorio de Google Chrome. Este no
 # soporta sistemas de 32bis por lo que, en este caso, se instala Chromium, el
 # proyecto base de Google Chrome.
-# if [ "$arch" == 'x86_64' ]
-# then
-#   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-#   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
-#
-#   sudo sed -i \
-#   -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
-#   /etc/apt/apt.conf.d/50unattended-upgrades
-#
-#   packages="$packages google-chrome-stable"
-# else
-#   packages="$packages chromium-browser"
-# fi
+if [ "$arch" == 'x86_64' ]
+then
+  sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
+
+  sudo sed -i \
+  -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
+  /etc/apt/apt.conf.d/50unattended-upgrades
+
+  packages="$packages google-chrome-stable"
+else
+  packages="$packages chromium-browser"
+fi
 
 # Shotwell
 #

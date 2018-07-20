@@ -184,14 +184,14 @@ fi
 # Shotwell
 #
 # Ultima version estable
-# sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
-#
+sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
+
 # sudo sed -i \
 # -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-yg-jensge-shotwell:${distro_codename}";/' \
 # /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages shotwell"
-# purgepackages="$purgepackages gnome-photos"
+
+packages="$packages shotwell"
+
 
 # Rhythmbox
 #

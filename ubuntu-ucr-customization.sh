@@ -351,64 +351,64 @@ fi
 if grep -q "MATE" /usr/share/xsessions/*
 then
   # Tema durante arranque
-  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr/ /usr/share/plymouth/themes/
-  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth 100
-  sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth
-
-  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-text/ /usr/share/plymouth/themes/
-  sudo cp "$BASEDIR"/plymouth/ubuntu-ucr-text.so /usr/lib/x86_64-linux-gnu/plymouth/
-  sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
-  sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
-
-  sudo update-grub
+  # sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr/ /usr/share/plymouth/themes/
+  # sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth 100
+  # sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth
+  #
+  # sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-text/ /usr/share/plymouth/themes/
+  # sudo cp "$BASEDIR"/plymouth/ubuntu-ucr-text.so /usr/lib/x86_64-linux-gnu/plymouth/
+  # sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
+  # sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
+  #
+  # sudo update-grub
 
   # Basado en https://lauri.võsandi.com/2015/03/dconf.html
-  sudo mkdir -p /etc/dconf/db/mate.d/lock/
-  sudo mkdir -p /etc/dconf/profile/
-  sudo sh -c 'echo "user-db:user" > /etc/dconf/profile/user'
-  sudo sh -c 'echo "system-db:mate" >> /etc/dconf/profile/user'
-  sudo cp "$BASEDIR"/gschema/panel /etc/dconf/db/mate.d/panel
-  sudo dconf update
+  # sudo mkdir -p /etc/dconf/db/mate.d/lock/
+  # sudo mkdir -p /etc/dconf/profile/
+  # sudo sh -c 'echo "user-db:user" > /etc/dconf/profile/user'
+  # sudo sh -c 'echo "system-db:mate" >> /etc/dconf/profile/user'
+  # sudo cp "$BASEDIR"/gschema/panel /etc/dconf/db/mate.d/panel
+  # sudo dconf update
 
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
-  sudo cp "$BASEDIR"/gschema/30_ucr-mate-settings.gschema.override /usr/share/glib-2.0/schemas/
-  sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
-  sudo rm /usr/share/glib-2.0/schemas/ubuntu-mate.gschema.override
-  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
+  # sudo cp "$BASEDIR"/gschema/30_ucr-mate-settings.gschema.override /usr/share/glib-2.0/schemas/
+  # sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
+  # sudo rm /usr/share/glib-2.0/schemas/ubuntu-mate.gschema.override
+  # sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Favoritos de menu avanzado
-  sudo mkdir -p /etc/skel/.config/mate-menu
-  sudo sh -c 'echo "location:/usr/share/applications/firefox.desktop
-location:/usr/share/applications/google-chrome.desktop
-location:/usr/share/applications/thunderbird.desktop
-location:/usr/share/applications/spotify.desktop
-separator
-location:/usr/share/applications/libreoffice-writer.desktop
-location:/usr/share/applications/libreoffice-calc.desktop
-location:/usr/share/applications/libreoffice-impress.desktop
-separator
-location:/usr/share/applications/mate-display-properties.desktop
-location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/applications.list'
+#   sudo mkdir -p /etc/skel/.config/mate-menu
+#   sudo sh -c 'echo "location:/usr/share/applications/firefox.desktop
+# location:/usr/share/applications/google-chrome.desktop
+# location:/usr/share/applications/thunderbird.desktop
+# location:/usr/share/applications/spotify.desktop
+# separator
+# location:/usr/share/applications/libreoffice-writer.desktop
+# location:/usr/share/applications/libreoffice-calc.desktop
+# location:/usr/share/applications/libreoffice-impress.desktop
+# separator
+# location:/usr/share/applications/mate-display-properties.desktop
+# location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/applications.list'
 
   # Se sobreescribe icono de menu de inicio de Numix para todos los tamanos, en su lugar se muestra el logo de Ubuntu
-  sudo mkdir -p /etc/skel/.icons/Numix/{16,22,24,32,48,64,96,128}/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/16/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/22/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/24/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/32/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/48/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/64/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/96/places/
-  sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/128/places/
+  # sudo mkdir -p /etc/skel/.icons/Numix/{16,22,24,32,48,64,96,128}/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/16/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/22/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/24/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/32/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/48/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/64/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/96/places/
+  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/128/places/
 
   # Configura pantalla de autenticacion
-  sudo sh -c 'echo "[greeter]
-background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
-icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
+#   sudo sh -c 'echo "[greeter]
+# background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg
+# icon-theme-name = Numix-Circle" > /etc/lightdm/lightdm-gtk-greeter.conf'
 
   # Parche para instalar version mas reciente de Arc-theme, que corrige error de bordes en MATE
-  wget -c -O $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb
-  sudo dpkg -i $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb
+  # wget -c -O $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb
+  # sudo dpkg -i $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb
 
 fi
 
@@ -416,9 +416,9 @@ fi
 # CONFIGURACION GENERAL
 
 # Desabilita apport para no mostrar molestos mensajes de fallos
-# sudo sed -i \
-# -e 's/enabled=1/enabled=0/' \
-# /etc/default/apport
+sudo sed -i \
+-e 's/enabled=1/enabled=0/' \
+/etc/default/apport
 
 
 # Script de configuración de red inalámbrica de la UCR (AURI)

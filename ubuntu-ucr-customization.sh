@@ -266,14 +266,10 @@ packages="$packages unattended-upgrades caffeine vlc shutter"
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 # Paquetes innecesarios
-# purgepackages="$purgepackages evolution evolution-plugins evolution-common libevolution evolution-data-server-online-accounts tilda
-# firefox-locale-de firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans
-# thunderbird-locale-de thunderbird-locale-en-gb thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-fr
-# thunderbird-locale-it thunderbird-locale-pt thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-ru
-# thunderbird-locale-zh-cn thunderbird-locale-zh-hans thunderbird-locale-zh-hant thunderbird-locale-zh-tw"
+# purgepackages="$purgepackages "
 
 # Aplicaciones al inicio
-# autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"
+autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"
 
 # Actualizacion del sistema e instalacion de los paquetes indicados
 sudo cp "$BASEDIR"/sources-mirror-ucr.list /etc/apt/sources.list.d/ # temporal, en caso que no este configurado

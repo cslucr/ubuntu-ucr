@@ -210,6 +210,25 @@ sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al a
 
 packages="$packages gimp"
 
+# Spotify
+#
+# Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
+# ancho de banda.
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 || error_exit "Error al agregar llave para repositorio spotify"
+
+# sudo sed -i \
+# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
+# /etc/apt/apt.conf.d/50unattended-upgrades
+
+packages="$packages spotify-client"
+
+# Driver comunes
+# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
+# y dispositivos de audio
+
+packages="$packages linux-firmware firmware-b43-installer"
+
 # Arc gtk theme
 #
 # Popular tema gtk que ofrece un mayor atractivo visual. Este se configura,
@@ -235,32 +254,14 @@ packages="$packages gimp"
 #
 # packages="$packages numix-icon-theme numix-icon-theme-circle"
 
-# Spotify
-#
-# Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
-# ancho de banda.
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 || error_exit "Error al agregar llave para repositorio spotify"
-
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-
-packages="$packages spotify-client"
-
-# Driver comunes
-# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
-# y dispositivos de audio
-
-packages="$packages linux-firmware firmware-b43-installer"
-
 
 # Paquetes varios
 # - unattended-upgrades para actualizaciones automaticas
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
-packages="$packages unattended-upgrades caffeine vlc shutter"
+# - Qt 5 extra widget styles para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
+packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
@@ -488,6 +489,9 @@ sudo timedatectl set-timezone America/Costa_Rica
 
 
 # PERFIL PREDETERMINADO
+
+# Qt 5 extra widget styles para que aplicaciones Qt5 usen un estilo nativo
+echo "export QT_QPA_PLATFORMTHEME=gtk2" >> ~/.profile
 
 # Aplicaciones al inicio
 sudo mkdir -p /etc/skel/.config/autostart

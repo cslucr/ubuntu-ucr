@@ -121,7 +121,7 @@ mkdir -p $WGET_CACHE || error_exit "Error al crear directorio para cache de wget
 # ubicados en /var/lib/apt/lists/
 
 sudo sed -i \
-# -e 's/^\/\/."\${distro_id}:\${distro_codename}-updates";/\t"\${distro_id}:\${distro_codename}-updates";/' \
+-e 's/^\/\/."\${distro_id}:\${distro_codename}-updates";/\t"\${distro_id}:\${distro_codename}-updates";/' \
 -e 's/^\/\/Unattended-Upgrade::MinimalSteps "false";/Unattended-Upgrade::MinimalSteps "true";/' \
 -e 's/^\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/' \
 /etc/apt/apt.conf.d/50unattended-upgrades
@@ -139,10 +139,10 @@ packages="$packages ubuntu-restricted-extras"
 # Se sustituye la version de Java por la desarrollada por Oracle.
 sudo add-apt-repository -y ppa:webupd8team/java || error_exit "Error al agregar PPA: webupd8team/java"
 
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-webupd8team-java:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-webupd8team-java:${distro_codename}";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
+
 echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 packages="$packages oracle-java8-installer"
 
@@ -155,7 +155,7 @@ sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-0 || error_exit "Error 
 
 sudo sed -i \
 -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-6-0:${distro_codename}";/' \
-/etc/apt/apt.conf.d/50unattended-upgrade
+/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages libreoffice"
 

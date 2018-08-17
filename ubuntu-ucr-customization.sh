@@ -491,18 +491,26 @@ sudo timedatectl set-timezone America/Costa_Rica
 # PERFIL PREDETERMINADO
 
 # Qt 5 extra widget styles para que aplicaciones Qt5 usen un estilo nativo
+sudo sh -c 'echo "export QT_QPA_PLATFORMTHEME=gtk2" >> /etc/skel/.profile'
 echo "export QT_QPA_PLATFORMTHEME=gtk2" >> ~/.profile
 
 # Aplicaciones al inicio
 sudo mkdir -p /etc/skel/.config/autostart
 sudo cp $autostart /etc/skel/.config/autostart/
 
+mkdir -p ~/.config/autostart
+cp $autostart ~/.config/autostart/
+
 # Terminal
 #
 # Se habilitan los colores del interprete de comandos para facilitar el uso
 # a los usuarios mas novatos.
-# sudo sed -i \
-# -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
-# /etc/skel/.bashrc
+sudo sed -i \
+-e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
+/etc/skel/.bashrc
+
+sudo sed -i \
+-e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
+~/.bashrc
 
 exit 0

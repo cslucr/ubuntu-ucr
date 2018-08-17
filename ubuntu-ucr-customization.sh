@@ -217,9 +217,9 @@ packages="$packages gimp"
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90 || error_exit "Error al agregar llave para repositorio spotify"
 
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages spotify-client"
 
@@ -273,7 +273,7 @@ packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins"
 autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"
 
 # Actualizacion del sistema e instalacion de los paquetes indicados
-sudo cp "$BASEDIR"/sources-mirror-ucr.list /etc/apt/sources.list.d/ # temporal, en caso que no este configurado
+#sudo cp "$BASEDIR"/sources-mirror-ucr.list /etc/apt/sources.list.d/ # temporal, en caso que no este configurado
 sudo apt update || error_exit "Error al actualizar lista de paquetes"
 sudo apt -y purge $purgepackages || error_exit "Error al purgar paquetes"
 sudo apt -y dist-upgrade || error_exit "Error al actualizar sistema operativo"
@@ -284,9 +284,9 @@ if ! $APT_CACHED ; then
   sudo apt clean
 fi
 
-sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
-sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save
-sudo apt update
+#sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
+#sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save
+#sudo apt update
 
 
 # ENTORNO DE ESCRITORIO

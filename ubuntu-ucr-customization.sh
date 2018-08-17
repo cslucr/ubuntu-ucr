@@ -186,9 +186,9 @@ fi
 # Ultima version estable
 sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
 
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-yg-jensge-shotwell:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-yg-jensge-shotwell:${distro_codename}";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages shotwell"
 
@@ -204,9 +204,9 @@ packages="$packages shotwell"
 # Ultima version estable
 sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
 
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages gimp"
 
@@ -215,7 +215,7 @@ packages="$packages gimp"
 # Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
 # ancho de banda.
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 || error_exit "Error al agregar llave para repositorio spotify"
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90 || error_exit "Error al agregar llave para repositorio spotify"
 
 # sudo sed -i \
 # -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \

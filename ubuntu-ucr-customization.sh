@@ -266,6 +266,37 @@ packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins"
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
+# Específicos del laboratorio del Centro de Informática UCR #################
+snappackages=""
+
+# Inkscape
+sudo add-apt-repository -y ppa:inkscape.dev/stable
+
+sudo sed -i \
+-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-inkscape.dev-stable:${distro_codename}";/' \
+/etc/apt/apt.conf.d/50unattended-upgrades
+
+packages="$packages inkscape"
+
+# Shotcut
+packages="$packages libsdl2-dev"
+snappackages="$snappackages shotcut"
+
+# Virtualbox
+echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
+packages="$packages virtualbox virtualbox-ext-pack"
+
+# Docker
+wget -q -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+packages="$packages apt-transport-https ca-certificates curl software-properties-common docker-ce"
+
+
+packages="$packages audacity kdenlive"
+
+
+
 # Paquetes innecesarios
 # purgepackages="$purgepackages "
 
@@ -283,6 +314,10 @@ sudo apt -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 if ! $APT_CACHED ; then
   sudo apt clean
 fi
+
+# Extras del laboratorio del Centro de Informática
+sudo snap install --classic $snappackages
+sudo usermod -aG docker ${USER}
 
 #sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
 #sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save

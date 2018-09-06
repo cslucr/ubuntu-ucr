@@ -351,6 +351,7 @@ fi
 # MATE
 if grep -q "MATE" /usr/share/xsessions/*
 then
+  echo "Entorno MATE aún no configurado"
   # Tema durante arranque
   # sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr/ /usr/share/plymouth/themes/
   # sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth 100

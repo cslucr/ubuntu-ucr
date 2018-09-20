@@ -17,11 +17,11 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-1.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/16.04/screenshot-1.png)
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-2.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/16.04/screenshot-2.png)
 
-![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-3.png)
+![Ubuntu 16.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/16.04/screenshot-3.png)
 
 
 ## Descarga

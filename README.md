@@ -76,6 +76,9 @@ El script *ubuntu-iso-customization.sh* toma una imagen ISO de Ubuntu y genera u
 
 Para más opciones ejecute `./ubuntu-iso-customization.sh -h`
 
+## Problemas conocidos
+- En modo UEFI, cuando se instala sin conexión a Internet, falla porque el pool de la imagen contiene paquetes desactualizados. Si hay conexión a Internet el paquete se descargará automáticamente y no habrá problema durante la instalación. 
+
 *Comunidad de Software Libre de la Universidad de Costa Rica*
 
 *http://softwarelibre.ucr.ac.cr*

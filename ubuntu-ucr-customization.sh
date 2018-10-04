@@ -28,4 +28,13 @@ Options:
 Customizes an Ubuntu installation.";
 }
 
+while getopts h, option
+do
+ case "${option}"
+ in
+ h) help
+    exit 0 ;;
+ esac
+done
+
 exit 0

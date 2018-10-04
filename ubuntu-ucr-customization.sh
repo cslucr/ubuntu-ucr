@@ -28,6 +28,4 @@ Options:
 Customizes an Ubuntu installation.";
 }
 
-help
-
 exit 0

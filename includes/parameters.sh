@@ -28,5 +28,7 @@ function get_parameters() {
             exit 1
         fi
     fi
+
+    return 0
 }
 

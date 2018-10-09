@@ -16,11 +16,13 @@
 
 source includes/messages.sh
 source includes/parameters.sh
+source includes/unattended-upgrades.sh
 source includes/vars.sh
-
-# PRE-PROCESS ############################################################
 
 # Handle parameters
 get_parameters "$@"
+
+# Handle unattended updates.
+enable_unattended_upgrades
 
 exit 0

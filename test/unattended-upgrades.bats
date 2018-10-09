@@ -26,3 +26,25 @@ source ./includes/unattended-upgrades.sh
     [[ $output == false ]]
 }
 
+@test "Add unattended upgrade: exit without software name" {
+    run add_unattended_upgrade
+    [[ $status -eq 1 ]]
+}
+
+@test "Add unattended upgrade" {
+    run add_unattended_upgrade 'libreoffice-libreoffice-6-0'
+    run file_contains_string $UNATTENDED_UPGRADES_FILE 'libreoffice-libreoffice-6-0'
+    [[ $output == true ]]
+}
+
+@test "Remove unattended upgrade: exit without software name" {
+    run remove_unattended_upgrade
+    [[ $status -eq 1 ]]
+}
+
+@test "Remove unattended upgrade" {
+    run remove_unattended_upgrade 'libreoffice-libreoffice-6-0'
+    run file_contains_string $UNATTENDED_UPGRADES_FILE 'libreoffice-libreoffice-6-0'
+    [[ $output == false ]]
+}
+

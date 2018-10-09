@@ -23,3 +23,17 @@ function replace_text() {
     return 0
 }
 
+# Verifies if a file contains a given string.
+function file_contains_string() {
+    file_to_check=$1
+    string_to_search=$2
+
+    # Verify file exists and string passed is not empty.
+    ! [[ -f "$file_to_check" ]] || [[ -z "$string_to_search"  ]] && return 1
+
+    [[ $(cat $file_to_check) == *"$string_to_search"* ]] && echo true && return 0
+
+    echo false && return 0
+}
+
+

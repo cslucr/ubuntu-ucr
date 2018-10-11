@@ -27,14 +27,14 @@ function disable_unattended_upgrades() {
 
 # Determines if the unattended upgrades are enabled or not.
 function is_enabled_unattended_upgrades() {
-    result=$(grep '"${distro_id}:${distro_codename}-updates";' $UNATTENDED_UPGRADES_FILE)
+    local result=$(grep '"${distro_id}:${distro_codename}-updates";' $UNATTENDED_UPGRADES_FILE)
     ! [[ $result == *'//'* ]] && echo true && return 0
     echo false && return 0
 }
 
 # Add a new unattended upgrade if is not already added.
 function add_unattended_upgrade() {
-    unattended_software=$1
+    local unattended_software=$1
 
     # Verify software name was passed.
     [[ -z "$unattended_software" ]] && return 1
@@ -50,7 +50,7 @@ function add_unattended_upgrade() {
 
 # Remove an unattended upgrade.
 function remove_unattended_upgrade() {
-    unattended_software=$1
+    local unattended_software=$1
 
     # Verify software name was passed.
     [[ -z "$unattended_software" ]] && return 1

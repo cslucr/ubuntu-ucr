@@ -9,7 +9,7 @@ UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
 
 # Uncomment unattended upgrades configuration.
 function enable_unattended_upgrades() {
-    [[ $(enabled_unattended_upgrades) == true ]] && return 0
+    [[ $(is_enabled_unattended_upgrades) == true ]] && return 0
     replace_text $UNATTENDED_UPGRADES_FILE '//\t"${distro_id}:${distro_codename}-updates";' '\t"${distro_id}:${distro_codename}-updates";' true
     replace_text $UNATTENDED_UPGRADES_FILE '//Unattended-Upgrade::MinimalSteps "false";' 'Unattended-Upgrade::MinimalSteps "true";' true
     replace_text $UNATTENDED_UPGRADES_FILE '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' true
@@ -18,7 +18,7 @@ function enable_unattended_upgrades() {
 
 # Comment unattended upgrades configuration.
 function disable_unattended_upgrades() {
-    [[ $(enabled_unattended_upgrades) == false ]] && return 0
+    [[ $(is_enabled_unattended_upgrades) == false ]] && return 0
     replace_text $UNATTENDED_UPGRADES_FILE '\t"${distro_id}:${distro_codename}-updates";' '//\t"${distro_id}:${distro_codename}-updates";' true
     replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::MinimalSteps "false";' '//Unattended-Upgrade::MinimalSteps "false";' true
     replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Remove-Unused-Dependencies "false";' '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' true
@@ -26,7 +26,7 @@ function disable_unattended_upgrades() {
 }
 
 # Determines if the unattended upgrades are enabled or not.
-function enabled_unattended_upgrades() {
+function is_enabled_unattended_upgrades() {
     result=$(grep '"${distro_id}:${distro_codename}-updates";' $UNATTENDED_UPGRADES_FILE)
     ! [[ $result == *'//'* ]] && echo true && return 0
     echo false && return 0

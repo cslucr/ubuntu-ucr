@@ -2,7 +2,7 @@
 #
 # Handle unattended-upgrades configuration.
 
-source ./includes/configuration.sh
+source ./includes/configuration.inc
 
 # Path to unattended updates file
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
@@ -61,6 +61,7 @@ function remove_unattended_upgrade() {
 
 # Get origin:suite format for unattended software based on repo name
 function get_unattended_software_name() {
+  local http_regex='https?://([-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|])'
   local repo_type=$1
   local repo_name=$2
 
@@ -71,7 +72,7 @@ function get_unattended_software_name() {
   # Generates repo name for apt policy data
   case "$repo_type" in
     apt)
-      repo_name=$( [[ "$repo_name" =~ http[s]?://(.*+)[[:space:]].+[[:space:]].+ ]] && echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
+      repo_name=$( [[ "$repo_name" =~ $http_regex ]] && echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
       ;;
     ppa)
       ;;

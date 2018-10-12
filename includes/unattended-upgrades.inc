@@ -6,6 +6,7 @@ source ./includes/configuration.sh
 
 # Path to unattended updates file
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
+APT_LIST_FOLDER=/var/lib/apt/lists
 
 # Uncomment unattended upgrades configuration.
 function enable_unattended_upgrades() {
@@ -34,15 +35,15 @@ function is_enabled_unattended_upgrades() {
 
 # Add a new unattended upgrade if is not already added.
 function add_unattended_upgrade() {
-    local unattended_software=$1
-
+    local unattended_software=$( get_unattended_software_name "$1" "$2")
+    
     # Verify software name was passed.
     [[ -z "$unattended_software" ]] && return 1
 
     # Verify if the upgrade is already added.
     [[ $(file_contains_string $UNATTENDED_UPGRADES_FILE $unattended_software) == true ]] && return 0
 
-    replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Allowed-Origins {' 'Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-UNATTENDED_SOFTWARE_PLACEHOLDER:${distro_codename}";' true
+    replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Allowed-Origins {' 'Unattended-Upgrade::Allowed-Origins {\n\t"UNATTENDED_SOFTWARE_PLACEHOLDER";' true
     replace_text $UNATTENDED_UPGRADES_FILE 'UNATTENDED_SOFTWARE_PLACEHOLDER' "$unattended_software" true
     
     return 0
@@ -50,12 +51,39 @@ function add_unattended_upgrade() {
 
 # Remove an unattended upgrade.
 function remove_unattended_upgrade() {
-    local unattended_software=$1
+    local unattended_software=$( get_unattended_software_name "$1" "$2")
 
     # Verify software name was passed.
     [[ -z "$unattended_software" ]] && return 1
 
     replace_text $UNATTENDED_UPGRADES_FILE "$unattended_software" 'UNATTENDED_SOFTWARE_PLACEHOLDER' true
     replace_text $UNATTENDED_UPGRADES_FILE '\t"LP-PPA-UNATTENDED_SOFTWARE_PLACEHOLDER:${distro_codename}";' '' true
+}
+
+# Get origin:suite format for unattended software based on repo name
+function get_unattended_software_name() {
+  local repo_type=$1
+  local repo_name=$2
+
+  # Verify repository type and name.
+  [[ -z "$repo_type" ]] && echo '' && return 1
+  [[ -z "$repo_name" ]] && echo '' && return 1
+   
+  # Generates repo name for apt policy data
+  case "$repo_type" in
+    apt)
+      repo_name=$( [[ "$repo_name" =~ http[s]?://(.*+)[[:space:]].+[[:space:]].+ ]] && echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
+      echo "###### $repo_name"
+      ;;
+    ppa)
+      ;;
+    *)
+      echo '' && return 1
+  esac
+  echo "###### $repo_name"
+  local repo_release_info=$( apt-cache policy | grep -A 2 "$repo_name" | head -n 3 )
+  [[ -z "$repo_release_info" ]] && echo '' && return 1
+  
+  [[ "$repo_release_info" =~ o=(.*),a=(.*),n= ]] && echo ${BASH_REMATCH[1]}:${BASH_REMATCH[2]}
 }
 

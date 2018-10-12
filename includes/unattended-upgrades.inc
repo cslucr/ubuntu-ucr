@@ -6,7 +6,6 @@ source ./includes/configuration.sh
 
 # Path to unattended updates file
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
-APT_LIST_FOLDER=/var/lib/apt/lists
 
 # Uncomment unattended upgrades configuration.
 function enable_unattended_upgrades() {
@@ -73,14 +72,14 @@ function get_unattended_software_name() {
   case "$repo_type" in
     apt)
       repo_name=$( [[ "$repo_name" =~ http[s]?://(.*+)[[:space:]].+[[:space:]].+ ]] && echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
-      echo "###### $repo_name"
       ;;
     ppa)
       ;;
     *)
       echo '' && return 1
   esac
-  echo "###### $repo_name"
+  
+  #Get repo info from apt policy
   local repo_release_info=$( apt-cache policy | grep -A 2 "$repo_name" | head -n 3 )
   [[ -z "$repo_release_info" ]] && echo '' && return 1
   

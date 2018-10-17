@@ -14,10 +14,10 @@
 #
 # Github: https://github.com/cslucr/ubuntu-ucr
 
-source includes/messages.sh
-source includes/parameters.sh
-source includes/unattended-upgrades.sh
-source includes/vars.sh
+source includes/messages.inc
+source includes/parameters.inc
+source includes/unattended-upgrades.inc
+source includes/vars.inc
 
 # Handle parameters
 get_parameters "$@"

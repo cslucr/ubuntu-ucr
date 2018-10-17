@@ -2,7 +2,7 @@
 #
 # Messages script tests.
 
-source ./includes/messages.sh
+source ./includes/messages.inc
 
 @test "Show help" {
     [[ $(help) == *'Customizes an Ubuntu installation'* ]]

@@ -2,8 +2,8 @@
 #
 # Parameters script tests.
 
-source ./includes/parameters.sh
-source ./includes/vars.sh
+source ./includes/parameters.inc
+source ./includes/vars.inc
 
 @test "Get APT_CACHE parameter" {
     get_parameters -c -y

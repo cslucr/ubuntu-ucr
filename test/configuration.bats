@@ -2,7 +2,7 @@
 #
 # Configuration script tests.
 
-source ./includes/configuration.sh
+source ./includes/configuration.inc
 
 @test "Replace text: exit with unexisting file path" {
     run replace_text $HOME/myUnexistingFileToModify

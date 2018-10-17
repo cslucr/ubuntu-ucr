@@ -4,26 +4,26 @@
 
 source ./includes/unattended-upgrades.inc
 
-@test "Enable unattended upgrades" {
-    run enable_unattended_upgrades
+@test "Uncomment unattended upgrades" {
+    run uncomment_unattended_upgrades
     run grep '"${distro_id}:${distro_codename}-updates";' /etc/apt/apt.conf.d/50unattended-upgrades 
     ! [[ $output == *'//'* ]]
 }
 
-@test "Verify unattended upgrades enabled" {
-    run is_enabled_unattended_upgrades
-    [[ $output == true ]]
+@test "Verify unattended upgrades uncommented" {
+    run is_commented_unattended_upgrades
+    [[ $output == false ]]
 }
 
-@test "Disable unattended upgrades" {
-    run disable_unattended_upgrades
+@test "Comment unattended upgrades" {
+    run comment_unattended_upgrades
     run grep '"${distro_id}:${distro_codename}-updates";' /etc/apt/apt.conf.d/50unattended-upgrades 
     [[ $output == *'//'* ]]
 }
 
-@test "Verify unattended upgrades disabled" {
-    run is_enabled_unattended_upgrades
-    [[ $output == false ]]
+@test "Verify unattended upgrades commented" {
+    run is_commented_unattended_upgrades
+    [[ $output == true ]]
 }
 
 @test "Add unattended upgrade: exit without software name" {

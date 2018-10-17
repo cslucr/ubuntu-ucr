@@ -2,7 +2,7 @@
 #
 # Unattended updates script tests.
 
-source ./includes/unattended-upgrades.sh
+source ./includes/unattended-upgrades.inc
 
 @test "Enable unattended upgrades" {
     run enable_unattended_upgrades
@@ -11,7 +11,7 @@ source ./includes/unattended-upgrades.sh
 }
 
 @test "Verify unattended upgrades enabled" {
-    run enabled_unattended_upgrades
+    run is_enabled_unattended_upgrades
     [[ $output == true ]]
 }
 
@@ -22,7 +22,7 @@ source ./includes/unattended-upgrades.sh
 }
 
 @test "Verify unattended upgrades disabled" {
-    run enabled_unattended_upgrades
+    run is_enabled_unattended_upgrades
     [[ $output == false ]]
 }
 
@@ -32,9 +32,8 @@ source ./includes/unattended-upgrades.sh
 }
 
 @test "Add unattended upgrade" {
-    run add_unattended_upgrade 'libreoffice-libreoffice-6-0'
-    run file_contains_string $UNATTENDED_UPGRADES_FILE 'libreoffice-libreoffice-6-0'
-    [[ $output == true ]]
+    run add_unattended_upgrade 'apt' "$( cat /etc/apt/sources.list | grep '^deb ' | head -n 1 )"
+    [[ $status -eq 0 ]]
 }
 
 @test "Remove unattended upgrade: exit without software name" {
@@ -43,8 +42,7 @@ source ./includes/unattended-upgrades.sh
 }
 
 @test "Remove unattended upgrade" {
-    run remove_unattended_upgrade 'libreoffice-libreoffice-6-0'
-    run file_contains_string $UNATTENDED_UPGRADES_FILE 'libreoffice-libreoffice-6-0'
-    [[ $output == false ]]
+    run remove_unattended_upgrade 'apt' "$( cat /etc/apt/sources.list | grep '^deb ' | head -n 1 )"
+    [[ $status -eq 0 ]]
 }
 

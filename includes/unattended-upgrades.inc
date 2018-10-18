@@ -4,12 +4,18 @@
 
 source ./includes/configuration.inc
 
-# Path to unattended updates file
+# Path to unattended updates file.
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
 
+# Path to yaml parser.
+YAML_PARSER=./resources/libs/yq_linux_amd64
+
+# Path to repositories.yaml file.
+REPOSITORIES_FILE=./configuration/repositories.yaml
+
 # Uncomment unattended upgrades configuration.
-function enable_unattended_upgrades() {
-  [[ $(is_enabled_unattended_upgrades) == true ]] && return 0
+function uncomment_unattended_upgrades() {
+  [[ $(is_commented_unattended_upgrades) == false ]] && return 0
   replace_text $UNATTENDED_UPGRADES_FILE '//\t"${distro_id}:${distro_codename}-updates";' '\t"${distro_id}:${distro_codename}-updates";' true
   replace_text $UNATTENDED_UPGRADES_FILE '//Unattended-Upgrade::MinimalSteps "false";' 'Unattended-Upgrade::MinimalSteps "true";' true
   replace_text $UNATTENDED_UPGRADES_FILE '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' true
@@ -17,18 +23,18 @@ function enable_unattended_upgrades() {
 }
 
 # Comment unattended upgrades configuration.
-function disable_unattended_upgrades() {
-  [[ $(is_enabled_unattended_upgrades) == false ]] && return 0
+function comment_unattended_upgrades() {
+  [[ $(is_commented_unattended_upgrades) == true ]] && return 0
   replace_text $UNATTENDED_UPGRADES_FILE '\t"${distro_id}:${distro_codename}-updates";' '//\t"${distro_id}:${distro_codename}-updates";' true
   replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::MinimalSteps "false";' '//Unattended-Upgrade::MinimalSteps "false";' true
   replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Remove-Unused-Dependencies "false";' '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' true
   return 0
 }
 
-# Determines if the unattended upgrades are enabled or not.
-function is_enabled_unattended_upgrades() {
+# Determines if the unattended upgrades are commented or not.
+function is_commented_unattended_upgrades() {
   local result=$(grep '"${distro_id}:${distro_codename}-updates";' $UNATTENDED_UPGRADES_FILE)
-  ! [[ $result == *'//'* ]] && echo true && return 0
+  [[ $result == *'//'* ]] && echo true && return 0
   echo false && return 0
 }
 
@@ -44,7 +50,6 @@ function add_unattended_upgrade() {
 
   replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Allowed-Origins {' 'Unattended-Upgrade::Allowed-Origins {\n\t"UNATTENDED_SOFTWARE_PLACEHOLDER";' true
   replace_text $UNATTENDED_UPGRADES_FILE 'UNATTENDED_SOFTWARE_PLACEHOLDER' "$unattended_software" true
-  
   return 0
 }
 
@@ -57,7 +62,35 @@ function remove_unattended_upgrade() {
 
   replace_text $UNATTENDED_UPGRADES_FILE "$unattended_software" 'UNATTENDED_SOFTWARE_PLACEHOLDER' true
   replace_text $UNATTENDED_UPGRADES_FILE '\t"LP-PPA-UNATTENDED_SOFTWARE_PLACEHOLDER:${distro_codename}";' '' true
+  return 0
 }
+
+# Given a repository index, get his data as an associative array.
+function get_repository_data() {
+  local digit_regex='[[:digit:]]+'
+  local repository_index=$1
+  result_array=$2
+
+  # Verify repository index is a positive number.
+  [[ -z "$repository_index" ]] && return 1
+  ! [[ $repository_index =~ $digit_regex ]] && return 1
+  
+  # Verify array name was passed.
+  [[ -z "$result_array" ]] && return 1
+
+  # Test if repository index is not out of bounds.
+  [[ $($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index]) == 'null' ]] && return 1
+
+  # Get repository data.
+  result_array[name]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].name)
+  result_array[type]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].type)
+  result_array[repo]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].repo)
+  result_array[key]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].key)
+  result_array[unattended]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].unattended)
+  
+  return 0
+}
+
 
 # Get origin:suite format for unattended software based on repo name
 function get_unattended_software_name() {
@@ -80,10 +113,11 @@ function get_unattended_software_name() {
       echo '' && return 1
   esac
   
-  #Get repo info from apt policy
+  # Get repo info from apt policy
   local repo_release_info=$( apt-cache policy | grep -A 2 "$repo_name" | head -n 3 )
   [[ -z "$repo_release_info" ]] && echo '' && return 1
   
   [[ "$repo_release_info" =~ o=(.*),a=(.*),n= ]] && echo ${BASH_REMATCH[1]}:${BASH_REMATCH[2]}
+  return 0
 }
 

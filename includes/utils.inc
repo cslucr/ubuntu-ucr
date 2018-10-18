@@ -10,11 +10,11 @@ CONFIGURATION_FILE=./configuration/ubuntu.yaml
 
 # Replaces text on a file.
 function replace_text() {
-    file_to_modify=$1
-    original_text=$2
-    replace_text=$3
-    use_sudo=$4
-    sudo_command=''
+    local file_to_modify=$1
+    local original_text=$2
+    local replace_text=$3
+    local use_sudo=$4
+    local sudo_command=''
 
     # Verify file exists.
     ! [[ -f "$file_to_modify" ]] && return 1
@@ -31,8 +31,8 @@ function replace_text() {
 
 # Verifies if a file contains a given string.
 function file_contains_string() {
-    file_to_check=$1
-    string_to_search=$2
+    local file_to_check=$1
+    local string_to_search=$2
 
     # Verify file exists and string passed is not empty.
     ! [[ -f "$file_to_check" ]] || [[ -z "$string_to_search"  ]] && return 1

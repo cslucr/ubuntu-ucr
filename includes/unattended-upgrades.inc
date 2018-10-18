@@ -2,16 +2,10 @@
 #
 # Handle unattended-upgrades configuration.
 
-source ./includes/configuration.inc
+source ./includes/utils.inc
 
 # Path to unattended updates file.
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades
-
-# Path to yaml parser.
-YAML_PARSER=./resources/libs/yq_linux_amd64
-
-# Path to repositories.yaml file.
-REPOSITORIES_FILE=./configuration/repositories.yaml
 
 # Uncomment unattended upgrades configuration.
 function uncomment_unattended_upgrades() {
@@ -62,32 +56,6 @@ function remove_unattended_upgrade() {
 
   replace_text $UNATTENDED_UPGRADES_FILE "$unattended_software" 'UNATTENDED_SOFTWARE_PLACEHOLDER' true
   replace_text $UNATTENDED_UPGRADES_FILE '\t"LP-PPA-UNATTENDED_SOFTWARE_PLACEHOLDER:${distro_codename}";' '' true
-  return 0
-}
-
-# Given a repository index, get his data as an associative array.
-function get_repository_data() {
-  local digit_regex='[[:digit:]]+'
-  local repository_index=$1
-  result_array=$2
-
-  # Verify repository index is a positive number.
-  [[ -z "$repository_index" ]] && return 1
-  ! [[ $repository_index =~ $digit_regex ]] && return 1
-  
-  # Verify array name was passed.
-  [[ -z "$result_array" ]] && return 1
-
-  # Test if repository index is not out of bounds.
-  [[ $($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index]) == 'null' ]] && return 1
-
-  # Get repository data.
-  result_array[name]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].name)
-  result_array[type]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].type)
-  result_array[repo]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].repo)
-  result_array[key]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].key)
-  result_array[unattended]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].unattended)
-  
   return 0
 }
 

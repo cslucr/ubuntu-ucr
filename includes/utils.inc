@@ -5,8 +5,8 @@
 # Path to yaml parser.
 YAML_PARSER=./resources/libs/yq_linux_amd64
 
-# Path to repositories.yaml file.
-REPOSITORIES_FILE=./configuration/repositories.yaml
+# Path to ubuntu.yaml file.
+CONFIGURATION_FILE=./configuration/ubuntu.yaml
 
 # Replaces text on a file.
 function replace_text() {
@@ -56,14 +56,14 @@ function get_repository_data() {
   [[ -z "$result_array" ]] && return 1
 
   # Test if repository index is not out of bounds.
-  [[ $($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index]) == 'null' ]] && return 1
+  [[ $($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index]) == 'null' ]] && return 1
 
   # Get repository data.
-  result_array[name]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].name)
-  result_array[type]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].type)
-  result_array[repo]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].repo)
-  result_array[key]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].key)
-  result_array[unattended]=$($YAML_PARSER r $REPOSITORIES_FILE repositories[$repository_index].unattended)
+  result_array[name]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].name)
+  result_array[type]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].type)
+  result_array[repo]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].repo)
+  result_array[key]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].key)
+  result_array[unattended]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].unattended)
   
   return 0
 }

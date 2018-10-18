@@ -14,3 +14,31 @@ repositories:
     type: apt
     repo: deb http://repository.spotify.com stable non-free
     key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C9
+    
+packages:
+  - name: oracle-java8-installer
+    debconf: oracle-java8-installer shared/accepted-oracle-license-v1-1
+
+  - name: google-chrome-stable
+    arch: x86_64
+
+  - name: chromium-browser
+    arch: x86
+
+  - name: gnome-tweak-tool
+    xsession: gnome-shell
+
+  - ubuntu-restricted-extras
+  - libreoffice
+  - shotwell
+  - gimp
+  - spotify-client
+  - linux-firmware
+  - firmware-b43-installer
+  - unattended-upgrades
+  - caffeine
+  - vlc
+  - shutter
+  - qt5-style-plugins
+
+purge_packages:

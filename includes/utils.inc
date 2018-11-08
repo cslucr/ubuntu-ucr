@@ -6,7 +6,7 @@
 YAML_PARSER=./resources/libs/yq_linux_amd64
 
 # Path to ubuntu.yaml file.
-CONFIGURATION_FILE=./configuration/ubuntu.yaml
+CONFIGURATION_FILE=./configuration/ubuntu.yaml #TODO: load as parameter, default ubuntu. i.e. ubuntu-ucr-customization-sh -y ubuntu
 
 # Replaces text on a file.
 function replace_text() {
@@ -68,3 +68,10 @@ function get_repository_data() {
   return 0
 }
 
+#TODO: Need bats test
+function create_wget_cache() {
+  # Creates a folder for caching files downloaded with wget
+  if "$DO_WGET_CACHE" == true; then
+    mkdir -p $WGET_CACHE || error_exit "Error creating wget cache folder"
+  fi
+}

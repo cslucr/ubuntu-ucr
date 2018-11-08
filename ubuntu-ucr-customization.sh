@@ -15,12 +15,17 @@
 # Github: https://github.com/cslucr/ubuntu-ucr
 
 source includes/messages.inc
+source includes/packages.inc
 source includes/parameters.inc
 source includes/unattended-upgrades.inc
+source includes/utils.inc
 source includes/vars.inc
 
 # Handle parameters
 get_parameters "$@"
+
+# Create wget cache folder.
+create_wget_cache
 
 # Handle unattended updates.
 enable_unattended_upgrades

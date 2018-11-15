@@ -1,0 +1,24 @@
+@startuml
+start
+:Get parameters;
+if (wget cache?) then (yes)
+  :create wget cache folder;
+else (no)
+endif
+:Enable unattended updates;
+:Add repositories, keys and unattended updates;
+:Set debconf selections;
+:Update packages;
+:Purge unwanted packages;
+:Upgrade packages;
+:Dist-upgrade system;
+:Install new packages;
+:Apt autoremove;
+if (clean apt cache?) then (yes)
+  :clean apt cache;
+else (no)
+endif
+:Configure system;
+:Configure desktop;
+end
+@enduml

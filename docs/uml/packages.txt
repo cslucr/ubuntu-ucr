@@ -1,6 +1,6 @@
 @startuml
 start
-:Parse ubuntu.yml for packages;
+:Parse ubuntu.yaml for packages;
 repeat
   :Add package to packages list;
   if (package debconf-selections == yes) then (no)

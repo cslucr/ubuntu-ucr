@@ -1,6 +1,6 @@
 @startuml
 start
-:Parse ubuntu.yml for repositories;
+:Parse ubuntu.yaml for repositories;
 repeat
   :Read repository from array;
   :Add repository (add-apt-repository);

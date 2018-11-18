@@ -34,3 +34,6 @@ purgepackages=""
 #  autostart="$autostart path1 path2 path3"
 autostart=""
 
+# REGEX for matching HTTP strings
+HTTP_REGEX='https?://([-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|])'
+

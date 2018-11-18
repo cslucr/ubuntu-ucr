@@ -3,6 +3,7 @@
 # Handle unattended-upgrades configuration.
 
 source ./includes/utils.inc
+source ./includes/vars.inc
 
 # Path to unattended updates file.
 UNATTENDED_UPGRADES_FILE=/etc/apt/apt.conf.d/50unattended-upgrades

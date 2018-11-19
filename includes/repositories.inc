@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Handle packages: instalation and configurations.
+# Handle packages: installation and configurations.
 
 source ./includes/vars.inc
 

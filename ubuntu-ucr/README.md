@@ -13,7 +13,6 @@ Role Variables
 
 - **apt_cache**: whether to preserve or not apt cache, defaults to **no**.
 - **arch**: system architecture, defaults to **amd64**.
-- **no_force**: ask for confirmation before start, defaults to **yes**.
 - **wget_cache_path**: path where to create **wget** downloads folder, defaults to */tmp/wget_cache*.
 
 Example Playbook

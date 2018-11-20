@@ -44,9 +44,8 @@ packages:
 
 purge_packages:
 
+arch: amd64
 apt_cache: no
 wget_cache_path: '/tmp/wget_cache'
-no_force: yes
-arch: amd64
 unattended_file_path: '/etc/apt/apt.conf.d/50unattended-upgrades'
 

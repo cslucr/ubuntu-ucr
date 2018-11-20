@@ -1,7 +1,7 @@
 Ubuntu UCR
 ===========
 
-Customized Ubuntu for Universidad of Costa Rica.
+Ansible role to customize Ubuntu for Universidad of Costa Rica.
 
 Requirements
 ------------

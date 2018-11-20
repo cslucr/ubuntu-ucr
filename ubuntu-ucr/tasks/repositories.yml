@@ -2,3 +2,6 @@
 - name: Add repository data.
   command: echo "{{ item.name }}"
   loop: "{{ repositories  }}"
+  tags:
+    - execution
+    - repositories

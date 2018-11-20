@@ -26,6 +26,6 @@ get_parameters "$@"
 [[ $(installByApt "ansible") -eq 1 ]] && exit 1
 
 # Run playbook.
-ansible-playbook -v customization.yml --extra-vars "apt_cache=$APT_CACHE wget_cache_path=$WGET_CACHE_PATH arch=$ARCH" --ask-become-pass
+ansible-playbook customization.yml -i production -v --ask-become-pass --extra-vars "apt_cache=$APT_CACHE arch=$ARCH wget_cache_path=$WGET_CACHE_PATH" --tags "execution"
 
 exit 0

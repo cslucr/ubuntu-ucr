@@ -15,18 +15,18 @@ Role Variables
 - **arch**: system architecture, defaults to **amd64**.
 - **wget_cache_path**: path where to create **wget** downloads folder, defaults to */tmp/wget_cache*.
 
-Example Playbook
-----------------
+Usage
+-----
+
+To execute:
+
+    ansible-playbook -v customization.yml --extra-vars "apt_cache=true wget_cache_path=$HOME/my-cache force=true arch=amd64" --ask-become-pass
 
 To include:
 
     - hosts: servers
       roles:
          - { role: ubuntu-ucr }
-
-To execute:
-
-    ansible-playbook -v customization.yml --extra-vars "apt_cache=true wget_cache_path=$HOME/my-cache force=true arch=amd64" --ask-become-pass
 
 License
 -------

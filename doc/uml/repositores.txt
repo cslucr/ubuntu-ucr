@@ -1,0 +1,23 @@
+@startuml
+start
+:Create wget cache folder;
+:Parse ubuntu.yml repositories;
+repeat
+  :Read repository from array;
+  :Add repository (add-apt-repository);
+  if (repository type == apt) then (no)
+  else (yes)
+    if (repository key == url) then (yes)
+      :Download key (wget | apt-key add);
+    else (no)
+      :Add hexadecimal key (apt-key adv --recv-keys);
+    endif
+  endif
+  if (respository unattended == yes) then (no)
+  else (yes)
+    :Add unattended update;
+  endif
+repeat while (repository on repositories array)
+
+end
+@enduml

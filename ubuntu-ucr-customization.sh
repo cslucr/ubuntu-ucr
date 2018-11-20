@@ -14,20 +14,18 @@
 #
 # Github: https://github.com/cslucr/ubuntu-ucr
 
-source includes/messages.inc
-source includes/packages.inc
-source includes/parameters.inc
-source includes/unattended-upgrades.inc
-source includes/utils.inc
-source includes/vars.inc
+source include/messages.inc
+source include/parameters.inc
+source include/utils.inc
+source include/vars.inc
 
-# Handle parameters
+# Handle parameters.
 get_parameters "$@"
 
-# Create wget cache folder.
-create_wget_cache
+# Install ansible.
+[[ $(installByApt "ansible") -eq 1 ]] && exit 1
 
-# Handle unattended updates.
-enable_unattended_upgrades
+# Run playbook.
+ansible-playbook -v customization.yml --extra-vars "apt_cache=$APT_CACHE wget_cache_path=$WGET_CACHE_PATH force=$FORCE arch=$ARCH" --ask-become-pass
 
 exit 0

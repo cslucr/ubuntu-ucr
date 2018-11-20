@@ -1,0 +1,7 @@
+---
+- name: Customize ubuntu for UCR.
+  hosts: localhost
+  connection: local
+  roles:
+    - role: ubuntu-ucr
+  become: yes

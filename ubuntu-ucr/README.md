@@ -16,11 +16,6 @@ Role Variables
 - **no_force**: ask for confirmation before start, defaults to **yes**.
 - **wget_cache_path**: path where to create **wget** downloads folder, defaults to */tmp/wget_cache*.
 
-Dependencies
-------------
-
-No dependencies.
-
 Example Playbook
 ----------------
 

@@ -11,9 +11,9 @@
     - repositories
 
 - name: unitTest - Add repositories.
-  command: grep '"${distro_id}:${distro_codename}";' {{ unattended_file_path }}
+  command: ls /etc/apt/sources.list.d
   register: result
-  failed_when: result.stdout == ''
+  failed_when: "'ppa_webupd8team_java_bionic.list' not in result.stdout"
   tags:
     - test
     - repositories

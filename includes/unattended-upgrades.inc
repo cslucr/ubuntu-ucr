@@ -21,8 +21,8 @@ function uncomment_unattended_upgrades() {
 function comment_unattended_upgrades() {
   [[ $(is_commented_unattended_upgrades) == true ]] && return 0
   replace_text $UNATTENDED_UPGRADES_FILE '\t"${distro_id}:${distro_codename}-updates";' '//\t"${distro_id}:${distro_codename}-updates";' true
-  replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::MinimalSteps "false";' '//Unattended-Upgrade::MinimalSteps "false";' true
-  replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Remove-Unused-Dependencies "false";' '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' true
+  replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::MinimalSteps "true";' '//Unattended-Upgrade::MinimalSteps "false";' true
+  replace_text $UNATTENDED_UPGRADES_FILE 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' '//Unattended-Upgrade::Remove-Unused-Dependencies "false";' true
   return 0
 }
 

@@ -2,6 +2,13 @@
 #
 # Handle packages: instalation and configurations.
 
+
+#TODO: Need bats test.
+function create_wget_cache() {
+  # Creates a folder for caching files downloaded with wget
+  mkdir -p $WGET_CACHE_PATH || error_exit "Error creating wget cache folder"
+}
+
 function refresh_packages() {
   sudo apt update || error_exit "Error refreshing APT package list"
 

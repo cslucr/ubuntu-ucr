@@ -31,30 +31,3 @@ source ./includes/utils.inc
     run file_contains_string /etc/apt/sources.list 'deb'
     [ "$output" == true ]
 }
-
-@test 'Get repository data' {
-    local -A result_array
-    get_repository_data 0 result_array
-    [  "${result_array[name]}" == 'java' ]
-}
-
-@test 'Get repository data: exit with index out of bounds' {
-    local -A result_array
-    run get_repository_data 77 result_array
-    [ $status -eq 1 ]
-}
-
-@test "Get repository data: exit with no repository index" {
-    run get_repository_data
-    [ $status -eq 1 ]
-}
-
-@test "Get repository data: exit when repository index not a number" {
-    run get_repository_data 'text'
-    [ $status -eq 1 ]
-}
-
-@test 'Get repository data: exit when not resultin array name passed' {
-    run get_repository_data 0
-    [ $status -eq 1 ]
-}

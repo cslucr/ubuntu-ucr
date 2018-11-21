@@ -4,6 +4,32 @@
 
 source ./includes/vars.inc
 
+# Given a repository index, get his data as an associative array.
+function get_repository_data() {
+  local digit_regex='[[:digit:]]+'
+  local repository_index=$1
+  result_array=$2
+
+  # Verify repository index is a positive number.
+  [[ -z "$repository_index" ]] && return 1
+  ! [[ $repository_index =~ $digit_regex ]] && return 1
+  
+  # Verify array name was passed.
+  [[ -z "$result_array" ]] && return 1
+
+  # Test if repository index is not out of bounds.
+  [[ $($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index]) == 'null' ]] && return 1
+
+  # Get repository data.
+  result_array[name]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].name)
+  result_array[type]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].type)
+  result_array[repo]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].repo)
+  result_array[key]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].key)
+  result_array[unattended]=$($YAML_PARSER r $CONFIGURATION_FILE repositories[$repository_index].unattended)
+  
+  return 0
+}
+
 function add_repository() {
   local name=$1
   local type=$2

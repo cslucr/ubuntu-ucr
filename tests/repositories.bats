@@ -1,4 +1,4 @@
-#!./test/libs/bats/bin/bats
+#!./tests/libs/bats/bin/bats
 #
 # Repositories tests.
 

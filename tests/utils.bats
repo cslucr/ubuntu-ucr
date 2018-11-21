@@ -1,8 +1,8 @@
-#!./test/libs/bats/bin/bats
+#!./tests/libs/bats/bin/bats
 #
 # Configuration script tests.
 
-source ./include/utils.inc
+source ./includes/utils.inc
 
 @test "Verify program is not installed." {
     sudo apt-get remove rolldice -y

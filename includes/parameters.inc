@@ -1,7 +1,7 @@
 # Handle scripts parameters.
 
-source ./include/messages.inc
-source ./include/vars.inc
+source ./includes/messages.inc
+source ./includes/vars.inc
 
 # Capture parameters.
 function get_parameters() {

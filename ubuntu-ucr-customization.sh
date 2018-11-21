@@ -14,10 +14,10 @@
 #
 # Github: https://github.com/cslucr/ubuntu-ucr
 
-source include/messages.inc
-source include/parameters.inc
-source include/utils.inc
-source include/vars.inc
+source includes/messages.inc
+source includes/parameters.inc
+source includes/utils.inc
+source includes/vars.inc
 
 # Handle parameters.
 get_parameters "$@"

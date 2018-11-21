@@ -1,8 +1,8 @@
-#!./test/libs/bats/bin/bats
+#!./tests/libs/bats/bin/bats
 #
 # Messages script tests.
 
-source ./include/messages.inc
+source ./includes/messages.inc
 
 @test "Show help" {
     [[ $(help) == *'Customizes an Ubuntu installation'* ]]

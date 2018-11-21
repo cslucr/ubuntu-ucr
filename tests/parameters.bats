@@ -1,9 +1,9 @@
-#!./test/libs/bats/bin/bats
+#!./tests/libs/bats/bin/bats
 #
 # Parameters script tests.
 
-source ./include/parameters.inc
-source ./include/vars.inc
+source ./includes/parameters.inc
+source ./includes/vars.inc
 
 @test "Get APT_CACHE parameter" {
     get_parameters -c -y

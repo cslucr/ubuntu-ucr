@@ -1,11 +1,6 @@
 @startuml
 start
 :Get parameters;
-if (wget cache?) then (no)
-else (yes)
-  :create wget cache folder;
-endif
-:Enable unattended updates;
 :Handle repositories;
 :Handle packages;
 :Configure system;

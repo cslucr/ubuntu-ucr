@@ -1,22 +1,17 @@
 @startuml
 start
-:Parse ubuntu.yaml for repositories;
+:Read repository from array;
 repeat
-  :Read repository from array;
-  :Add repository (add-apt-repository);
-  if (repository type == apt) then (no)
-  else (yes)
-    if (repository key == url) then (yes)
-      :Download key (wget | apt-key add);
-    else (no)
-      :Add hexadecimal key (apt-key adv --recv-keys);
-    endif
+  if (repository key == url) then (yes)
+    :Download key (wget | apt-key add);
+  else (no)
+    :Add hexadecimal key (apt-key adv --recv-keys);
   endif
-  if (respository unattended == yes) then (no)
-  else (yes)
+:Add repository (add-apt-repository);
+  if (respository unattended) then (yes)
     :Add unattended update;
+  else (no)
   endif
 repeat while (repository on repositories array)
-
 end
 @enduml

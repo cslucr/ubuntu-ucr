@@ -1,7 +1,7 @@
 @startuml
 start
-:Apply hexadecimal keys;
-:Apply url keys;
+:Add hexadecimal keys;
+:Add url keys;
 :Add repositories;
 :Enable unattended updates;
 :Add unattended updates;

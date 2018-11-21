@@ -15,16 +15,16 @@ function get_parameters() {
 
     while getopts c,h,w:y, option; do
         case "${option}" in
-            c) APT_CACHED=true;;
+            c) APT_CACHE=true;;
             h) help; exit 0;;
-            w) DO_WGET_CACHE=true; WGET_CACHE=$(readlink -f ${OPTARG});;
-            y) NOFORCE=false;;
+            w) WGET_CACHE_PATH=$(readlink -f ${OPTARG});;
+            y) NO_FORCE=false;;
         esac
     done
 
     # Warning Message.
     # Ask only if the user did not specify the -y parameter.
-    if $NOFORCE == true; then
+    if $NO_FORCE == true; then
         #TODO: i18n
         echo ""
         echo "This script could overwrite your actual configuration, it is recommended to execute it on a fresh installation. If this is not a freshly installed system or a backup has not been made, you better cancel the process."

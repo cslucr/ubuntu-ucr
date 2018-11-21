@@ -38,7 +38,7 @@ function autoremove_packages() {
 }
 
 function clean_packages_cache() {
-  if ! $APT_CACHED ; then
+  if ! $APT_CACHE ; then
     sudo apt clean
   fi
 

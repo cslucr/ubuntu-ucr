@@ -3,23 +3,20 @@
 # Shared varibles.
 
 # Does not saves apt cache.
-APT_CACHED=false
-
-# Does not saves wget cache.
-WGET_CACHED=false
+APT_CACHE=false
 
 # Path where to download files via wget.
 WGET_CACHE=/tmp/wget_cache
 
 # Ask before make any changes.
-NOFORCE=true
+NO_FORCE=true
 
 # Directory where the script is being executed.
-SCRIPTPATH=$(readlink -f $0)
-BASEDIR=$(dirname "$SCRIPTPATH")
+SCRIPT_PATH=$(readlink -f $0)
+BASE_DIR=$(dirname "$SCRIPTPATH")
 
 # Computer architecture.
-arch=$(uname -m)
+ARCH=$(uname -m)
 
 # This variable aggregates package names that will be installed:
 # packages="$packages package1 package2 package3"

@@ -7,22 +7,21 @@ source ./includes/vars.inc
 
 @test "Get APT_CACHE parameter" {
     get_parameters -c -y
-    [[ $APT_CACHED == true ]]
+    [ "$APT_CACHE" == true ]
 }
 
 @test "Get HELP parameter" {
     run get_parameters -h
-    [[ $output == *'Customizes an Ubuntu installation'* ]]
+    [[ "$output" == *'Customizes an Ubuntu installation'* ]]
 }
 
-@test "Get WGET_CACHED parameter" {
+@test "Get WGET_CACHE parameter" {
     get_parameters -w $HOME -y
-    [[ $WGET_CACHED == true ]]
-    [[ $WGET_CACHE == $HOME ]]
+    [ "$WGET_CACHE_PATH" == "$HOME" ]
 }
 
-@test "Get NOFORCE parameter" {
+@test "Get NO_FORCE parameter" {
     get_parameters -y
-    [[ $NOFORCE == false ]]
+    [ "$NO_FORCE" == false ]
 }
 

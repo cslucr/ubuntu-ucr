@@ -1,36 +1,21 @@
 ---
-- name: Apply hexadecimal keys.
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: "{{ item.key }}"
-  when: item.key is defined and item.key is not match(http_regex)
-  loop: "{{ repositories }}"
-  tags:
-    - execution
-    - repositories
+- import_tasks: keys.yml
 
-- name: unitTest - Applied hexadecimal keys.
-  command: apt-key list
-  register: result
-  failed_when: "'*Spotify*' in result.stdout"
-  tags:
-    - test
-    - repositories
-
-- name: Apply url keys.
-  apt_key:
-    url: "{{ item.key }}"
+- name: Add repositories.
+  apt_repository:
+    repo: "{{ item.repo }}"
     state: present
-  when: item.key is defined and item.key is match(http_regex)
   loop: "{{ repositories }}"
   tags:
     - execution
     - repositories
 
-- name: unitTest - Applied url keys.
-  command: apt-key list
+- name: unitTest - Add repositories.
+  command: grep '"${distro_id}:${distro_codename}";' {{ unattended_file_path }}
   register: result
-  failed_when: "'*Google*' in result.stdout"
+  failed_when: result.stdout == ''
   tags:
     - test
     - repositories
+
+- import_tasks: unattended.yml

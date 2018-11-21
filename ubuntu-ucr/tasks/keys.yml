@@ -1,0 +1,36 @@
+---
+- name: Add hexadecimal keys.
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "{{ item.key }}"
+  when: item.key is defined and item.key is not match(http_regex)
+  loop: "{{ repositories }}"
+  tags:
+    - execution
+    - repositories
+
+- name: unitTest - Added hexadecimal keys.
+  command: apt-key list
+  register: result
+  failed_when: "'*Spotify*' in result.stdout"
+  tags:
+    - test
+    - repositories
+
+- name: Add url keys.
+  apt_key:
+    url: "{{ item.key }}"
+    state: present
+  when: item.key is defined and item.key is match(http_regex)
+  loop: "{{ repositories }}"
+  tags:
+    - execution
+    - repositories
+
+- name: unitTest - Added url keys.
+  command: apt-key list
+  register: result
+  failed_when: "'*Google*' in result.stdout"
+  tags:
+    - test
+    - repositories

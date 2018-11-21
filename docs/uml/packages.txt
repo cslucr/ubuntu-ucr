@@ -1,24 +1,11 @@
 @startuml
 start
-:Enable unattended updates;
-if (respository unattended == yes) then (no)
-else (yes)
-  :Add unattended update;
-endif
-:Parse ubuntu.yaml for packages;
-repeat
-  :Add package to packages list;
-  if (package debconf-selections == yes) then (no)
-  else (yes)
-    :Set debconf-selections;
-  endif
-repeat while (package on packages array)
-:Update packages;
+:Update apt;
 :Purge unwanted packages;
 :Upgrade packages;
 :Dist-upgrade system;
 :Install new packages;
-:Apt autoremove;
+:Autoremove packages;
 if (clean apt cache?) then (no)
 else (yes)
   :clean apt cache;

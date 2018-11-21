@@ -3,5 +3,7 @@ start
 :Apply hexadecimal keys;
 :Apply url keys;
 :Add repositories;
+:Enable unattended updates;
+:Add unattended updates;
 end
 @enduml

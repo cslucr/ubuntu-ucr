@@ -1,20 +1,12 @@
 ---
 repositories:
-  - name: java
-    type: ppa
-    repo: webupd8team/java
-    unattended: yes
-
-  - name: chrome
-    type: apt
-    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+  - repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
     key: https://dl-ssl.google.com/linux/linux_signing_key.pub
-    unattended: yes
 
-  - name: spotify
-    type: apt
-    repo: deb http://repository.spotify.com stable non-free
-    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C9
+  - repo: webupd8team/java
+
+  - repo: deb http://repository.spotify.com stable non-free
+    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     
 packages:
   - name: oracle-java8-installer
@@ -46,6 +38,7 @@ purge_packages:
 
 arch: amd64
 apt_cache: no
-wget_cache_path: '/tmp/wget_cache'
+wget_cache_path: '$HOME/wget_cache'
 unattended_file_path: '/etc/apt/apt.conf.d/50unattended-upgrades'
+http_regex: 'https?://([-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|])'
 

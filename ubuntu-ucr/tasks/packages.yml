@@ -1,21 +1,4 @@
 ---
-- name: Ensure wget cache folder is created.
-  file:
-    path: "{{ wget_cache_path }}"
-    state: directory
-  when: wget_cache_path != ''
-  tags:
-    - execution
-    - packages
-
-- name: unitTest - wget cache folder is created.
-  command: ls {{ wget_cache_path }}
-  register: result
-  failed_when: "'exist*' in result.stdout"
-  tags:
-    - test
-    - packages
-
 - name: Enable unattended updates - distro.
   lineinfile:
     path: "{{ unattended_file_path }}"

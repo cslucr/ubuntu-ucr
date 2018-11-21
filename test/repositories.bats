@@ -8,12 +8,6 @@ source ./includes/repositories.inc
     [ "$YAML_PARSER" == "${BASE_DIR}/resources/libs/yq_linux_${ARCH}" ]
 }
 
-@test 'Get repository data' {
-    local -A result_array
-    get_repository_data 0 result_array
-    [  "${result_array[name]}" == 'java' ]
-}
-
 @test 'Get repository data: exit with index out of bounds' {
     local -A result_array
     run get_repository_data 77 result_array
@@ -36,12 +30,6 @@ source ./includes/repositories.inc
     [ $status -eq 1 ]
 }
 
-@test 'Get repository data' {
-    local -A result_array
-    get_repository_data 0 result_array
-    [  "${result_array[name]}" == 'java' ]
-}
-
 @test 'Get repository data: exit with index out of bounds' {
     local -A result_array
     run get_repository_data 77 result_array
@@ -62,4 +50,10 @@ source ./includes/repositories.inc
 @test 'Get repository data: exit when not resultin array name passed' {
     run get_repository_data 0
     [ $status -eq 1 ]
+}
+
+@test 'Get repository data' {
+    local -A result_array
+    get_repository_data 0 result_array
+    [[ "${result_array[key]}" == *'google'* ]]
 }

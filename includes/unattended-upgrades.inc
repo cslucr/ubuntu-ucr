@@ -29,12 +29,12 @@ function comment_unattended_upgrades() {
 # Determines if the unattended upgrades are commented or not.
 function is_commented_unattended_upgrades() {
   local result=$(grep '"${distro_id}:${distro_codename}-updates";' $UNATTENDED_UPGRADES_FILE)
-  [[ $result == *'//'* ]] && echo true && return 0
+  [[ "$result" == *'//'* ]] && echo true && return 0
   echo false && return 0
 }
 
-# Add a new unattended upgrade if is not already added.
-function add_unattended_upgrade() {
+# Add a new unattended upgrades if is not already added.
+function add_unattended_upgrades() {
   local unattended_software=$( get_unattended_software_name "$1" "$2")
   
   # Verify software name was passed.
@@ -63,24 +63,14 @@ function remove_unattended_upgrade() {
 
 # Get origin:suite format for unattended software based on repo name
 function get_unattended_software_name() {
-  local repo_type=$1
-  local repo_name=$2
-
-  # Verify repository type and name.
-  [[ -z "$repo_type" ]] && echo '' && return 1
+  local repo_name=$1
   [[ -z "$repo_name" ]] && echo '' && return 1
    
   # Generates repo name for apt policy data
-  case "$repo_type" in
-    apt)
-      repo_name=$( [[ "$repo_name" =~ $HTTP_REGEX ]] && echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
-      ;;
-    ppa)
-      ;;
-    *)
-      echo '' && return 1
-  esac
-  
+  if [[ "$repo_name" =~ $HTTP_REGEX ]]; then
+    repo_name=$(echo ${BASH_REMATCH[1]} | sed 's:/*$::' )
+  fi
+
   # Get repo info from apt policy
   local repo_release_info=$( apt-cache policy | grep -A 2 "$repo_name" | head -n 3 )
   [[ -z "$repo_release_info" ]] && echo '' && return 1

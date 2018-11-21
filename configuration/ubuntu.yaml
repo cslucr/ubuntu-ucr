@@ -13,7 +13,7 @@ repositories:
   - name: spotify
     type: apt
     repo: deb http://repository.spotify.com stable non-free
-    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C9
+    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     
 packages:
   - name: oracle-java8-installer

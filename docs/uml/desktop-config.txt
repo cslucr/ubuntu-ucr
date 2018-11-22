@@ -1,0 +1,24 @@
+@startuml
+start
+if (gnome-shell?) then (yes)
+  : Install top icons extension;
+  : Install media player extension;
+  : Override and compile gschema;
+  : Reset gsettings values for current session;
+  : Display reset gui session message;
+else (no)
+endif
+
+if (mate?) then (yes)
+  : Set plymouth theme;
+  : Configure dconf;
+  : Override and compile gschema;
+  : Set advanced menu favorites;
+  : Override start menu icon;
+  : Configure authentication screen;
+  : Install arch-theme;
+else (no)
+endif
+
+end
+@enduml

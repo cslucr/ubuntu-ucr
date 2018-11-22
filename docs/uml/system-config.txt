@@ -1,0 +1,12 @@
+@startuml
+start
+:Disable apport;
+:Configure eduroam;
+:Configure date-time;
+:Configure libre office plugins;
+:Configure digital signature;
+:Configure terminal colors;
+:Configure Qt styles;
+:Configure applications on startup;
+end
+@enduml

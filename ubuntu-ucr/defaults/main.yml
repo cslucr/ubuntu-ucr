@@ -12,7 +12,9 @@ repositories:
     
 packages:
   - name: oracle-java8-installer
-    debconf: oracle-java8-installer shared/accepted-oracle-license-v1-1
+    debconf: 
+      name: oracle-java8-installer
+      question: shared/accepted-oracle-license-v1-1
 
   - name: google-chrome-stable
     arch: x86_64
@@ -23,7 +25,11 @@ packages:
   - name: gnome-tweak-tool
     xsession: gnome-shell
 
-  - ubuntu-restricted-extras
+  - name: ubuntu-restricted-extras
+    debconf: 
+      name: ttf-mscorefonts-installer
+      question: msttcorefonts/accepted-mscorefonts-eula
+
   - libreoffice
   - shotwell
   - gimp

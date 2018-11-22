@@ -4,6 +4,7 @@ start
 :Purge unwanted packages;
 :Upgrade packages;
 :Dist-upgrade system;
+:Set debconf selections;
 :Install new packages;
 :Autoremove packages;
 if (clean apt cache?) then (no)

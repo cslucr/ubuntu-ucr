@@ -1,1 +1,20 @@
 ---
+- name: Add deconf selections.
+  debconf:
+    name: "{{ item.debconf.name }}"
+    question: "{{ item.debconf.question }}"
+    value: 'true'
+    vtype: select
+  when: item.debconf is defined
+  loop: "{{ packages }}"
+  tags:
+    - execution
+    - packages
+
+- name: unitTest - Add debconf selections.
+  command: grep "oracle" /var/cache/debconf/config.dat
+  register: result
+  failed_when: "'*oracle*' in result.stdout"
+  tags:
+    - test
+    - packages

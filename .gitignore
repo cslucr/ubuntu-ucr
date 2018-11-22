@@ -1,3 +1,4 @@
 cache/
 ubuntu-iso-customization/
 ubuntu-mate-16.04.3-desktop-amd64.iso
+*.retry

@@ -7,6 +7,7 @@
   tags:
     - execution
     - repositories
+    - unattended
 
 - name: unitTest - enable unattended updates - distro.
   command: grep '"${distro_id}:${distro_codename}";' {{ unattended_file_path }}
@@ -15,6 +16,7 @@
   tags:
     - test
     - repositories
+    - unattended
 
 - name: Enable unattended updates - minimal steps.
   replace:
@@ -24,6 +26,7 @@
   tags:
     - execution
     - repositories
+    - unattended
 
 - name: unitTest - enable unattended updates - minimal steps.
   command: grep 'Unattended-Upgrade::MinimalSteps "true";' {{ unattended_file_path }}
@@ -32,6 +35,7 @@
   tags:
     - test
     - repositories
+    - unattended
 
 - name: Enable unattended updates - unused dependencies.
   replace:
@@ -41,6 +45,7 @@
   tags:
     - execution
     - repositories
+    - unattended
 
 - name: unitTest - enable unattended updates - unused dependencies.
   command: grep 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' {{ unattended_file_path }}
@@ -49,3 +54,4 @@
   tags:
     - test
     - repositories
+    - unattended

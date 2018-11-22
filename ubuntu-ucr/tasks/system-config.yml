@@ -1,0 +1,17 @@
+---
+- name: Disable apport.
+  replace:
+    path: /etc/default/apport
+    regexp: 'enabled=1'
+    replace: 'enabled=0'
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Disable apport.
+  command: cat /etc/default/apport
+  register: result
+  failed_when: "'*enabled=1*' not in result.stdout"
+  tags:
+    - test
+    - system

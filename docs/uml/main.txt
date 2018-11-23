@@ -3,7 +3,7 @@ start
 :Get parameters;
 :Handle repositories;
 :Handle packages;
-:Configure system;
 :Configure desktop;
+:Configure system;
 end
 @enduml

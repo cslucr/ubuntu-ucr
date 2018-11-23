@@ -13,14 +13,3 @@ Options:
 
 Customizes an Ubuntu installation.";
 }
-
-# Shows error messages and exits the script.
-function error_exit(){
-    show_error $1
-    exit 1
-}
-
-# Shows error messages
-function show_error(){
-    echo "${1:-"Unknown error"}" 1>&2
-}

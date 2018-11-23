@@ -22,6 +22,7 @@ function installByApt() {
     if [[ $(installedByApt "$programName") == "false" ]]; then
         sudo apt-get install "$programName" -y
     fi
+    return $?
 }    
 
 function uninstallByApt() {
@@ -32,4 +33,5 @@ function uninstallByApt() {
     
     sudo apt-get remove "$programName" -y
     sudo apt-get autoremove -y
+    return $?
 }

@@ -1,6 +1,16 @@
-# Show messages: help, errors.
+# @file help
+# @brief Show messages: help.
 
-# Shows help.
+#############################################################################
+# @description Shows help message.
+#
+# @example
+#
+#  `# Show help.`
+#   help
+#
+# @noargs
+#############################################################################
 function help(){
   echo -e "Usage: $0 [options]
 

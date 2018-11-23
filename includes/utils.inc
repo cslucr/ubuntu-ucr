@@ -1,37 +1,77 @@
-# Install ansible.
+# @file utils
+# @brief Wrapper around apt to install ansible.
 
-function installedByApt() {
+#############################################################################
+# @description Verifies if a package is installed.
+#
+# @example
+#
+#  `# Verify if ansible is installed.`
+#   installed_by_apt ansible
+#
+# @arg $packageName *string* package name to search.
+#
+# @exitcode true is package is installed, false otherwise.
+# @exitcode 1 on failure.
+#############################################################################
+function installed_by_apt() {
     # Search for text: 'Installed: (none) or Instalados: (ninguno)'.
     local INSTALLED_REGEX='.*(\(.*\))'
     
-    local programName=$1
-    [[ -z "$programName" ]] && return 1
+    local packageName=$1
+    [[ -z "$packageName" ]] && return 1
     
-    result=$(apt-cache policy "$programName")
+    result=$(apt-cache policy "$packageName")
     ! [[ -z "$result" ]] && ! [[ "$result" =~ $INSTALLED_REGEX ]] && echo true && return 
     echo false
 }
 
-function installByApt() {
-    local programName=$1
-    [[ -z "$programName" ]] && return 1
+#############################################################################
+# @description Installs a package via apt.
+#
+# @example
+#
+#  `# Install ansible.`
+#   install_by_apt ansible
+#
+# @arg $packageName *string* package name to install.
+#
+# @exitcode 0 on sucess.
+# @exitcode 1 on failure.
+#############################################################################
+function install_by_apt() {
+    local packageName=$1
+    [[ -z "$packageName" ]] && return 1
 
     # Verify user can sudo.
     ! [[ $(groups) = *"sudo"* ]] && ! [[ $(groups) == *"root"* ]] && echo "Permission denied, please run with admin privileges." && return 1
 
-    if [[ $(installedByApt "$programName") == "false" ]]; then
-        sudo apt-get install "$programName" -y
+    if [[ $(installed_by_apt "$packageName") == "false" ]]; then
+        sudo apt-get install "$packageName" -y
     fi
     return $?
 }    
 
-function uninstallByApt() {
-    local programName=$1
-    [[ -z "$programName" ]] && return 1
+#############################################################################
+# @description Uninstalls a package via apt.
+#
+# @example
+#
+#  `# Uninstall ansible.`
+#   uninstall_by_apt ansible
+#
+# @arg $packageName *string* package name to uninstall.
+#
+# @exitcode 0 on sucess.
+# @exitcode 1 on failure.
+#############################################################################
+function uninstall_by_apt() {
+    local packageName=$1
+    [[ -z "$packageName" ]] && return 1
 
-    [[ $(installedByApt "$programName") == false ]] && return 0
+    [[ $(installed_by_apt "$packageName") == false ]] && return 0
     
-    sudo apt-get remove "$programName" -y
+    sudo apt-get remove "$packageName" -y
     sudo apt-get autoremove -y
     return $?
 }

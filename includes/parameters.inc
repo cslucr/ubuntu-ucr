@@ -1,9 +1,30 @@
-# Handle scripts parameters.
+# @file parameters
+# @brief Handle scripts parameters.
 
 source ./includes/messages.inc
 source ./includes/vars.inc
 
-# Capture parameters.
+#############################################################################
+# @description Capture user input.
+#
+# The captured input is stored on the variables:
+# - APT_CACHE
+# - WGET_CACHE_PATH
+# - NO_FORCE
+#
+# If the parameter **-h** or **--help** is found on the arguments string,
+# this functions shows the help message and exits.
+#
+# @example
+#
+#  `# Get parameter from arguments string.`
+#   get_parameters "$@"
+#
+# @arg $@ *string* arguments string.
+#
+# @exitcode 0 on sucess.
+# @exitcode 1 on failure.
+#############################################################################
 function get_parameters() {
 
 #  -y doesn't ask anything, force configuration overwriting.

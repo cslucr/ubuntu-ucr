@@ -6,15 +6,15 @@ source ./includes/utils.inc
 
 @test "Verify program is not installed." {
     sudo apt-get remove rolldice -y
-    [[ $(installedByApt 'rolldice') == false ]]
+    [[ $(installed_by_apt 'rolldice') == false ]]
 }
 
 @test "Install program by apt." {
-    installByApt 'rolldice'
-    [[ $(installedByApt 'rolldice') == true ]]
+    install_by_apt 'rolldice'
+    [[ $(installed_by_apt 'rolldice') == true ]]
 }
 
 @test "Uninstall program by apt." {
-    uninstallByApt 'rolldice'
-    [[ $(installedByApt 'rolldice') == false ]]
+    uninstall_by_apt 'rolldice'
+    [[ $(installed_by_apt 'rolldice') == false ]]
 }

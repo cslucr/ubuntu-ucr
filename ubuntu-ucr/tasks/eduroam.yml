@@ -13,6 +13,24 @@
   register: result
   failed_when:  "'AURI-eduroam-UCR-Linux.tar.gz' not in result.stdout"
   tags:
+    - test
+    - system
+    - eduroam
+
+- name: Extract eduroam installer.
+  unarchive:
+    src: "{{ wget_cache_path }}/AURI-eduroam-UCR-Linux.tar.gz"
+    dest: /opt
+  tags:
     - execution
+    - system
+    - eduroam
+
+- name: unitTest - Extracted eduroam installer.
+  command: ls /opt
+  register: result
+  failed_when:  "'AURI-eduroam-UCR-linux.sh' not in result.stdout"
+  tags:
+    - test
     - system
     - eduroam

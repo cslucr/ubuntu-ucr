@@ -6,7 +6,7 @@
     - execution
     - test
 
-- name: Retrieved the user running the play.
+- name: unitTest - Retrieved the user running the play.
   command: echo "{{ user_on_host }}"
   register: result
   failed_when: result.stdout == ''

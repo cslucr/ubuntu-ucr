@@ -6,7 +6,7 @@ start
 :Configure timezone;
 :Install libre office plugins;
 :Install digital signature;
-:Configure terminal colors;
+:Enable terminal colors;
 :Configure Qt styles;
 :Add applications to autostart;
 end

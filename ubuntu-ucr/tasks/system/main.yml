@@ -51,3 +51,43 @@
 
 - import_tasks: office.yml
 - import_tasks: signature.yml
+
+- name: Enable terminal colors on /etc/skel/.bashrc.
+  replace:
+    path: "/etc/skel/.bashrc"
+    regexp: "^#force_color_prompt=yes"
+    replace: 'force_color_prompt=yes'
+  tags:
+    - execution
+    - system
+    - current
+
+- name: Enabled terminal colors on /etc/skel/.bashrc.
+  command: grep '#force_color_prompt=yes' /etc/skel/.bashrc
+  register: result
+  failed_when: result.stdout == '#force_color_prompt=yes'
+  tags:
+    - execution
+    - system
+    - current
+
+- name: Enable terminal colors on ~/.bashrc.
+  replace:
+    path: ~/.bashrc
+    regexp: "#force_color_prompt=yes"
+    replace: 'force_color_prompt=yes'
+  become: user_on_host
+  tags:
+    - execution
+    - system
+    - current
+
+- name: Enabled terminal colors on ~/.bashrc.
+  command: grep '#force_color_prompt=yes' ~/.bashrc
+  register: result
+  become: user_on_host
+  failed_when: result.stdout == '#force_color_prompt=yes'
+  tags:
+    - execution
+    - system
+    - current

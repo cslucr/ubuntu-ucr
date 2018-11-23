@@ -1,4 +1,13 @@
 ---
+
+- name: Get the user running the play.
+  local_action: command whoami
+  register: user_on_host
+  tags:
+    - execution
+    - test
+    - current
+
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml
 - import_tasks: system/main.yml

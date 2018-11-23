@@ -43,9 +43,6 @@ function install_by_apt() {
     local packageName=$1
     [[ -z "$packageName" ]] && return 1
 
-    # Verify user can sudo.
-    ! [[ $(groups) = *"sudo"* ]] && ! [[ $(groups) == *"root"* ]] && echo "Permission denied, please run with admin privileges." && return 1
-
     if [[ $(installed_by_apt "$packageName") == "false" ]]; then
         sudo apt-get install "$packageName" -y
     fi

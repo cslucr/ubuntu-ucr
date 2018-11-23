@@ -22,10 +22,16 @@ source includes/vars.inc
 # Handle parameters.
 get_parameters "$@"
 
+# Verify user can sudo.
+! [[ "$(groups)" = *"sudo"* ]] && ! [[ "$(groups)" == *"root"* ]] && error_exit 'To run this script administrative permissions are needed.'
+
+# Do sudo to get password to install ansible and to use on the playbook.
+sudo ls &>/dev/null
+
 # Install ansible.
-[[ $(installByApt "ansible") -eq 1 ]] && exit 1
+[[ $(install_by_apt "ansible") -eq 1 ]] && error_exit 'Could not install ansible.'
 
 # Run playbook.
-ansible-playbook customization.yml -i production -v --ask-become-pass --extra-vars "apt_cache=$APT_CACHE arch=$ARCH wget_cache_path=$WGET_CACHE_PATH" --tags "execution"
+ansible-playbook customization.yml -i production -v --extra-vars "apt_cache=$APT_CACHE arch=$ARCH wget_cache_path=$WGET_CACHE_PATH" --tags "execution"
 
 exit 0

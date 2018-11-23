@@ -1,4 +1,5 @@
 ---
-- import_tasks: repositories.yml
-- import_tasks: packages.yml
-- import_tasks: system.yml
+- import_tasks: repositories/main.yml
+- import_tasks: packages/main.yml
+- import_tasks: system/main.yml
+- import_tasks: desktop/main.yml

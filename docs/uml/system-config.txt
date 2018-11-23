@@ -8,6 +8,6 @@ start
 :Configure digital signature;
 :Configure terminal colors;
 :Configure Qt styles;
-:Configure applications on startup;
+:Add applications to autostart;
 end
 @enduml

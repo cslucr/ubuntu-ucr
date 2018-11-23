@@ -11,6 +11,17 @@ repositories:
     key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     
 packages:
+  - libreoffice
+  - shotwell
+  - gimp
+  - spotify-client
+  - linux-firmware
+  - firmware-b43-installer
+  - unattended-upgrades
+  - vlc
+  - shutter
+  - qt5-style-plugins
+
   - name: oracle-java8-installer
     debconf: 
       name: oracle-java8-installer
@@ -30,17 +41,8 @@ packages:
       name: ttf-mscorefonts-installer
       question: msttcorefonts/accepted-mscorefonts-eula
 
-  - libreoffice
-  - shotwell
-  - gimp
-  - spotify-client
-  - linux-firmware
-  - firmware-b43-installer
-  - unattended-upgrades
-  - caffeine
-  - vlc
-  - shutter
-  - qt5-style-plugins
+  - name: caffeine
+    autostart: /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop
 
 purge_packages:
 

@@ -1,7 +1,7 @@
 Ubuntu UCR
 ===========
 
-Ansible role to customize Ubuntu for Universidad of Costa Rica.
+Ansible role to customize Ubuntu for University of Costa Rica.
 
 Requirements
 ------------
@@ -12,7 +12,7 @@ Role Variables
 --------------
 
 - **apt_cache**: whether to preserve or not apt cache, defaults to **no**.
-- **arch**: system architecture, defaults to **amd64**.
+- **arch**: system architecture, defaults to **x86_64**.
 - **wget_cache_path**: path where to create **wget** downloads folder, defaults to */tmp/wget_cache*.
 
 Usage
@@ -20,7 +20,7 @@ Usage
 
 To execute:
 
-    ansible-playbook customization.yml -i production -v --ask-become-pass --extra-vars "apt_cache=yes arch=amd64 wget_cache_path=$HOME/my-cache" --tags "execution"
+    ansible-playbook customization.yml -i production -t execution -v --ask-become-pass --extra-vars "apt_cache=yes arch=amd64 wget_cache_path=$HOME/my-cache"
 
 To include:
 

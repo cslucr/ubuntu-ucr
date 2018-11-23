@@ -1,5 +1,6 @@
 @startuml
 start
+:Create wget cache folder;
 :Disable apport;
 :Configure eduroam;
 :Configure date-time;

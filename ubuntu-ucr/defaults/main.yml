@@ -46,6 +46,6 @@ purge_packages:
 
 arch: amd64
 apt_cache: no
-wget_cache_path: '$HOME/wget_cache'
+wget_cache_path: '/tmp/wget_cache'
 unattended_file_path: '/etc/apt/apt.conf.d/50unattended-upgrades'
 http_regex: 'https?://([-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|])'

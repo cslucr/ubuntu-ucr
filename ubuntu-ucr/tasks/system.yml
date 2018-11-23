@@ -1,0 +1,35 @@
+---
+- name: Create wget cache folder.
+  file:
+    path: "{{ wget_cache_path }}"
+    state: directory
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Created wget cache folder.
+  command: ls {{ wget_cache_path }}
+  register: result
+  failed_when: result.stderr != ''
+  tags:
+    - test
+    - system
+
+- name: Disable apport.
+  replace:
+    path: /etc/default/apport
+    regexp: 'enabled=1'
+    replace: 'enabled=0'
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Disable apport.
+  command: cat /etc/default/apport
+  register: result
+  failed_when: "'*enabled=1*' in result.stdout"
+  tags:
+    - test
+    - system
+
+- import_tasks: eduroam.yml

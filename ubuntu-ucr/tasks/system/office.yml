@@ -11,8 +11,15 @@
 - name: unitTest - Downloaded LanguageTool.
   command: ls {{ wget_cache_path }}
   register: result
-  failed_when:  "'LanguageTool-stable.oxt' not in result.stdout"
+  failed_when: "'LanguageTool-stable.oxt' not in result.stdout"
   tags:
     - test
+    - system
+    - office
+
+- name: Install LanguageTool.
+  command: unopkg add --shared {{ wget_cache_path }}/LanguageTool-stable.oxt
+  tags:
+    - execution
     - system
     - office

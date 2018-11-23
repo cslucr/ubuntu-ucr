@@ -29,7 +29,7 @@
 - name: unitTest - Extracted eduroam installer.
   command: ls /opt
   register: result
-  failed_when:  "'AURI-eduroam-UCR-linux.sh' not in result.stdout"
+  failed_when: "'AURI-eduroam-UCR-linux.sh' not in result.stdout"
   tags:
     - test
     - system
@@ -47,7 +47,7 @@
 - name: unitTest - Created eduroam desktop entry.
   command: ls /usr/share/applications
   register: result
-  failed_when:  "'auri.desktop' not in result.stdout"
+  failed_when: "'auri.desktop' not in result.stdout"
   tags:
     - test
     - system

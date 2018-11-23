@@ -1,7 +1,7 @@
 Ubuntu UCR
 ===========
 
-Ansible role to customize Ubuntu for Universidad of Costa Rica.
+Ansible role to customize Ubuntu for University of Costa Rica.
 
 Requirements
 ------------

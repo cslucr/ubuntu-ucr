@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Configurar AURI
+Comment=Configurar red Wifi de la UCR y Eduroam
+Exec=/opt/AURI-eduroam-UCR-linux.sh
+Icon=network-wireless
+Terminal=false
+Type=Application
+Categories=Settings;HardwareSettings;
+Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red

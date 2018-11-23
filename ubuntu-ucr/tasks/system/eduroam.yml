@@ -34,3 +34,21 @@
     - test
     - system
     - eduroam
+
+- name: Create eduroam desktop entry.
+  copy:
+    src: "{{ role_path }}/files/auri.desktop"
+    dest: /usr/share/applications/auri.desktop
+  tags:
+    - execution
+    - system
+    - eduroam
+
+- name: unitTest - Created eduroam desktop entry.
+  command: ls /usr/share/applications
+  register: result
+  failed_when:  "'auri.desktop' not in result.stdout"
+  tags:
+    - test
+    - system
+    - eduroam

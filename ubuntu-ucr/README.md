@@ -12,7 +12,7 @@ Role Variables
 --------------
 
 - **apt_cache**: whether to preserve or not apt cache, defaults to **no**.
-- **arch**: system architecture, defaults to **amd64**.
+- **arch**: system architecture, defaults to **x86_64**.
 - **wget_cache_path**: path where to create **wget** downloads folder, defaults to */tmp/wget_cache*.
 
 Usage

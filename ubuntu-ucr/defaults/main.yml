@@ -12,6 +12,7 @@ repositories:
     
 packages:
   - libreoffice
+  - libreoffice-java-common
   - shotwell
   - gimp
   - spotify-client
@@ -46,7 +47,15 @@ packages:
 
 purge_packages:
 
-arch: amd64
+office_plugins:
+  # Grammar checker.
+  - https://www.languagetool.org/download/LanguageTool-stable.oxt
+  # Ortography, word separation and synonyms.
+  - https://github.com/sbosio/rla-es/releases/download/v2.3/es_ANY.oxt
+  # Allows to delete empty cells.
+  - https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
+
+arch: x86_64
 apt_cache: no
 wget_cache_path: '/tmp/wget_cache'
 unattended_file_path: '/etc/apt/apt.conf.d/50unattended-upgrades'

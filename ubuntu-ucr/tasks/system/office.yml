@@ -1,14 +1,15 @@
 ---
-- name: Download LanguageTool.
+- name: Download Libre office plugins.
   get_url:
-    url: https://www.languagetool.org/download/LanguageTool-stable.oxt
+    url: "{{ item }}"
     dest: "{{ wget_cache_path }}"
+  loop: "{{ office_plugins }}"
   tags:
     - execution
     - system
     - office
 
-- name: unitTest - Downloaded LanguageTool.
+- name: unitTest - Downloaded Libre office plugins.
   command: ls {{ wget_cache_path }}
   register: result
   failed_when: "'LanguageTool-stable.oxt' not in result.stdout"
@@ -17,9 +18,22 @@
     - system
     - office
 
-- name: Install LanguageTool.
-  command: unopkg add --shared {{ wget_cache_path }}/LanguageTool-stable.oxt
+- name: Install Libre office plugins.
+  # Extract the plugin name from the url and install it.
+  command: bash -c 'NAME={{ item }} && NAME=$(printf -- "%s" "${NAME##*/}") && unopkg add -f --shared {{ wget_cache_path }}/$NAME'
+  loop: "{{ office_plugins }}"
+  # Give parse error on language tool but installs fine.
+  ignore_errors: yes
   tags:
     - execution
+    - system
+    - office
+
+- name: unitTest - Installed Libre office plugins.
+  command: unopkg list --shared
+  register: result
+  failed_when: "'org.openoffice.languagetool.oxt' not in result.stdout"
+  tags:
+    - test
     - system
     - office

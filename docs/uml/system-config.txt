@@ -2,10 +2,10 @@
 start
 :Create wget cache folder;
 :Disable apport;
-:Configure eduroam;
+:Install eduroam;
 :Configure timezone;
-:Configure libre office plugins;
-:Configure digital signature;
+:Install libre office plugins;
+:Install digital signature;
 :Configure terminal colors;
 :Configure Qt styles;
 :Add applications to autostart;

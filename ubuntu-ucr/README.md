@@ -20,7 +20,7 @@ Usage
 
 To execute:
 
-    ansible-playbook customization.yml -i production -v --ask-become-pass --extra-vars "apt_cache=yes arch=amd64 wget_cache_path=$HOME/my-cache" --tags "execution"
+    ansible-playbook customization.yml -i production -t "execution" -v --ask-become-pass --extra-vars "apt_cache=yes arch=amd64 wget_cache_path=$HOME/my-cache"
 
 To include:
 

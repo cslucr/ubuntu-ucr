@@ -11,39 +11,37 @@ repositories:
     key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     
 packages:
+  - caffeine
+  - firmware-b43-installer
+  - gimp
   - libreoffice
   - libreoffice-java-common
-  - shotwell
-  - gimp
-  - spotify-client
   - linux-firmware
-  - firmware-b43-installer
+  - qt5-style-plugins
+  - shotwell
+  - shutter
+  - spotify-client
   - unattended-upgrades
   - vlc
-  - shutter
-  - qt5-style-plugins
+
+  - name: chromium-browser
+    arch: x86
+    
+  - name: google-chrome-stable
+    arch: x86_64
+
+  - name: gnome-tweak-tool
+    xsession: gnome-shell
 
   - name: oracle-java8-installer
     debconf: 
       name: oracle-java8-installer
       question: shared/accepted-oracle-license-v1-1
 
-  - name: google-chrome-stable
-    arch: x86_64
-
-  - name: chromium-browser
-    arch: x86
-
-  - name: gnome-tweak-tool
-    xsession: gnome-shell
-
   - name: ubuntu-restricted-extras
     debconf: 
       name: ttf-mscorefonts-installer
       question: msttcorefonts/accepted-mscorefonts-eula
-
-  - name: caffeine
-    autostart: /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop
 
 purge_packages:
 
@@ -54,6 +52,10 @@ office_plugins:
   - https://github.com/sbosio/rla-es/releases/download/v2.3/es_ANY.oxt
   # Allows to delete empty cells.
   - https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt
+
+autostart:
+  - /usr/share/applications/caffeine.desktop
+  - /usr/share/applications/caffeine-indicator.desktop
 
 arch: x86_64
 apt_cache: no

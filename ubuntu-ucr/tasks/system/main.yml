@@ -60,16 +60,14 @@
   tags:
     - execution
     - system
-    - current
 
-- name: Enabled terminal colors on /etc/skel/.bashrc.
+- name: unitTest - Enabled terminal colors on /etc/skel/.bashrc.
   command: grep '#force_color_prompt=yes' /etc/skel/.bashrc
   register: result
   failed_when: result.stdout == '#force_color_prompt=yes'
   tags:
-    - execution
+    - test
     - system
-    - current
 
 - name: Enable terminal colors on ~/.bashrc.
   replace:
@@ -80,14 +78,118 @@
   tags:
     - execution
     - system
-    - current
 
-- name: Enabled terminal colors on ~/.bashrc.
+- name: unitTest - Enabled terminal colors on ~/.bashrc.
   command: grep '#force_color_prompt=yes' ~/.bashrc
   register: result
-  become: user_on_host
   failed_when: result.stdout == '#force_color_prompt=yes'
+  become: user_on_host
   tags:
     - execution
     - system
-    - current
+
+# So Qt5 applications can use a native style.
+- name: Enable Qt5 extra widget styles on /etc/skel/.profile.
+  lineinfile:
+    dest: /etc/skel/.profile
+    line: "export QT_QPA_PLATFORMTHEME=gtk2"
+    state: present
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Enabled Qt5 extra widget styles on /etc/skel/.profile
+  command: grep 'export QT_QPA_PLATFORMTHEME=gtk2' /etc/skel/.profile
+  register: result
+  failed_when: result.stdout != 'export QT_QPA_PLATFORMTHEME=gtk2'
+  tags:
+    - test
+    - system
+
+- name: Enable Qt5 extra widget styles on ~/.profile.
+  lineinfile:
+    dest: ~/.profile
+    line: "export QT_QPA_PLATFORMTHEME=gtk2"
+    state: present
+  become: user_on_host
+  tags:
+    - execution
+    - system
+    
+- name: unitTest - Enabled Qt5 extra widget styles on ~/.profile
+  command: grep 'export QT_QPA_PLATFORMTHEME=gtk2' ~/.profile
+  register: result
+  failed_when: result.stdout != 'export QT_QPA_PLATFORMTHEME=gtk2'
+  become: user_on_host
+  tags:
+    - test
+    - system
+
+- name: Create folder /etc/skel/.config/autostart.
+  file:
+    path: /etc/skel/.config/autostart
+    state: directory
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Created folder /etc/skel/.config/autostart.
+  command: ls /etc/skel/.config
+  register: result
+  failed_when: "'autostart' not in result.stdout"
+  tags:
+    - test
+    - system
+
+- name: Add applications to /etc/skel/.config/autostart.
+  copy:
+    src: "{{ item }}"
+    dest: /etc/skel/.config/autostart
+  loop: "{{ autostart }}"
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Added applications to /etc/skel/.config/autostart.
+  command: ls /etc/skel/.config/autostart
+  register: result
+  failed_when: "'caffeine.desktop' not in result.stdout"
+  tags:
+    - test
+    - system
+
+- name: Create folder ~/.config/autostart.
+  file:
+    path: ~/.config/autostart
+    state: directory
+  become: user_on_host
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Created folder ~/.config/autostart.
+  command: ls ~/.config
+  register: result
+  failed_when: "'autostart' not in result.stdout"
+  tags:
+    - test
+    - system
+
+- name: Add applications to ~/.config/autostart.
+  copy:
+    src: "{{ item }}"
+    dest: "~/.config/autostart/{{ item | basename }}"
+  loop: "{{ autostart }}"
+  become: user_on_host
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Added applications to ~/.config/autostart.
+  command: ls ~/.config/autostart
+  register: result
+  failed_when: "'caffeine.desktop' not in result.stdout"
+  become: user_on_host
+  tags:
+    - test
+    - system

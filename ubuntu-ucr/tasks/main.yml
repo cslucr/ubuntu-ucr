@@ -1,12 +1,17 @@
 ---
-
 - name: Get the user running the play.
   local_action: command whoami
   register: user_on_host
   tags:
     - execution
     - test
-    - current
+
+- name: Retrieved the user running the play.
+  command: echo "{{ user_on_host }}"
+  register: result
+  failed_when: result.stdout == ''
+  tags:
+    - test
 
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml

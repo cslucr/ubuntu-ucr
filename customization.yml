@@ -1,5 +1,5 @@
 ---
-- name: Customize ubuntu for UCR.
+- name: Customize Ubuntu for University of Costa Rica.
   hosts: localhost
   connection: local
   gather_facts: no

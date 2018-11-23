@@ -27,9 +27,24 @@
 - name: unitTest - Disable apport.
   command: cat /etc/default/apport
   register: result
-  failed_when: "'*enabled=1*' in result.stdout"
+  failed_when: "'enabled=1' in result.stdout"
   tags:
     - test
     - system
 
 - import_tasks: eduroam.yml
+
+- name: Set timezone to America/Costa_Rica.
+  timezone:
+    name: America/Costa_Rica
+  tags:
+    - execution
+    - system
+
+- name: unitTest - Setted timezone to America/Costa_Rica.
+  command: ls -l /etc/localtime
+  register: result
+  failed_when: "'Costa_Rica' not in result.stdout"
+  tags:
+    - test
+    - system

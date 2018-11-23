@@ -3,7 +3,7 @@ start
 :Create wget cache folder;
 :Disable apport;
 :Configure eduroam;
-:Configure date-time;
+:Configure timezone;
 :Configure libre office plugins;
 :Configure digital signature;
 :Configure terminal colors;

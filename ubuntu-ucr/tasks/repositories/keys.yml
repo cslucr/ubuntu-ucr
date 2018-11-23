@@ -12,7 +12,7 @@
 - name: unitTest - Added hexadecimal keys.
   command: apt-key list
   register: result
-  failed_when: "'*Spotify*' in result.stdout"
+  failed_when: "'Spotify' not in result.stdout"
   tags:
     - test
     - repositories
@@ -30,7 +30,7 @@
 - name: unitTest - Added url keys.
   command: apt-key list
   register: result
-  failed_when: "'*Google*' in result.stdout"
+  failed_when: "'Google' not in result.stdout"
   tags:
     - test
     - repositories

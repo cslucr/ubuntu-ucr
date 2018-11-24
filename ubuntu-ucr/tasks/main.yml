@@ -13,6 +13,14 @@
   tags:
     - test
 
+- name: Verify if mate is installed and store the result.
+  command: bash -c "apt list --installed | grep mate-desktop"
+  register: mate_xsession
+  tags:
+    - execution
+    - desktop
+    - mate
+
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml
 - import_tasks: system/main.yml

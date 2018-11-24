@@ -1,0 +1,19 @@
+---
+- name: Download gnome-shell extensions.
+  get_url:
+    url: "{{ item }}"
+    dest: "{{ wget_cache_path }}"
+  loop: "{{ gnome_extensions  }}"
+  tags:
+    - execution
+    - desktop
+    - gnome
+
+- name: unitTest - Downloaded gnome-shell extensions.
+  command: ls {{ wget_cache_path }}
+  register: result
+  failed_when:  "'patapon.info.v57.shell-extension.zip' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - gnome

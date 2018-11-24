@@ -1,0 +1,22 @@
+---
+- name: Create mate dconf lock folder.
+  file:
+    path: /etc/dconf/db/mate.d/lock
+    state: directory
+  when: mate_xsession != ''
+  tags:
+    - execution
+    - desktop
+    - mate
+    - dconf
+
+- name: unitTest - Created mate dconf lock folder.
+  command: ls /etc/dconf/db
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'mate' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - dconf

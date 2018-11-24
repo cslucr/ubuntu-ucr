@@ -8,6 +8,3 @@ WGET_CACHE_PATH=/tmp/wget_cache
 
 # Ask before make any changes.
 NO_FORCE=true
-
-# Computer architecture.
-ARCH=$(uname -m)

@@ -60,7 +60,6 @@ autostart:
   - /usr/share/applications/caffeine.desktop
   - /usr/share/applications/caffeine-indicator.desktop
 
-arch: x86_64
 apt_cache: no
 wget_cache_path: '/tmp/wget_cache'
 unattended_file_path: '/etc/apt/apt.conf.d/50unattended-upgrades'

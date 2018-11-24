@@ -90,10 +90,10 @@
     - mate
     - plymouth
 
-- name: Copy ubuntu-ucr-text.so to /usr/lib/{{ arch }}-linux-gnu/plymouth.
+- name: Copy ubuntu-ucr-text.so to /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth.
   copy:
     src: "{{ role_path }}/files/plymouth/ubuntu-ucr-text.so"
-    dest: "/usr/lib/{{ arch }}-linux-gnu/plymouth"
+    dest: "/usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth"
   when: mate_xsession != ''
   tags:
     - execution
@@ -101,8 +101,8 @@
     - mate
     - plymouth
 
-- name: unitTest - Copied ubuntu-ucr-text.so to /usr/lib/{{ arch }}-linux-gnu/plymouth.
-  command: ls /usr/lib/{{ arch }}-linux-gnu/plymouth
+- name: unitTest - Copied ubuntu-ucr-text.so to /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth.
+  command: ls /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth
   register: result
   when: mate_xsession != ''
   failed_when: "'ubuntu-ucr' not in result.stdout"

@@ -18,8 +18,11 @@
   register: mate_xsession
   tags:
     - execution
+    - test
+    - packages
     - desktop
     - mate
+    - plymouth
 
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml

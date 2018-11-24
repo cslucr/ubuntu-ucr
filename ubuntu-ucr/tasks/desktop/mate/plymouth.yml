@@ -1,0 +1,56 @@
+---
+- name:  Copy ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
+  copy:
+    src: "{{ role_path }}/files/plymouth/themes"
+    dest: /usr/share/plymouth
+  when: mate_xsession != ''
+  tags:
+    - execution
+    - desktop
+    - mate
+    - plymouth
+
+- name: unitTest - Copied ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
+  command: ls /usr/share/plymouth/themes
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: Install default.plymouth alternative as ubuntu-ucr.
+  alternatives:
+    name: default.plymouth
+    link: /usr/share/plymouth/themes/default.plymouth
+    path: /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth
+    priority: 100
+  tags:
+    - execution
+    - desktop
+    - mate
+    - plymouth
+
+- name: uniTest - Installed alternative default.plymouth alternative = ubuntu-ucr.
+  command: update-alternatives --list default.plymouth
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: unitTest - Setted alternative default.plymouth = ubuntu-ucr.
+  command: update-alternatives --display default.plymouth
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth

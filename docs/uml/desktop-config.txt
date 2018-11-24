@@ -1,11 +1,7 @@
 @startuml
 start
 if (gnome-shell?) then (yes)
-  : Install top icons extension;
-  : Install media player extension;
-  : Override and compile gschema;
-  : Reset gsettings values for current session;
-  : Display reset gui session message;
+  : Apply wallpaper;
 else (no)
 endif
 

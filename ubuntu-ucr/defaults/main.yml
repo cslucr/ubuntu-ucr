@@ -59,13 +59,6 @@ autostart:
   - /usr/share/applications/caffeine.desktop
   - /usr/share/applications/caffeine-indicator.desktop
 
-gnome_extensions:
-  # TopIcons extension (TODO: fix 404)
-#  - https://extensions.gnome.org/download-extension/TopIcons@phocean.net.shell-extension.zip?version_tag=6608
-
-  # Media player extension.
-  -  https://extensions.gnome.org/download-extension/mediaplayer@patapon.info.shell-extension.zip?version_tag=7152
-
 arch: x86_64
 apt_cache: no
 wget_cache_path: '/tmp/wget_cache'

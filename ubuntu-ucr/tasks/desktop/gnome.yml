@@ -1,29 +1,7 @@
 ---
-- name: Determine if gnome-shell is present and store the result.
-  command: bash -c "grep 'gnome-shell' /usr/share/xsessions/*"
-  register: gnome_present
+- name: Set wallpaper.
+  command: echo 'TODO - set wallpaper'
   tags:
     - execution
-    - desktop
-    - gnome
-
-- name: Download gnome-shell extensions.
-  get_url:
-    url: "{{ item }}"
-    dest: "{{ wget_cache_path }}"
-  loop: "{{ gnome_extensions }}"
-  when: gnome_present != ''
-  tags:
-    - execution
-    - desktop
-    - gnome
-
-- name: unitTest - Downloaded gnome-shell extensions.
-  command: ls {{ wget_cache_path }}
-  register: result
-  when: gnome_present != ''
-  failed_when:  "'patapon.info' not in result.stdout"
-  tags:
-    - test
     - desktop
     - gnome

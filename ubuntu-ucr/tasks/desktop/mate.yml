@@ -1,15 +1,15 @@
 ---
-- name:  Copy plymouth theme to /usr/share/plymouth/themes.
+- name:  Copy ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
   copy:
-    src: "{{ role_path }}/files/plymouth/ubuntu-ucr"
-    dest: /usr/share/plymouth/themes
+    src: "{{ role_path }}/files/plymouth/themes"
+    dest: /usr/share/plymouth
   when: mate_xsession != ''
   tags:
     - execution
     - desktop
     - mate
 
-- name: unitTest - Copied plymouth theme to /usr/share/plymouth/themes.
+- name: unitTest - Copied ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
   command: ls /usr/share/plymouth/themes
   register: result
   failed_when: "'ubuntu-ucr' not in result.stdout"
@@ -18,4 +18,3 @@
     - test
     - desktop
     - mate
-  

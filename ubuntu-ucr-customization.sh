@@ -32,6 +32,6 @@ sudo ls &>/dev/null
 [[ $(install_by_apt "ansible") -eq 1 ]] && error_exit 'Could not install ansible.'
 
 # Run playbook.
-ansible-playbook customization.yml -i production -t "execution" -v --extra-vars "apt_cache=$APT_CACHE arch=$ARCH wget_cache_path=$WGET_CACHE_PATH" 
+ansible-playbook customization.yml -i production -t execution -v --extra-vars "apt_cache=$APT_CACHE arch=$ARCH wget_cache_path=$WGET_CACHE_PATH" 
 
 exit 0

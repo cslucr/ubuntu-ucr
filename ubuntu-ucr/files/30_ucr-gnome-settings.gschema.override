@@ -1,0 +1,15 @@
+[org.gnome.desktop.background]
+picture-uri = "file:///usr/share/backgrounds/ubuntu-18.04-ucr-background-cslucr.jpg"
+
+[org.gnome.desktop.screensaver]
+picture-uri = "file:///usr/share/backgrounds/ubuntu-18.04-ucr-background-cslucr.jpg"
+
+[org.gnome.desktop.input-sources]
+sources = [('xkb', 'latam'), ('xkb', 'es'), ('xkb', 'us'), ('xkb', 'us+alt-intl')]
+
+[org.gnome.desktop.interface]
+clock-format = "12h"
+clock-show-date = true
+
+[org.gnome.shell]
+favorite-apps = ['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'chromium-browser.desktop', 'thunderbird.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'libreoffice-impress.desktop', 'spotify.desktop', 'auri.desktop', 'yelp.desktop']

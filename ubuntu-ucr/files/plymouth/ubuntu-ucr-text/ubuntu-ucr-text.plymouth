@@ -1,0 +1,15 @@
+[Plymouth Theme]
+Name=Ubuntu UCR Text
+Description=The original Ubuntu theme with the University of Costa Rica colors.
+ModuleName=ubuntu-ucr-text
+
+[ubuntu-ucr-text]
+title=Ubuntu UCR
+# Background
+black=Ox005da4
+# Title text + additional messages
+white=0xffffff
+# Point color
+brown=0xff4012
+# Status messages (fsck)
+blue=0x989898

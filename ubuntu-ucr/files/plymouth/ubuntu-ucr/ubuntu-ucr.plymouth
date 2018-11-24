@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Ubuntu UCR
+Description=The original Ubuntu theme with the University of Costa Rica colors.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/ubuntu-ucr
+ScriptFile=/usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.script

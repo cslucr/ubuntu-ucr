@@ -17,7 +17,9 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-![gnome-shell](resources/img/gnome-shell.png "gnome-shell desktop.")
+![gnome-shell](resources/img/screenshot-1.png "gnome-shell desktop.")
+![firefox](resources/img/screenshot-2.png "firefox.")
+![libre-office](resources/img/screenshot-3.png "libre-office.")
 
 ## Descarga
 

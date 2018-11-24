@@ -29,7 +29,7 @@
     - system
     - office
 
-- name: unitTest - Installed Libre office plugins.
+- name: unitTest - Installed Libre office plugins (giver ERROR, installs just FINE).
   command: unopkg list --shared
   register: result
   failed_when: "'org.openoffice.languagetool.oxt' not in result.stdout"

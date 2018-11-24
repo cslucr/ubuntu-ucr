@@ -37,7 +37,7 @@
 
 - name: Create eduroam desktop entry.
   copy:
-    src: "{{ role_path }}/files/auri.desktop"
+    src: "{{ role_path }}/files/desktop-entry/auri.desktop"
     dest: /usr/share/applications/auri.desktop
   tags:
     - execution

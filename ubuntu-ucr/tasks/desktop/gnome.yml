@@ -1,7 +1,7 @@
 ---
 - name: Copy configuration override (wallpaper, favorites, date format and input sources).
   copy:
-    src: "{{ role_path }}/files/30_ucr-gnome-settings.gschema.override"
+    src: "{{ role_path }}/files/gschema/30_ucr-gnome-settings.gschema.override"
     dest: /usr/share/glib-2.0/schemas
   tags:
     - execution
@@ -19,7 +19,7 @@
 
 - name: Copy wallpaper to /usr/share/backgrounds.
   copy:
-    src: "{{ role_path }}/files/ubuntu-ucr-background.jpg"
+    src: "{{ role_path }}/files/backgrounds/ubuntu-ucr-background.jpg"
     dest: /usr/share/backgrounds
   tags:
     - execution

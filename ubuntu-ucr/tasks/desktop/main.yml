@@ -1,2 +1,3 @@
 ---
 - import_tasks: gnome.yml
+- import_tasks: mate.yml

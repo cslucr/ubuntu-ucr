@@ -14,6 +14,7 @@ packages:
   - caffeine
   - firmware-b43-installer
   - gimp
+  - gnome-tweak-tool
   - libreoffice
   - libreoffice-java-common
   - linux-firmware
@@ -29,9 +30,6 @@ packages:
     
   - name: google-chrome-stable
     arch: x86_64
-
-  - name: gnome-tweak-tool
-    xsession: gnome-shell
 
   - name: oracle-java8-installer
     debconf: 

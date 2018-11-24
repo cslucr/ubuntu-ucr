@@ -1,0 +1,12 @@
+---
+- name: Verify if mate is installed and store the result.
+  command: grep "MATE" /usr/share/xsessions/*
+  register: mate_xsession
+  tags:
+    - execution
+    - desktop
+    - mate
+
+- name:  Copy plymouth theme to /usr/share/plymouth/themes.
+  copy:
+    src: "{{ role_path }}/files/"

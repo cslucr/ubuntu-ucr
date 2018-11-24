@@ -1,5 +1,5 @@
 ---
-- name:  Copy ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
+- name:  Copy ubuntu-ucr plymouth themes to /usr/share/plymouth/themes.
   copy:
     src: "{{ role_path }}/files/plymouth/themes"
     dest: /usr/share/plymouth
@@ -10,7 +10,7 @@
     - mate
     - plymouth
 
-- name: unitTest - Copied ubuntu-ucr plymouth theme to /usr/share/plymouth/themes.
+- name: unitTest - Copied ubuntu-ucr plymouth themes to /usr/share/plymouth/themes.
   command: ls /usr/share/plymouth/themes
   register: result
   when: mate_xsession != ''
@@ -21,7 +21,7 @@
     - mate
     - plymouth
 
-- name: Install default.plymouth alternative as ubuntu-ucr.
+- name: Install default.plymouth alternative = ubuntu-ucr.
   alternatives:
     name: default.plymouth
     link: /usr/share/plymouth/themes/default.plymouth
@@ -33,7 +33,7 @@
     - mate
     - plymouth
 
-- name: uniTest - Installed alternative default.plymouth alternative = ubuntu-ucr.
+- name: uniTest - Installed alternative default.plymouth = ubuntu-ucr.
   command: update-alternatives --list default.plymouth
   register: result
   when: mate_xsession != ''
@@ -46,6 +46,41 @@
 
 - name: unitTest - Setted alternative default.plymouth = ubuntu-ucr.
   command: update-alternatives --display default.plymouth
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: Install text.plymouth alternative = ubuntu-ucr-text.
+  alternatives:
+    name: text.plymouth
+    link: /usr/share/plymouth/themes/text.plymouth
+    path: /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
+    priority: 100
+  when: mate_xsession != ''
+  tags:
+    - execution
+    - desktop
+    - mate
+    - plymouth
+
+- name: uniTest - Installed alternative text.plymouth = ubuntu-ucr.
+  command: update-alternatives --list text.plymouth
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: unitTest - Setted alternative text.plymouth = ubuntu-ucr.
+  command: update-alternatives --display text.plymouth
   register: result
   when: mate_xsession != ''
   failed_when: "'ubuntu-ucr' not in result.stdout"

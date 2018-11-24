@@ -1,8 +1,8 @@
 [org.gnome.desktop.background]
-picture-uri = "file:///usr/share/backgrounds/ubuntu-18.04-ucr-background-cslucr.jpg"
+picture-uri = "file:///usr/share/backgrounds/ubuntu-ucr-background.jpg"
 
 [org.gnome.desktop.screensaver]
-picture-uri = "file:///usr/share/backgrounds/ubuntu-18.04-ucr-background-cslucr.jpg"
+picture-uri = "file:///usr/share/backgrounds/ubuntu-ucr-background.jpg"
 
 [org.gnome.desktop.input-sources]
 sources = [('xkb', 'latam'), ('xkb', 'es'), ('xkb', 'us'), ('xkb', 'us+alt-intl')]

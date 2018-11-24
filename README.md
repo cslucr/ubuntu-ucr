@@ -17,8 +17,7 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-Próximamente
-
+![gnome-shell](resources/img/gnome-shell.png "gnome-shell desktop.")
 
 ## Descarga
 

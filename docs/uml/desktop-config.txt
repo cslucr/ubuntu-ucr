@@ -1,7 +1,9 @@
 @startuml
 start
 if (gnome-shell?) then (yes)
-  : Apply wallpaper;
+  : Copy wallpaper to /usr/share/backgrounds;
+  : Override gsettings (wallpaper, date, favorites);
+  : Show gui session restart warning;
 else (no)
 endif
 

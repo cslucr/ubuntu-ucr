@@ -5,6 +5,7 @@
   tags:
     - execution
     - test
+    - current
 
 - name: unitTest - Retrieved the user running the play.
   command: echo "{{ user_on_host }}"
@@ -23,6 +24,7 @@
     - desktop
     - mate
     - plymouth
+    - current
 
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml

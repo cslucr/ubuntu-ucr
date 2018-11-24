@@ -33,7 +33,7 @@
     - mate
     - plymouth
 
-- name: uniTest - Installed alternative default.plymouth = ubuntu-ucr.
+- name: unitTest - Installed alternative default.plymouth = ubuntu-ucr.
   command: update-alternatives --list default.plymouth
   register: result
   when: mate_xsession != ''
@@ -68,7 +68,7 @@
     - mate
     - plymouth
 
-- name: uniTest - Installed alternative text.plymouth = ubuntu-ucr.
+- name: unitTest - Installed alternative text.plymouth = ubuntu-ucr.
   command: update-alternatives --list text.plymouth
   register: result
   when: mate_xsession != ''
@@ -84,6 +84,49 @@
   register: result
   when: mate_xsession != ''
   failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: Copy ubuntu-ucr-text.so to /usr/lib/{{ arch }}-linux-gnu/plymouth.
+  copy:
+    src: "{{ role_path }}/files/plymouth/ubuntu-ucr-text.so"
+    dest: "/usr/lib/{{ arch }}-linux-gnu/plymouth"
+  when: mate_xsession != ''
+  tags:
+    - execution
+    - desktop
+    - mate
+    - plymouth
+
+- name: unitTest - Copied ubuntu-ucr-text.so to /usr/lib/{{ arch }}-linux-gnu/plymouth.
+  command: ls /usr/lib/{{ arch }}-linux-gnu/plymouth
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - plymouth
+
+- name: Update grub.
+  command: update-grub
+  register: result
+  when: mate_xsession != ''
+  tags:
+    - execution
+    - desktop
+    - mate
+    - plymouth
+
+- name: unitTest - Updated grub.
+  command: echo "{{ result }}"
+  register: result
+  when: mate_xsession != ''
+  failed_when: "'vmlinuz' not in result.stdout"
   tags:
     - test
     - desktop

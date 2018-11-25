@@ -4,7 +4,10 @@
     path: "{{ wget_cache_path }}"
     state: directory
   tags:
+    - eduroam
     - execution
+    - office
+    - signature
     - system
 
 - name: unitTest - Created wget cache folder.

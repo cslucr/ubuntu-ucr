@@ -29,7 +29,7 @@
     - current
     - fact
 
-- name: unitTest - Verified mate is installed or no run sucessfully.
+- name: unitTest - Verified task 'mate is installed or not' executed sucessfully.
   command: echo "{{ mate_xsession.stderr }}"
   register: result
   failed_when: "result.stdout != '' and result.stdout != '\nWARNING: apt does not have a stable CLI interface. Use with caution in scripts.'"

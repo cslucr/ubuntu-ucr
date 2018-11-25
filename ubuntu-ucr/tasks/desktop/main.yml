@@ -17,7 +17,7 @@
     - desktop
     - test
 
-- import_tasks: gnome.yml
+- import_tasks: gnome/main.yml
 - import_tasks: mate/main.yml
 
 - name: Compile gsettings override.

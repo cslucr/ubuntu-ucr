@@ -24,4 +24,3 @@ source ./includes/vars.inc
     get_parameters -y
     [ "$NO_FORCE" == false ]
 }
-

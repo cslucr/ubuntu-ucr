@@ -4,12 +4,22 @@ repositories:
     key: https://dl-ssl.google.com/linux/linux_signing_key.pub
     unattended: yes
 
+  - repo: deb http://repository.spotify.com stable non-free
+    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+    unattended: yes
+
+  - repo: ppa:libreoffice/libreoffice-6.0
+    unattended: yes
+
   - repo: ppa:webupd8team/java
     unattended: yes
 
-  - repo: deb http://repository.spotify.com stable non-free
-    key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+  - repo: ppa:otto-kesselgulasch/gimp
+    unattended: yes
     
+  - repo: ppa:yg-jensge/shotwell
+    unattended: yes
+
 packages:
   - caffeine
   - firmware-b43-installer

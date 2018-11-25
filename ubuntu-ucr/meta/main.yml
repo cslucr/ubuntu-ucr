@@ -7,6 +7,6 @@ galaxy_info:
 
   min_ansible_version: 2.4
 
-  galaxy_tags: []
+  galaxy_tags: [ubuntu, ucr, linux, cslucr]
   
 dependencies: []

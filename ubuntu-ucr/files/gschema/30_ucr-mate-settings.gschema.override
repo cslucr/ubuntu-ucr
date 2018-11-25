@@ -183,5 +183,3 @@ theme='Ubuntu-MATE'
 
 [org.mate.panel.general]
 default-layout='redmond-fresh'
-
-

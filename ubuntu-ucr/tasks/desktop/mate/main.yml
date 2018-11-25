@@ -35,8 +35,8 @@
 - name: unitTest - Created mate-menu directory.
   command: ls /etc/skel/.config
   register: result
-  failed_when: "'mate-menu' not in result.stdout"
   when: mate_xsession == True
+  failed_when: "'mate-menu' not in result.stdout"
   tags:
     - desktop
     - mate

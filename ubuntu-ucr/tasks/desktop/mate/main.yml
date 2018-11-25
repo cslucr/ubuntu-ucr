@@ -1,5 +1,4 @@
 ---
-- import_tasks: plymouth.yml
 - import_tasks: dconf.yml
 
 - name: Copy mate configuration override.

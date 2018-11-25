@@ -17,6 +17,7 @@
     - desktop
     - test
 
+- import_tasks: plymouth.yml
 - import_tasks: gnome/main.yml
 - import_tasks: mate/main.yml
 

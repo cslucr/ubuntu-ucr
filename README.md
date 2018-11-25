@@ -6,8 +6,6 @@ It consist on a customization of Ubuntu, the popular GNU/Linux distribution.
 
 This innovative and easy to use operating system is also open source, this means that it can be used to any means, is possible to copy and distribute it without restriction and even can be modified to be adapted to particular needs. The mayority of the included software on **Ubuntu UCR** is also open source.
 
-**Ubuntu UCR** is built using [bash scripts](https://www.gnu.org/software/bash) and [ansible roles](https://www.ansible.com/).
-
 ## Features:
 
 - Based on the **long term support** Ubuntu version, this offers more stability and improved support from the community.
@@ -27,6 +25,8 @@ This innovative and easy to use operating system is also open source, this means
 - Plugins for LibreOffice: synonyms, ortography checker, grammar checker and others.
 
 - Included support for [Gnome-Shell](https://www.gnome.org/gnome-3) and [MATE](https://mate-desktop.org/) desktop enviroments.
+
+- Built with [bash scripts](https://www.gnu.org/software/bash) and [ansible roles](https://www.ansible.com/) which gives more robustness.
 
 ## Screenshots
 

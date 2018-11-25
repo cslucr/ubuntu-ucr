@@ -1,9 +1,10 @@
 ---
+# Based on https://lauri.võsandi.com/2015/03/dconf.html.
 - name: Create mate dconf lock folder.
   file:
     path: /etc/dconf/db/mate.d/lock
     state: directory
-  when: mate_xsession == 'yes'
+  when: mate_xsession == True
   tags:
     - execution
     - desktop
@@ -13,7 +14,29 @@
 - name: unitTest - Created mate dconf lock folder.
   command: ls /etc/dconf/db
   register: result
-  when: mate_xsession == 'yes'
+  when: mate_xsession == True
+  failed_when: "'mate' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - dconf
+
+- name: Copy mate user profile to /etc/dconf/profile.
+  copy:
+    src: "{{ role_path }}/files/mate/dconf/profile/user"
+    dest: /etc/dconf/profile
+  when: mate_xsession == True
+  tags:
+    - execution
+    - desktop
+    - mate
+    - dconf
+
+- name: unitTest - Copied mate user profile to /etc/dconf/profile.
+  command: cat /etc/dconf/profile/user
+  register: result
+  when: mate_xsession == True
   failed_when: "'mate' not in result.stdout"
   tags:
     - test

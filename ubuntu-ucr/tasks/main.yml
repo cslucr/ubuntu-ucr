@@ -17,8 +17,8 @@
     - fact
 
 - name: Verify if mate is installed and store the result.
-  command: echo "$(dpkg --get-selections | grep mate-desktop)"
-  register: mate_xsession
+  command: dpkg --get-selections
+  register: mate_xsession_result
   tags:
     - execution
     - test
@@ -30,17 +30,17 @@
     - fact
 
 - name: unitTest - Verified task 'mate is installed or not' executed sucessfully.
-  command: echo "{{ mate_xsession.stderr }}"
+  command: echo "{{ mate_xsession_result.stderr }}"
   register: result
   failed_when: "result.stdout != ''"
   tags:
     - test
     - fact
 
-- name: If mate-desktop installed, set mate_xsession = yes.
-  command: echo 'yes'
-  register: mate_xsession
-  when: "'mate-desktop' in mate_xsession.stdout"
+- name: If mate-desktop installed, set mate_xsession = True.
+  set_fact:
+    mate_xsession: True
+  when: "'mate-desktop' in mate_xsession_result.stdout"
   tags:
     - execution
     - test
@@ -51,10 +51,10 @@
     - current
     - fact
 
-- name: If mate-desktop is not installed, set mate_xsession = no.
-  command: echo 'no'
-  register: mate_xsession
-  when: "'mate-desktop' not in mate_xsession.stdout"
+- name: If mate-desktop no installed, set mate_xsession = False.
+  set_fact:
+    mate_xsession: False
+  when: mate_xsession is not defined
   tags:
     - execution
     - test
@@ -65,10 +65,10 @@
     - current
     - fact
 
-- name: unitTest - Set mate_xsession to yes or no.
+- name: unitTest - Set mate_xsession to True or False.
   command: echo "{{ mate_xsession }}"
   register: result
-  failed_when: "'yes' not in result.stdout and 'no' not in result.stdout"
+  failed_when: result.stdout != True and result.stdout != False
   tags:
     - test
     - fact

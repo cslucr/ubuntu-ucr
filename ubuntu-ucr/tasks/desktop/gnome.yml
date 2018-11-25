@@ -1,7 +1,7 @@
 ---
 - name: Copy configuration override (wallpaper, favorites, date format and input sources).
   copy:
-    src: "{{ role_path }}/files/gschema/30_ucr-gnome-settings.gschema.override"
+    src: "{{ role_path }}/files/gnome/gschema/30_ucr-gnome-settings.gschema.override"
     dest: /usr/share/glib-2.0/schemas
   tags:
     - execution

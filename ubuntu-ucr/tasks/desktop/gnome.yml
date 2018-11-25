@@ -11,7 +11,7 @@
 - name: initTest - Copied configuration override.
   command: ls /usr/share/glib-2.0/schemas
   register: result
-  failed_when: "'30_ucr' not in result.stdout"
+  failed_when: "'30_ucr-gnome' not in result.stdout"
   tags:
     - desktop
     - gnome
@@ -47,9 +47,9 @@
   register: result
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
-    - test
     - desktop
     - gnome
+    - test
 
 - name: Reset gsettings keys.
   command: bash -c 'gsettings list-schemas | xargs -n 1 gsettings reset-recursively'
@@ -63,9 +63,9 @@
   register: result
   failed_when: result.stdout == ''
   tags:
-    - test
     - desktop
     - gnome
+    - test
 
 - name: Display gui session restart warning.
   debug:

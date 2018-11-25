@@ -32,7 +32,7 @@ theme='Arc-Darker'
 titlebar-font='Ubuntu Medium 11'
 
 [org.mate.background]
-picture-filename='/usr/share/backgrounds/ubuntu-16.04-ucr-background-cslucr.jpg'
+picture-filename='/usr/share/backgrounds/ubuntu-ucr-background.jpg'
 
 [org.mate.Marco.global-keybindings]
 run-command-terminal='<Control><Alt>t'

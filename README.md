@@ -4,7 +4,7 @@
 
 It consist on a customization of Ubuntu, the popular GNU/Linux distribution. This innovative and easy to use operating system is also open source, this means that it can be used to any means, is possible to copy and distribute it without restriction and even can be modified to be adapted to particular needs. The mayority of the included software on **Ubuntu UCR** is also open source.
 
-Features:
+## Features:
 
 - Based on the **long term support** Ubuntu version, this offers more stability and improved support from the community.
 

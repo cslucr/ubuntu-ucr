@@ -2,7 +2,11 @@
 
 **Ubuntu UCR** is a proposal from the *Community of Software Libre of the University of Costa Rica* to be used as the institutionalized Linux distribution.
 
-It consist on a customization of Ubuntu, the popular GNU/Linux distribution. This innovative and easy to use operating system is also open source, this means that it can be used to any means, is possible to copy and distribute it without restriction and even can be modified to be adapted to particular needs. The mayority of the included software on **Ubuntu UCR** is also open source.
+It consist on a customization of Ubuntu, the popular GNU/Linux distribution.
+
+Ubunutu is an innovative and easy to use operating system and also is open source, this means that it can be used to any means, is possible to copy and distribute it without restriction and even can be modified to be adapted to particular needs. The mayority of the included software on **Ubuntu UCR** is also open source.
+
+**Ubuntu UCR** is built using [bash scripts](https://www.gnu.org/software/bash) and [ansible roles](https://www.ansible.com/).
 
 ## Features:
 

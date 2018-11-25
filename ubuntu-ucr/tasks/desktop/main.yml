@@ -1,3 +1,31 @@
 ---
+- name: Copy wallpaper to /usr/share/backgrounds.
+  copy:
+    src: "{{ role_path }}/files/backgrounds/ubuntu-ucr-background.jpg"
+    dest: /usr/share/backgrounds
+  tags:
+    - desktop
+    - execution
+    - gnome
+    - mate
+
+- name: unitTest - Copied wallpaper to /usr/share/backgrounds.
+  command: ls /usr/share/backgrounds
+  register: result
+  failed_when: "'ubuntu-ucr' not in result.stdout"
+  tags:
+    - desktop
+    - test
+
 - import_tasks: gnome.yml
 - import_tasks: mate/main.yml
+
+- name: Display gui session restart warning.
+  debug:
+    msg:
+      - 'WARNING: If a graphical user interface session is open, you must restart it.'
+  tags:
+    - desktop
+    - execution
+    - gnome
+    - mate

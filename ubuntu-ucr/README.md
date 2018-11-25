@@ -26,7 +26,7 @@ Usage
 
 To execute:
 
-    ansible-playbook customization.yml -i production -t execution -v --ask-become-pass --extra-vars "apt_cache=yes wget_cache_path=$HOME/my-cache"
+      ansible-galaxy install cslucr.ubuntu-ucr
 
 To include:
 

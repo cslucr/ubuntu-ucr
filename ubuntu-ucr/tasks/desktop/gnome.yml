@@ -1,5 +1,5 @@
 ---
-- name: Copy configuration override (wallpaper, favorites, date format and input sources).
+- name: Copy gnome configuration override (wallpaper, favorites, date format and input sources).
   copy:
     src: "{{ role_path }}/files/gschema/30_ucr-gnome-settings.gschema.override"
     dest: /usr/share/glib-2.0/schemas
@@ -8,7 +8,7 @@
     - execution
     - gnome
 
-- name: initTest - Copied configuration override.
+- name: initTest - Copied gnome configuration override.
   command: ls /usr/share/glib-2.0/schemas
   register: result
   failed_when: "'30_ucr-gnome' not in result.stdout"
@@ -35,14 +35,14 @@
     - gnome
     - test
 
-- name: Compile gsettings override.
+- name: Compile gnome gsettings override.
   command: glib-compile-schemas /usr/share/glib-2.0/schemas
   tags:
     - desktop
     - execution
     - gnome
 
-- name: unitTest - Compiled gsettings override.
+- name: unitTest - Compiled gnome gsettings override.
   command: gsettings list-recursively org.gnome.desktop.background
   register: result
   failed_when: "'ubuntu-ucr' not in result.stdout"
@@ -51,14 +51,14 @@
     - gnome
     - test
 
-- name: Reset gsettings keys.
+- name: Reset gnome gsettings keys.
   command: bash -c 'gsettings list-schemas | xargs -n 1 gsettings reset-recursively'
   tags:
     - desktop
     - execution
     - gnome
 
-- name: unitTest - Resetted gsettings keys.
+- name: unitTest - Reset gnome gsettings keys.
   command: bash -c "gsettings list-schemas | grep 'org.gnome.desktop.interface'"
   register: result
   failed_when: result.stdout == ''

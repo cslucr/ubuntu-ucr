@@ -6,6 +6,7 @@
   copy:
     src: "{{ role_path }}/files/gschema/30_ucr-mate-settings.gschema.override"
     dest: /usr/share/glib-2.0/schemas
+  when: mate_xsession == True
   tags:
     - desktop
     - execution
@@ -14,6 +15,7 @@
 - name: initTest - Copied mate configuration override.
   command: ls /usr/share/glib-2.0/schemas
   register: result
+  when: mate_xsession == True
   failed_when: "'30_ucr-mate' not in result.stdout"
   tags:
     - desktop
@@ -22,6 +24,7 @@
 
 - name: Compile mate gsettings override.
   command: glib-compile-schemas /usr/share/glib-2.0/schemas
+  when: mate_xsession == True
   tags:
     - desktop
     - execution
@@ -30,6 +33,7 @@
 - name: unitTest - Compiled mate gsettings override.
   command: gsettings list-recursively org.mate.background
   register: result
+  when: mate_xsession == True
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - desktop
@@ -38,16 +42,57 @@
 
 - name: Reset mate gsettings keys.
   command: bash -c 'gsettings list-schemas | xargs -n 1 gsettings reset-recursively'
+  when: mate_xsession == True
   tags:
     - desktop
     - execution
     - mate
 
-- name: unitTest - Resetted mate gsettings keys.
+- name: unitTest - Reset mate gsettings keys.
   command: bash -c "gsettings list-schemas | grep 'org.mate.sound'"
   register: result
+  when: mate_xsession == True
   failed_when: result.stdout == ''
   tags:
     - desktop
     - mate
     - test
+
+- name: Create mate-menu directory.
+  file:
+    path: /etc/skel/.config/mate-menu
+    state: directory
+  tags:
+    - desktop
+    - execution
+    - mate
+
+- name: unitTest - Created mate-menu directory.
+  command: ls /etc/skel/.config
+  register: result
+  failed_when: "'mate-menu' not in result.stdout"
+  tags:
+    - desktop
+    - mate
+    - test
+
+- name: Set mate advanced menu favorites.
+  copy:
+    src: "{{ role_path }}/files/mate-menu/applications.list"
+    dest: /etc/skel/.config/mate-menu
+  when: mate_xsession == True
+  tags:
+    - desktop
+    - execution
+    - mate
+
+- name: unitTest - Set mate advanced menu favorites.
+  command: cat /etc/skel/.config/mate-menu/applications.list
+  register: result
+  when: mate_xsession == True
+  failed_when: "'auri' not in result.stdout"
+  tags:
+    - desktop
+    - mate
+    - test
+  

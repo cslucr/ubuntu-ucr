@@ -3,7 +3,7 @@
   file:
     path: /etc/dconf/db/mate.d/lock
     state: directory
-  when: mate_xsession == yes
+  when: mate_xsession == 'yes'
   tags:
     - execution
     - desktop
@@ -13,7 +13,7 @@
 - name: unitTest - Created mate dconf lock folder.
   command: ls /etc/dconf/db
   register: result
-  when: mate_xsession == yes
+  when: mate_xsession == 'yes'
   failed_when: "'mate' not in result.stdout"
   tags:
     - test

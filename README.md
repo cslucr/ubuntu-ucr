@@ -85,8 +85,6 @@ This innovative and easy to use operating system is also open source, this means
       ./ubuntu-ucr-customization.sh
     ```
 
-6. Follow the instructions.
-
 ## Download
 
 Images of **Ubuntu UCR**, ready to install, can be downloaded from our [mirrors server](http://espejos.ucr.ac.cr/cslucr).

@@ -26,6 +26,7 @@
   file:
     path: /etc/skel/.config/mate-menu
     state: directory
+  when: mate_xsession == True
   tags:
     - desktop
     - execution
@@ -35,6 +36,7 @@
   command: ls /etc/skel/.config
   register: result
   failed_when: "'mate-menu' not in result.stdout"
+  when: mate_xsession == True
   tags:
     - desktop
     - mate

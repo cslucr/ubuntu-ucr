@@ -24,7 +24,7 @@
 
 - name: Copy mate user profile to /etc/dconf/profile.
   copy:
-    src: "{{ role_path }}/files/mate/dconf/profile/user"
+    src: "{{ role_path }}/files/dconf/profile/user"
     dest: /etc/dconf/profile
   when: mate_xsession == True
   tags:

@@ -1,7 +1,7 @@
 ---
 - name:  Copy ubuntu-ucr plymouth themes to /usr/share/plymouth/themes.
   copy:
-    src: "{{ role_path }}/files/mate/plymouth/themes"
+    src: "{{ role_path }}/files/plymouth/themes"
     dest: /usr/share/plymouth
   when: mate_xsession == True
   tags:
@@ -93,7 +93,7 @@
 
 - name: Copy ubuntu-ucr-text.so to /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth.
   copy:
-    src: "{{ role_path }}/files/mate/plymouth/ubuntu-ucr-text.so"
+    src: "{{ role_path }}/files/plymouth/ubuntu-ucr-text.so"
     dest: "/usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth"
   when: mate_xsession == True
   tags:

@@ -18,7 +18,7 @@ Role Facts
 ----------
 
 - **ansible_architecture**: system architecture: **x86** or **x86_64**.
-- **mate_xsession**: if not empty then **mate-desktop** is installed.
+- **mate_xsession**: **yes** when **mate-desktop** is installed, **no** otherwise.
 - **user_on_host**: non-root user running the play.
 
 Usage

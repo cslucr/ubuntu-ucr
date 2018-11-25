@@ -17,7 +17,7 @@
     - fact
 
 - name: Verify if mate is installed and store the result.
-  command: bash -c "apt list --installed | grep mate-desktop"
+  command: echo "$(dpkg --get-selections | grep mate-desktop)"
   register: mate_xsession
   tags:
     - execution
@@ -32,7 +32,43 @@
 - name: unitTest - Verified task 'mate is installed or not' executed sucessfully.
   command: echo "{{ mate_xsession.stderr }}"
   register: result
-  failed_when: "result.stdout != '' and result.stdout != '\nWARNING: apt does not have a stable CLI interface. Use with caution in scripts.'"
+  failed_when: "result.stdout != ''"
+  tags:
+    - test
+    - fact
+
+- name: If mate-desktop installed, set mate_xsession = yes.
+  command: echo 'yes'
+  register: mate_xsession
+  when: "'mate-desktop' in mate_xsession.stdout"
+  tags:
+    - execution
+    - test
+    - packages
+    - desktop
+    - mate
+    - plymouth
+    - current
+    - fact
+
+- name: If mate-desktop is not installed, set mate_xsession = no.
+  command: echo 'no'
+  register: mate_xsession
+  when: "'mate-desktop' not in mate_xsession.stdout"
+  tags:
+    - execution
+    - test
+    - packages
+    - desktop
+    - mate
+    - plymouth
+    - current
+    - fact
+
+- name: unitTest - Set mate_xsession to yes or no.
+  command: echo "{{ mate_xsession }}"
+  register: result
+  failed_when: "'yes' not in result.stdout and 'no' not in result.stdout"
   tags:
     - test
     - fact

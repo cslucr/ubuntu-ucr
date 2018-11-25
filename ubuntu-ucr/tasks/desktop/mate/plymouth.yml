@@ -3,7 +3,7 @@
   copy:
     src: "{{ role_path }}/files/plymouth/themes"
     dest: /usr/share/plymouth
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   tags:
     - execution
     - desktop
@@ -13,7 +13,7 @@
 - name: unitTest - Copied ubuntu-ucr plymouth themes to /usr/share/plymouth/themes.
   command: ls /usr/share/plymouth/themes
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -36,7 +36,7 @@
 - name: unitTest - Installed alternative default.plymouth = ubuntu-ucr.
   command: update-alternatives --list default.plymouth
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -47,7 +47,7 @@
 - name: unitTest - Setted alternative default.plymouth = ubuntu-ucr.
   command: update-alternatives --display default.plymouth
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -61,7 +61,7 @@
     link: /usr/share/plymouth/themes/text.plymouth
     path: /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
     priority: 100
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   tags:
     - execution
     - desktop
@@ -71,7 +71,7 @@
 - name: unitTest - Installed alternative text.plymouth = ubuntu-ucr.
   command: update-alternatives --list text.plymouth
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -82,7 +82,7 @@
 - name: unitTest - Setted alternative text.plymouth = ubuntu-ucr.
   command: update-alternatives --display text.plymouth
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -94,7 +94,7 @@
   copy:
     src: "{{ role_path }}/files/plymouth/ubuntu-ucr-text.so"
     dest: "/usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth"
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   tags:
     - execution
     - desktop
@@ -104,7 +104,7 @@
 - name: unitTest - Copied ubuntu-ucr-text.so to /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth.
   command: ls /usr/lib/{{ ansible_architecture }}-linux-gnu/plymouth
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
     - test
@@ -115,7 +115,7 @@
 - name: Update grub.
   command: update-grub
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   tags:
     - execution
     - desktop
@@ -125,7 +125,7 @@
 - name: unitTest - Updated grub.
   command: echo "{{ result }}"
   register: result
-  when: mate_xsession != ''
+  when: mate_xsession == yes
   failed_when: "'vmlinuz' not in result.stdout"
   tags:
     - test

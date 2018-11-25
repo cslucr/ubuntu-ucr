@@ -1,78 +1,119 @@
-# Ubuntu personalizado para la Universidad de Costa Rica
+# Customized Ubuntu for the University of Costa Rica
 
-**Ubuntu UCR** es una propuesta por parte de la *Comunidad de Software Libre de la Universidad de Costa Rica* para ser utilizada en la Institución.
+**Ubuntu UCR** is a proposal from the *Community of Software Libre of the University of Costa Rica* to be used as the institutionalized Linux distribution.
 
-Consiste en una personalización de Ubuntu, la popular distribución GNU/Linux. Este es un sistema operativo innovador y de fácil manejo, además es libre, lo que significa que se puede utilizar con cualquier fin, se puede copiar y distribuir sin restricción e incluso se puede modificar para ser adaptado a diversas necesidades. La mayoría del software incluido también es de licencia libre.
+It consist on a customization of Ubuntu, the popular GNU/Linux distribution. This innovative and easy to use operating system is also open source, this means that it can be used to any means, is possible to copy and distribute it without restriction and even can be modified to be adapted to particular needs. The mayority of the included software on **Ubuntu UCR** is also open source.
 
-Estas son algunas de sus características:
+Features:
 
-- Se basa en la versión de Ubuntu con soporte extendido, lo que ofrece mayor estabilidad y gran soporte técnico por parte de la comunidad.
-- Tema gráfico moderno y atractivo.
-- Versiones actualizadas del software base, como LibreOffice, Mozilla Firefox, Shotwell, Rhythmbox y otros.
-- Extras de terceros preinstalados, como tipografías Arial, Times New Roman, etc., plugins Oracle Java, Adobe Flash, o codecs multimedia.
-- Software adicional como Gimp, Google Chrome, VLC, Spotify o la herramienta de configuración de AURI y Eduroam.
-- Actualizaciones automáticas de seguridad y de algunos programas importantes, como LibreOffice. Estas son silenciosas y no requieren intervención del usuario.
-- Soporte para lectores de firma digital, certificados de la CA nacional y programas instalados del BCCR.
-- Complementos para LibreOffice como sinónimos, corrección ortográfica, entre otros; los cuales permiten tener un mejor aprovechamiento de la herramienta.
+- Based on the **long term support** Ubuntu version, this offers more stability and improved support from the community.
 
-## Capturas de pantalla
+- Modern and attractive graphical theme.
+
+- Updated version of base software: LibreOffice, Mozilla Firefox, Shotwell, Rhytmbox and others.
+
+- Third party extras preinstalled: Common typographies like Arial and Times New Roman, Java Oracle plugins, Adobe Flash and multimedia codecs.
+
+- Additional Software: Gimp, Google Chrome, VLC, Spotify, AURI configuration tool and Eduroam.
+
+- Automatic security updates for the system and for multiple software (i.e. LibreOffice).
+
+- Included support for: digital signature readers, national CA certificates and installed banking programs (i.e: BCCR).
+
+- Plugins for LibreOffice: synonyms, ortography checker, grammar checker and others.
+
+- Included support for [Gnome-Shell](https://www.gnome.org/gnome-3) and [MATE](https://mate-desktop.org/) desktop enviroments.
+
+## Screenshots
 
 ![gnome-shell](resources/img/screenshot-1.png "gnome-shell desktop.")
 ![firefox](resources/img/screenshot-2.png "firefox.")
 ![libre-office](resources/img/screenshot-3.png "libre-office.")
 
-## Descarga
+## Usage
 
-Imágenes de **Ubuntu UCR**, listas para instalar, pueden ser descargadas desde nuestro servidor de espejos:
-http://espejos.ucr.ac.cr/cslucr/
+### To customize Ubuntu:
 
+#### Using the ansible galaxy role.
 
-## Trabajo conjunto
+1. Install ansible:
 
-Todas las modificaciones se han escrito en un script bash para poder recrear la personalización fácilmente, tanto en una instalación en limpio como para generar un ISO para la distribución.
+    ```
+      sudo apt install ansible -y
+    ```
 
-Si usted desea reportar problemas, hacer sugerencias o aportar mejoras, puede hacerlo a través de esta plataforma.
+2. Install ubuntu-ucr role from ansible-galaxy:
 
-Se toma como base Ubuntu por las siguientes razones:
+    ```
+      ansible-galaxy install cslucr.ubuntu-ucr
+    ```
 
-- Ubuntu es un sistema GNU/Linux muy popular, con mucha documentación y mucho soporte.
-- Fuerte enfoce en el usuario final.
-- Al tener una versión de soporte extendido, ofrece mucha estabilidad.
-
-### Criterios para la personalización
-
-- Se incluye únicamente software estable, no en desarrollo, no experimental
-- Las modificaciones al entorno de escritorio son mínimas, después de todo existe un equipo enfocado en experiencia de usuario (UX) detrás de su desarrollo, con criterios suficientes para diseñar el entorno de esa manera.
-- No intenta parecerse a ningún otro sistema, si no que ofrece las innovadoras características de los entornos libres.
-- Se modifica el aspecto gráfico para mostrar una alternativa atractiva pero sin sacrificar la usabilidad del sistema. Todo tema o set de íconos debe ser de fácil visualización, sin que confunda al usuario.
-- Se enfoca en el usuario final o en los usuarios que inician en GNU/Linux. Los usuarios avanzados sabrán buscar distribuciones alternativas, instalar sus herramientas o personalizar los entornos de escritorio a su manera.
-- Los entornos a utilizar son: Unity (Ubuntu 16.04), Gnome-shell (Ubuntu 18.04+) y MATE, ideal para equipos antiguos.
+#### Using the bash script:
 
 
-## ¿Cómo ejecutar los scripts?
+1. Download the project:
 
-### Para personalizar una instalación en limpio:
+    ```
+      wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip
+    ```
 
-1. Realice una instalación en limpio de Ubuntu 18.04 LTS, funciona con Gnome-Shell y MATE.
-2. Conéctese a Internet
-3. Descargue el proyecto: `wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip`
-4. Descomprima: `unzip master.zip`
-5. Ingrese al directorio: `cd ubuntu-ucr-master`
-6. De permisos de ejecución al script: `chmod +x ubuntu-ucr-customization.sh`
-7. Ejecútelo: `./ubuntu-ucr-customization.sh`
-8. Siga las instrucciones
+2. Unzip the project:
 
-### Para generar una imagen ISO
+    ```
+      unzip master.zip
+    ```
 
-El script *ubuntu-ucr-iso-generator.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de perzonalización.
-1. Instale las herramientas requeridas: `sudo apt install squashfs-tools xorriso`
-2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 18.04 con Gnome-Shell o MATE.
-3. Descargue el script *ubuntu-ucr-iso-generator.sh*: `wget https://github.com/cslucr/ubuntu-ucr/raw/master/ubuntu-ucr-iso-generator.sh`
-3. De permisos de ejecución al script: `chmod +x ubuntu-ucr-iso-generator.sh`
-4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-ucr-iso-generator.sh ubuntu-18.04.x-desktop-arch.iso`
+3. Enter the unzipped folder:
 
-Para más opciones ejecute `./ubuntu-ucr-iso-generator.sh -h`
+    ```
+      cd ubuntu-ucr-master
+    ```
+
+4. Give run permissions to the script:
+
+    ```
+      chmod +x ubuntu-ucr-customization.sh
+    ```
+
+5. Run the script:
+
+    ```
+      ./ubuntu-ucr-customization.sh
+    ```
+
+6. Follow the instructions.
+
+## Download
+
+Images of **Ubuntu UCR**, ready to install, can be downloaded from our [mirrors server](http://espejos.ucr.ac.cr/cslucr).
+
+### Customization Criteria
+
+- Only stable software is included. Development and experimental software is not included.
+
+- The modifications to desktop enviroments are minimal, the configurations stablished by the Ubuntu user experience team are enough.
+
+- Does not try to resemble another system, instead offer an attractive alternative without sacrificing system usability.
+
+- All graphical or icon themes must not confuse the user.
+
+- Focused on the final user or on new GNU/Linux users.
+
+## License
+
+GPL 3.
+
+For more info see [LICENSE](LICENSE).
+
+## Contributing
+
+If you want to report a problem, make sugerencies or add new features, feel free to fork the project and
+put a pull request through this platform.
+
+For more info see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Authors
 
 *Comunidad de Software Libre de la Universidad de Costa Rica*
 
-*http://softwarelibre.ucr.ac.cr*
+[http://softwarelibre.ucr.ac.cr](http://softwarelibre.ucr.ac.cr)

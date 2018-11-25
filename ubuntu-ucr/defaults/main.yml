@@ -8,7 +8,7 @@ repositories:
     key: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     unattended: yes
 
-  - repo: ppa:libreoffice/libreoffice-6.0
+  - repo: ppa:libreoffice/ppa
     unattended: yes
 
   - repo: ppa:webupd8team/java

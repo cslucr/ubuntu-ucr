@@ -2,7 +2,7 @@
 - name: Display Packages Process Part Message.
   debug:
     msg:
-      - 'INFO: Pacakges Configuration.'
+      - 'INFO: Packages Configuration.'
   tags:
     - execution
     - packages

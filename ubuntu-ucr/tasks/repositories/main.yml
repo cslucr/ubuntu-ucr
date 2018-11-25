@@ -1,4 +1,13 @@
 ---
+- name: Display Repositories Process Part Message.
+  debug:
+    msg:
+      - 'INFO: Repositories Configuration.'
+  tags:
+    - execution
+    - repositories
+    - test
+
 - import_tasks: keys.yml
 
 - name: Add repositories.

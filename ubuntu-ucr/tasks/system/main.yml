@@ -1,4 +1,13 @@
 ---
+- name: Display System Process Part Message.
+  debug:
+    msg:
+      - 'INFO: System Configuration.'
+  tags:
+    - execution
+    - system
+    - test
+    
 - name: Create wget cache folder.
   file:
     path: "{{ wget_cache_path }}"

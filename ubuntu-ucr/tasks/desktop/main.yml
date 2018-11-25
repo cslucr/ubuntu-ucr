@@ -1,4 +1,13 @@
 ---
+- name: Display Desktop Process Part Message.
+  debug:
+    msg:
+      - 'INFO: Desktop Configuration.'
+  tags:
+    - desktop
+    - execution
+    - test
+
 - name: Copy wallpaper to /usr/share/backgrounds.
   copy:
     src: "{{ role_path }}/files/backgrounds/ubuntu-ucr-background.jpg"

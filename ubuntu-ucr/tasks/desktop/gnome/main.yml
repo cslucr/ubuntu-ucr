@@ -1,4 +1,14 @@
 ---
+- name: Display Desktop - Gnome Process Part Message.
+  debug:
+    msg:
+      - 'INFO: Desktop - Gnome Configuration'
+  tags:
+    - desktop
+    - execution
+    - gnome
+    - test
+
 - name: Copy gnome configuration override (wallpaper, favorites, date format and input sources).
   copy:
     src: "{{ role_path }}/files/gschema/30_ucr-gnome-settings.gschema.override"

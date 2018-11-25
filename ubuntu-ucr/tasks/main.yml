@@ -1,4 +1,13 @@
 ---
+- name: Display Preprocess Part Message.
+  debug:
+    msg:
+      - 'INFO: Preprocess information.'
+  tags:
+    - execution
+    - fact
+    - test
+
 - name: Get non-root user running the play.
   local_action: command whoami
   register: user_on_host

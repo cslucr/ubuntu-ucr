@@ -1,4 +1,13 @@
 ---
+- name: Display Packages Process Part Message.
+  debug:
+    msg:
+      - 'INFO: Pacakges Configuration.'
+  tags:
+    - execution
+    - packages
+    - test
+
 - name: Add deconf selections.
   debconf:
     name: "{{ item.debconf.name }}"

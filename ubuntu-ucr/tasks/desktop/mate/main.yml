@@ -1,4 +1,14 @@
 ---
+- name: Display Desktop - Mate Process Part Message.
+  debug:
+    msg:
+      - 'INFO: Desktop - Mate Configuration'
+  tags:
+    - desktop
+    - execution
+    - mate
+    - test
+
 - import_tasks: dconf.yml
 
 - name: Copy mate configuration override.

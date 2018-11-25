@@ -4,51 +4,51 @@
     url: https://ci.ucr.ac.cr/auri/instaladores/AURI-eduroam-UCR-Linux.tar.gz
     dest: "{{ wget_cache_path }}"
   tags:
+    - eduroam
     - execution
     - system
-    - eduroam
 
 - name: unitTest - Downloaded eduroam installer.
   command: ls {{ wget_cache_path }}
   register: result
   failed_when:  "'AURI-eduroam-UCR-Linux.tar.gz' not in result.stdout"
   tags:
-    - test
-    - system
     - eduroam
+    - system
+    - test
 
 - name: Extract eduroam installer.
   unarchive:
     src: "{{ wget_cache_path }}/AURI-eduroam-UCR-Linux.tar.gz"
     dest: /opt
   tags:
+    - eduroam
     - execution
     - system
-    - eduroam
 
 - name: unitTest - Extracted eduroam installer.
   command: ls /opt
   register: result
   failed_when: "'AURI-eduroam-UCR-linux.sh' not in result.stdout"
   tags:
-    - test
-    - system
     - eduroam
+    - system
+    - test
 
 - name: Create eduroam desktop entry.
   copy:
     src: "{{ role_path }}/files/desktop-entry/auri.desktop"
     dest: /usr/share/applications/auri.desktop
   tags:
+    - eduroam
     - execution
     - system
-    - eduroam
 
 - name: unitTest - Created eduroam desktop entry.
   command: ls /usr/share/applications
   register: result
   failed_when: "'auri.desktop' not in result.stdout"
   tags:
-    - test
-    - system
     - eduroam
+    - system
+    - test

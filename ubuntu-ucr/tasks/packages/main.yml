@@ -16,5 +16,5 @@
   register: result
   failed_when: "'oracle' not in result.stdout"
   tags:
-    - test
     - packages
+    - test

@@ -43,3 +43,46 @@
     - desktop
     - mate
     - dconf
+
+- name: Copy mate panel configuration to /etc/dconf/db/mate.d.
+  copy:
+    src: "{{ role_path }}/files/gschema/panel"
+    dest: /etc/dconf/db/mate.d
+  when: mate_xsession == True
+  tags:
+    - execution
+    - desktop
+    - mate
+    - dconf
+
+- name: unitTest - Copied mate panel configuration to /etc/dconf/db/mate.d.
+  command: cat /etc/dconf/db/mate.d/panel
+  register: result
+  when: mate_xsession == True
+  failed_when: "'mate' not in result.stdout"
+  tags:
+    - test
+    - desktop
+    - mate
+    - dconf
+
+- name: Update dconf.
+  command: dconf update
+  when: mate_xsession == True
+  register: result
+  tags:
+    - execution
+    - desktop
+    - mate
+    - dconf
+
+- name: unitTest - Updated dconf.
+  command: echo "{{ result.stderr }}"
+  when: mate_xsession == True
+  register: result
+  failed_when: result.stdout != ''
+  tags:
+    - test
+    - desktop
+    - mate
+    - dconf

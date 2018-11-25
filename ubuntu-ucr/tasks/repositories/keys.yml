@@ -14,8 +14,8 @@
   register: result
   failed_when: "'Spotify' not in result.stdout"
   tags:
-    - test
     - repositories
+    - test
 
 - name: Add url keys.
   apt_key:
@@ -32,5 +32,5 @@
   register: result
   failed_when: "'Google' not in result.stdout"
   tags:
-    - test
     - repositories
+    - test

@@ -14,8 +14,8 @@
   register: result
   failed_when: result.stdout == ''
   tags:
-    - test
     - repositories
+    - test
     - unattended
 
 - name: Enable unattended updates - minimal steps.
@@ -33,8 +33,8 @@
   register: result
   failed_when: result.stdout == ''
   tags:
-    - test
     - repositories
+    - test
     - unattended
 
 - name: Enable unattended updates - unused dependencies.
@@ -52,6 +52,6 @@
   register: result
   failed_when: result.stdout == ''
   tags:
-    - test
     - repositories
+    - test
     - unattended

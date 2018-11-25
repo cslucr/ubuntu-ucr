@@ -6,8 +6,8 @@
   loop: "{{ office_plugins }}"
   tags:
     - execution
-    - system
     - office
+    - system
 
 - name: unitTest - Downloaded Libre office plugins.
   command: ls {{ wget_cache_path }}
@@ -15,8 +15,8 @@
   failed_when: "'LanguageTool-stable.oxt' not in result.stdout"
   tags:
     - test
-    - system
     - office
+    - system
 
 - name: Install Libre office plugins (gives ERROR but installs just FINE).
   # Extract the plugin name from the url and install it.
@@ -26,8 +26,8 @@
   ignore_errors: yes
   tags:
     - execution
-    - system
     - office
+    - system
 
 - name: unitTest - Installed Libre office plugins (giver ERROR, installs just FINE).
   command: unopkg list --shared
@@ -36,5 +36,5 @@
   ignore_errors: yes
   tags:
     - test
-    - system
     - office
+    - system

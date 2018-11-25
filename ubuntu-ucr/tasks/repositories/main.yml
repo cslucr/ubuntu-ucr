@@ -15,7 +15,7 @@
   register: result
   failed_when: "'ppa_webupd8team_java_bionic.list' not in result.stdout"
   tags:
-    - test
     - repositories
+    - test
 
 - import_tasks: unattended.yml

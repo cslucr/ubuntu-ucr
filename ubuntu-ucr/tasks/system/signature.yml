@@ -3,5 +3,5 @@
   command: echo 'TODO - install and configure digital signature.'
   tags:
     - execution
-    - system
     - signature
+    - system

@@ -3,75 +3,83 @@
   local_action: command whoami
   register: user_on_host
   tags:
-    - execution
-    - test
     - current
+    - dconf
+    - desktop
+    - execution
     - fact
+    - mate
+    - packages
+    - plymouth
+    - test
 
 - name: unitTest - Retrieved non-root user running the play.
   command: echo "{{ user_on_host }}"
   register: result
   failed_when: result.stdout == ''
   tags:
-    - test
     - fact
+    - test
 
 - name: Verify if mate is installed and store the result.
-  command: dpkg --get-selections
+  command: dpkg-query -l mate-desktop
   register: mate_xsession_result
   tags:
-    - execution
-    - test
-    - packages
-    - desktop
-    - mate
-    - plymouth
     - current
+    - dconf
+    - desktop
+    - execution
     - fact
+    - mate
+    - packages
+    - plymouth
+    - test
 
 - name: unitTest - Verified task 'mate is installed or not' executed sucessfully.
   command: echo "{{ mate_xsession_result.stderr }}"
   register: result
-  failed_when: "result.stdout != ''"
+  failed_when: result.stdout != ''
   tags:
-    - test
     - fact
+    - test
 
 - name: If mate-desktop installed, set mate_xsession = True.
   set_fact:
     mate_xsession: True
-  when: "'mate-desktop' in mate_xsession_result.stdout"
+  when: "'MATE' in mate_xsession_result.stdout"
   tags:
-    - execution
-    - test
-    - packages
-    - desktop
-    - mate
-    - plymouth
     - current
+    - dconf
+    - desktop
+    - execution
     - fact
+    - mate
+    - packages
+    - plymouth
+    - test
 
 - name: If mate-desktop no installed, set mate_xsession = False.
   set_fact:
     mate_xsession: False
   when: mate_xsession is not defined
   tags:
-    - execution
-    - test
-    - packages
-    - desktop
-    - mate
-    - plymouth
     - current
+    - dconf
+    - desktop
+    - execution
     - fact
+    - mate
+    - packages
+    - plymouth
+    - test
 
 - name: unitTest - Set mate_xsession to True or False.
   command: echo "{{ mate_xsession }}"
   register: result
-  failed_when: result.stdout != True and result.stdout != False
+  failed_when: result.stdout != "True" and result.stdout != "False"
   tags:
-    - test
     - fact
+    - test
 
 - import_tasks: repositories/main.yml
 - import_tasks: packages/main.yml

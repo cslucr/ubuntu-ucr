@@ -4,8 +4,8 @@
     src: "{{ role_path }}/files/gschema/30_ucr-gnome-settings.gschema.override"
     dest: /usr/share/glib-2.0/schemas
   tags:
-    - execution
     - desktop
+    - execution
     - gnome
 
 - name: initTest - Copied configuration override.
@@ -13,17 +13,17 @@
   register: result
   failed_when: "'30_ucr' not in result.stdout"
   tags:
-    - test
     - desktop
     - gnome
+    - test
 
 - name: Copy wallpaper to /usr/share/backgrounds.
   copy:
     src: "{{ role_path }}/files/backgrounds/ubuntu-ucr-background.jpg"
     dest: /usr/share/backgrounds
   tags:
-    - execution
     - desktop
+    - execution
     - gnome
 
 - name: unitTest - Copied wallpaper to /usr/share/backgrounds.
@@ -31,15 +31,15 @@
   register: result
   failed_when: "'ubuntu-ucr' not in result.stdout"
   tags:
-    - test
     - desktop
     - gnome
+    - test
 
 - name: Compile gsettings override.
   command: glib-compile-schemas /usr/share/glib-2.0/schemas
   tags:
-    - execution
     - desktop
+    - execution
     - gnome
 
 - name: unitTest - Compiled gsettings override.
@@ -54,8 +54,8 @@
 - name: Reset gsettings keys.
   command: bash -c 'gsettings list-schemas | xargs -n 1 gsettings reset-recursively'
   tags:
-    - execution
     - desktop
+    - execution
     - gnome
 
 - name: unitTest - Resetted gsettings keys.
@@ -72,8 +72,8 @@
     msg:
       - 'WARNING: If a graphical user interface session is open, you must restart it.'
   tags:
-    - execution
     - desktop
+    - execution
     - gnome
 
 

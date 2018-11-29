@@ -55,3 +55,31 @@
     - repositories
     - test
     - unattended
+    
+- name: unitTest - Get APT Policy data
+  command: grep 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' {{ unattended_file_path }}
+  register: result
+  failed_when: result.stdout == ''
+  tags:
+    - repositories
+    - test
+    - unattended
+    
+- name: Get unattended updates repo name for APT
+  command: bash -c '[[ "$repo_name" =~ {{http_regex}} ]] && repo_name=$(echo ${BASH_REMATCH[1]} | sed 's:/*$::' ) && repo_release_info=$( apt-cache policy | grep -A 2 "$repo_name" | head -n 3 ) && [[ "$repo_release_info" =~ o=(.*),a=(.*),n= ]] && echo ${BASH_REMATCH[1]}:${BASH_REMATCH[2]}'
+  when: item.repo is defined and item.repo is match(http_regex)
+  register: apt-repo-name
+  loop: "{{ repositories }}"
+  tags:
+    - execution
+    - repositories
+    
+- name: Add unattended update for APT
+  lineinfile:
+    path: "{{ unattended_file_path }}"
+    insertafter: 'Unattended-Upgrade::Allowed-Origins {'
+    line: '{{ item.stdout }}'
+  loop: '{{ apt-repo-name }}'
+  tags:
+    - execution
+    - repositories

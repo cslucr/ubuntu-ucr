@@ -27,3 +27,48 @@
   tags:
     - packages
     - test
+
+- name: Purge APT packages by name.
+  apt:
+    name: "{{ item.name }}"
+    purge: true
+    state: absent
+  when: item.name is defined
+  loop: "{{ packages }}"
+  tags:
+    - execution
+    - packages
+    
+- name: Purge APT packages without name.
+  apt:
+    name: "{{ item }}"
+    purge: true
+    state: absent
+  when: item.name is not defined
+  loop: "{{ packages }}"
+  tags:
+    - execution
+    - packages
+  
+- name: Install APT packages by name.
+  apt:
+    name: "{{ item.name }}"
+    state: latest
+    update_cache: yes
+  when: (item.name is defined and item.arch is defined and item.arch = ansible_machine) or (item.name is defined and item.arch is notdefined) 
+  loop: "{{ packages }}"
+  tags:
+    - execution
+    - packages
+
+- name: Install APT packages without name.
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  when: item.name is not defined
+  loop: "{{ packages }}"
+  tags:
+    - execution
+    - packages
+

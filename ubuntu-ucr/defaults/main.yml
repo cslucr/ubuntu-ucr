@@ -54,7 +54,7 @@ packages:
       name: ttf-mscorefonts-installer
       question: msttcorefonts/accepted-mscorefonts-eula
 
-purge_packages:
+purge_packages: []
 
 office_plugins:
   # Grammar checker.

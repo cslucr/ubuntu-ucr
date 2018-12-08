@@ -34,7 +34,7 @@
     purge: true
     state: absent
   when: item.name is defined
-  loop: "{{ packages }}"
+  loop: "{{ purge_packages }}"
   tags:
     - execution
     - packages
@@ -44,18 +44,26 @@
     name: "{{ item }}"
     purge: true
     state: absent
-  when: item.name is not defined
-  loop: "{{ packages }}"
+  when: item.name is defined
+  loop: "{{ purge_packages }}"
   tags:
     - execution
     - packages
-  
+
+- name: Update APT packages cache
+  apt:
+    update_cache: yes
+  tags:
+    - execution
+    - packages
+
+# TODO: this is to slow, need to find another way
 - name: Install APT packages by name.
   apt:
     name: "{{ item.name }}"
     state: latest
-    update_cache: yes
-  when: (item.name is defined and item.arch is defined and item.arch = ansible_machine) or (item.name is defined and item.arch is notdefined) 
+  when: (item.name is defined and item.arch is defined and item.arch == ansible_machine) or
+        (item.name is defined and item.arch is not defined) 
   loop: "{{ packages }}"
   tags:
     - execution
@@ -65,7 +73,6 @@
   apt:
     name: "{{ item }}"
     state: latest
-    update_cache: yes
   when: item.name is not defined
   loop: "{{ packages }}"
   tags:

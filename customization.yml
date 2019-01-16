@@ -1,8 +1,8 @@
 ---
-- name: Customize Ubuntu for University of Costa Rica.
+- name: Debian base configuration.
   hosts: localhost
   connection: local
   gather_facts: yes
   roles:
-    - role: ubuntu-ucr
+    - role: debian-base
   become: yes

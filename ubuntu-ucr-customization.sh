@@ -206,9 +206,9 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C61A2656FB57B7E4D
 # Ultima version estable
 sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
 
-sudo sed -i \
--e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
-/etc/apt/apt.conf.d/50unattended-upgrades
+#sudo sed -i \
+#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
+#/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages gimp"
 

@@ -146,16 +146,15 @@ packages="$packages ubuntu-restricted-extras"
 #packages="$packages oracle-java8-installer"
 packages="$packages default-jre" #OpenJDK Runtime Environment
 
-# LibreOffice 6 (Fresh)
+# LibreOffice 6 (Still)
 #
-# Ante la dificultad de hacer un downgrade a la version Enterprise (5.4), se
-# mantiene la rama Fresh (6.x.x) y se anade el repositorio de
-# LibreOffice Packgin team, esto para obtener las ultimas actualizaciones.
-sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-0 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-0"
+# Versión estable de LibO
 
-sudo sed -i \
--e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-6-0:${distro_codename}";/' \
-/etc/apt/apt.conf.d/50unattended-upgrades
+sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-1 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-1"
+
+#sudo sed -i \
+#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-6-0:${distro_codename}";/' \
+#/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages libreoffice"
 

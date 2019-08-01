@@ -219,9 +219,9 @@ packages="$packages gimp"
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90 2EBF997C15BDA244B6EBF5D84773BD5E130D1D45 || error_exit "Error al agregar llave para repositorio spotify"
 
-sudo sed -i \
--e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
-/etc/apt/apt.conf.d/50unattended-upgrades
+#sudo sed -i \
+#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
+#/etc/apt/apt.conf.d/50unattended-upgrades
 
 packages="$packages spotify-client"
 

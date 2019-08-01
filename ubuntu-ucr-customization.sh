@@ -171,9 +171,9 @@ then
   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
 
-  sudo sed -i \
-  -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
-  /etc/apt/apt.conf.d/50unattended-upgrades
+  #sudo sed -i \
+  #-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
+  #/etc/apt/apt.conf.d/50unattended-upgrades
 
   packages="$packages google-chrome-stable"
 else

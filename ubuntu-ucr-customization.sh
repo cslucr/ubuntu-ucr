@@ -269,7 +269,7 @@ packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins"
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 # Paquetes innecesarios
-# purgepackages="$purgepackages "
+purgepackages="$purgepackages ubuntu-web-launchers"
 
 # Aplicaciones al inicio
 autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"

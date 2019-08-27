@@ -263,7 +263,8 @@ packages="$packages linux-firmware firmware-b43-installer"
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
 # - Qt 5 extra widget styles para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
-packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins"
+# - Soporte para sistema de archivos exfat
+packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins exfat-fuse exfat-utils"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi

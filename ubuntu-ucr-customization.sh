@@ -150,7 +150,7 @@ packages="$packages default-jre" #OpenJDK Runtime Environment
 #
 # Versión estable de LibO
 
-sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-1 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-1"
+sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-2 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-2"
 
 #sudo sed -i \
 #-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-6-0:${distro_codename}";/' \

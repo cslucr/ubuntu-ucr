@@ -298,7 +298,7 @@ fi
 # facilmente con el Editor de dconf (apt install dconf-editor)
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
-#sudo cp "$BASEDIR"/backgrounds/*.jpg "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
+sudo cp "$BASEDIR"/backgrounds/*.jpg "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
 
 # Gnome-shell
 if grep -q "gnome-shell" /usr/share/xsessions/*
@@ -323,13 +323,13 @@ then
   # fi
 
   # Copia esquema que sobrescribe configuracion de Gnome-shell y lo compila
-  # sudo cp "$BASEDIR"/gschema/30_ucr-gnome-default-settings.gschema.override /usr/share/glib-2.0/schemas/
-  # sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
+  sudo cp "$BASEDIR"/gschema/30_ucr-ubuntu-settings.gschema.override /usr/share/glib-2.0/schemas/
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Reinicia todos los valores redefinidos en archivo override para la sesion actual
   # Si no existe una sesion X11 falla y no hace nada
-  # gsettings reset org.gnome.desktop.background picture-uri
-  # gsettings reset org.gnome.desktop.screensaver picture-uri
+  gsettings reset org.gnome.desktop.background picture-uri
+  gsettings reset org.gnome.desktop.screensaver picture-uri
   # gsettings reset org.gnome.desktop.input-sources sources
   # gsettings reset org.gnome.desktop.interface clock-format
   # gsettings reset org.gnome.desktop.interface clock-show-date
@@ -341,7 +341,7 @@ then
   #gsettings reset org.gnome.shell.extensions.topicons icon-saturation
   #gsettings reset org.gnome.shell.extensions.topicons tray-order
   # gsettings reset org.gnome.shell.extensions.user-theme name
-  # gsettings reset org.gnome.shell favorite-apps
+  gsettings reset org.gnome.shell favorite-apps
   # gsettings reset org.gnome.nautilus.preferences show-directories-first
 
   echo "*** *** *** *** *** ***"

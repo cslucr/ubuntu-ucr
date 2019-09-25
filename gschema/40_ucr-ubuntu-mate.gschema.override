@@ -17,6 +17,9 @@ picture-filename='/usr/share/backgrounds/ubuntu-ucr-bionic.png'
 primary-color='#005DA4'
 secondary-color='#005DA4'
 
+[org.mate.Marco.general]
+theme='Arc-Darker'
+
 [org.mate.peripherals-mouse]
 cursor-theme='Yaru'
 
@@ -26,8 +29,8 @@ numlock-state='on'
 [org.mate.peripherals-keyboard-xkb.kbd]
 layouts=['latam', 'es', 'us', 'us\talt-intl']
 
-[org.mate.Marco.general]
-theme='Arc-Darker'
+[org.mate.sound]
+theme-name='Yaru'
 
 [org.mate.pluma]
 color-scheme='classic'

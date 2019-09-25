@@ -1,25 +1,33 @@
 [x.dm.slick-greeter]
 background='/usr/share/backgrounds/ubuntu-ucr-bionic.png'
 background-color='#005DA4'
-theme-name='Ambiant-MATE'
-icon-theme-name='ubuntu-mono-dark'
+theme-name='Arc-Darker'
+icon-theme-name='Yaru'
+
+[org.mate.interface]
+gtk-theme='Arc-Darker'
+icon-theme='Yaru'
 
 [org.gnome.desktop.interface:MATE]
-gtk-theme='Ambiant-MATE'
-icon-theme='ubuntu-mono-dark'
-cursor-theme='mate'
+gtk-theme='Arc-Darker'
+icon-theme='Yaru'
 
 [org.mate.background]
 picture-filename='/usr/share/backgrounds/ubuntu-ucr-bionic.png'
 primary-color='#005DA4'
 secondary-color='#005DA4'
 
-[org.mate.interface]
-gtk-theme='Ambiant-MATE'
-icon-theme='ubuntu-mono-dark'
+[org.mate.peripherals-mouse]
+cursor-theme='Yaru'
+
+[org.mate.peripherals-keyboard]
+numlock-state='on'
+
+[org.mate.peripherals-keyboard-xkb.kbd]
+layouts=['latam', 'es', 'us', 'us\talt-intl']
 
 [org.mate.Marco.general]
-theme='Ambiant-MATE'
+theme='Arc-Darker'
 
 [org.mate.pluma]
 color-scheme='classic'

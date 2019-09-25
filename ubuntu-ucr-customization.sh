@@ -354,7 +354,6 @@ fi
 # MATE
 if grep -q "MATE" /usr/share/xsessions/*
 then
-  echo "Entorno MATE aún no configurado"
   # Tema durante arranque
   # sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr/ /usr/share/plymouth/themes/
   # sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr/ubuntu-ucr.plymouth 100
@@ -376,10 +375,8 @@ then
   # sudo dconf update
 
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
-  # sudo cp "$BASEDIR"/gschema/30_ucr-mate-settings.gschema.override /usr/share/glib-2.0/schemas/
-  # sudo rm /usr/share/glib-2.0/schemas/mate-ubuntu.gschema.override
-  # sudo rm /usr/share/glib-2.0/schemas/ubuntu-mate.gschema.override
-  # sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
+  sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Favoritos de menu avanzado
 #   sudo mkdir -p /etc/skel/.config/mate-menu

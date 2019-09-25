@@ -1,6 +1,13 @@
-###################
-# global settings #
-###################
+[org.gnome.desktop.interface:GNOME-Greeter]
+cursor-theme = 'Yaru'
+
+[org.gnome.desktop.interface:ubuntu]
+gtk-theme = 'Arc-Darker'
+icon-theme = 'Yaru'
+cursor-theme = 'Yaru'
+
+[org.gnome.desktop.sound]
+theme-name = 'Yaru'
 
 [org.gnome.shell]
 favorite-apps = ['ubiquity.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'chromium-browser.desktop', 'thunderbird.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'libreoffice-impress.desktop', 'spotify.desktop', 'auri.desktop', 'yelp.desktop']

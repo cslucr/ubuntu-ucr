@@ -231,30 +231,22 @@ packages="$packages spotify-client"
 
 packages="$packages linux-firmware firmware-b43-installer"
 
-# Arc gtk theme
+# Arc theme (gtk, gnome-shell)
 #
 # Popular tema gtk que ofrece un mayor atractivo visual. Este se configura,
-# una vez instalado, en la seccion de Gnome-shell.
-# sudo add-apt-repository -y ppa:noobslab/themes || error_exit "Error al agregar PPA: noobslab/themes"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-noobslab-themes:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages arc-theme"
+# una vez instalado, en la seccion correspondiente a entornos de escritorio.
+sudo add-apt-repository -y ppa:noobslab/themes || error_exit "Error al agregar PPA: noobslab/themes"
 
-# Numix icon theme
+packages="$packages arc-theme"
+
+# Yaru theme (iconos, cursores, sonidos)
 #
-# Conjundo de iconos visualmente atractivos y de facil lectura. El paquete
-# incluye todos o casi todos los iconos utilizados. Este paquete se configura,
-# una vez instalado, en la seccion de Gnome-shell.
-# sudo add-apt-repository -y ppa:numix/ppa || error_exit "Error al agregar PPA: numix/ppa"
-#
-# sudo sed -i \
-# -e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-numix:${distro_codename}";/' \
-# /etc/apt/apt.conf.d/50unattended-upgrades
-#
-# packages="$packages numix-icon-theme numix-icon-theme-circle"
+# Conjundo de iconos visualmente atractivos y de facil lectura. Este es el
+# paquete utilizado en versiones recientes de Ubuntu. Se configura, una vez
+# instalado, en la seccion correspondiente a entornos de escritorio.
+sudo add-apt-repository -y ppa:communitheme/ppa || error_exit "Error al agregar PPA: communitheme/ppa"
+
+packages="$packages yaru-theme-icon yaru-theme-sound"
 
 
 # Paquetes varios

@@ -20,6 +20,9 @@ secondary-color='#005DA4'
 [org.mate.Marco.general]
 theme='Arc-Darker'
 
+[org.mate.NotificationDaemon]
+theme='coco'
+
 [org.mate.peripherals-mouse]
 cursor-theme='Yaru'
 

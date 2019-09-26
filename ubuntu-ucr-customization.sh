@@ -315,7 +315,7 @@ then
   # fi
 
   # Copia esquema que sobrescribe configuracion de Gnome-shell y lo compila
-  sudo cp "$BASEDIR"/gschema/30_ucr-ubuntu-settings.gschema.override /usr/share/glib-2.0/schemas/
+  sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu.gschema.override /usr/share/glib-2.0/schemas/
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
   # Reinicia todos los valores redefinidos en archivo override para la sesion actual

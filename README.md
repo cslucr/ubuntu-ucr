@@ -17,14 +17,20 @@ Estas son algunas de sus características:
 
 ## Capturas de pantalla
 
-Próximamente
+Ubuntu UCR 18.04 con entorno de escritorio Gnome-Shell, el predeterminado.
+![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-1.png)
 
+![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-2.png)
+
+Ubuntu MATE UCR 18.04. El entorno MATE requiere de menos recursos.
+![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-mate-1.png)
+
+![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-mate-2.png)
 
 ## Descarga
 
 Imágenes de **Ubuntu UCR**, listas para instalar, pueden ser descargadas desde nuestro servidor de espejos:
 http://espejos.ucr.ac.cr/cslucr/
-
 
 ## Trabajo conjunto
 

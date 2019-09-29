@@ -1,11 +1,15 @@
 [org.gnome.desktop.interface:GNOME-Greeter]
 gtk-theme = 'Arc-Darker'
 cursor-theme = 'Yaru'
+clock-format = "12h"
+clock-show-date = true
 
 [org.gnome.desktop.interface:ubuntu]
 gtk-theme = 'Arc-Darker'
 icon-theme = 'Yaru'
 cursor-theme = 'Yaru'
+clock-format = "12h"
+clock-show-date = true
 
 [org.gnome.desktop.sound]
 theme-name = 'Yaru'

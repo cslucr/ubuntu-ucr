@@ -323,6 +323,8 @@ then
   gsettings reset org.gnome.desktop.interface gtk-theme
   gsettings reset org.gnome.desktop.interface icon-theme
   gsettings reset org.gnome.desktop.interface cursor-theme
+  gsettings reset org.gnome.desktop.interface clock-format
+  gsettings reset org.gnome.desktop.interface clock-show-date
   gsettings reset org.gnome.desktop.sound theme-name
   gsettings reset org.gnome.desktop.background picture-uri
   gsettings reset org.gnome.desktop.screensaver picture-uri
@@ -330,8 +332,6 @@ then
   gsettings reset org.gnome.shell.extensions.user-theme name
   gsettings reset org.gnome.shell favorite-apps
   gsettings reset org.gnome.desktop.input-sources sources
-  # gsettings reset org.gnome.desktop.interface clock-format
-  # gsettings reset org.gnome.desktop.interface clock-show-date
 
   echo "*** *** *** *** *** ***"
   echo ""

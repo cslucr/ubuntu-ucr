@@ -329,7 +329,7 @@ then
   gsettings reset org.gnome.shell enabled-extensions
   gsettings reset org.gnome.shell.extensions.user-theme name
   gsettings reset org.gnome.shell favorite-apps
-  # gsettings reset org.gnome.desktop.input-sources sources
+  gsettings reset org.gnome.desktop.input-sources sources
   # gsettings reset org.gnome.desktop.interface clock-format
   # gsettings reset org.gnome.desktop.interface clock-show-date
 

@@ -327,7 +327,11 @@ then
   gsettings reset org.gnome.desktop.interface clock-show-date
   gsettings reset org.gnome.desktop.sound theme-name
   gsettings reset org.gnome.desktop.background picture-uri
+  gsettings reset org.gnome.desktop.background primary-color
+  gsettings reset org.gnome.desktop.background secondary-color
   gsettings reset org.gnome.desktop.screensaver picture-uri
+  gsettings reset org.gnome.desktop.screensaver primary-color
+  gsettings reset org.gnome.desktop.screensaver secondary-color
   gsettings reset org.gnome.shell enabled-extensions
   gsettings reset org.gnome.shell.extensions.user-theme name
   gsettings reset org.gnome.shell favorite-apps

@@ -16,9 +16,13 @@ theme-name = 'Yaru'
 
 [org.gnome.desktop.background]
 picture-uri = 'file:///usr/share/backgrounds/ubuntu-ucr-bionic.png'
+primary-color='#005DA4'
+secondary-color='#005DA4'
 
 [org.gnome.desktop.screensaver]
 picture-uri = 'file:///usr/share/backgrounds/ubuntu-ucr-bionic.png'
+primary-color='#005DA4'
+secondary-color='#005DA4'
 
 [org.gnome.shell]
 enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com']

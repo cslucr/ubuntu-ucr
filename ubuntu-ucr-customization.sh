@@ -133,18 +133,9 @@ sudo sed -i \
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 packages="$packages ubuntu-restricted-extras"
 
-# Oracle Java 8
+# OpenJDK 8
 #
-# Se sustituye la version de Java por la desarrollada por Oracle.
-#sudo add-apt-repository -y ppa:webupd8team/java || error_exit "Error al agregar PPA: webupd8team/java"
-
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-webupd8team-java:${distro_codename}";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
-
-#echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-#packages="$packages oracle-java8-installer"
-packages="$packages default-jre" #OpenJDK Runtime Environment
+packages="$packages openjdk-8-jdk" #OpenJDK Runtime Environment
 
 # LibreOffice 6 (Still)
 #

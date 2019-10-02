@@ -27,15 +27,15 @@ cache:
 job_ubuntu:
   script:
     - mkdir -p cache/apt/ 
-    - test -f  cache/ubuntu-16.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-16.04.3-desktop-amd64.iso http://espejos.ucr.ac.cr/ubuntu-cd/16.04/ubuntu-16.04.3-desktop-amd64.iso
-    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-16.04.3-desktop-amd64.iso
+    - test -f  cache/ubuntu-18.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-18.04.3-desktop-amd64.iso http://espejos.ucr.ac.cr/ubuntu-cd/18.04/ubuntu-18.04.3-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-18.04.3-desktop-amd64.iso
   only:
     - estable
 
 job_mate:
   script:
     - mkdir -p cache/apt/
-    - test -f  cache/ubuntu-16.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-mate-16.04-desktop-amd64.iso http://cdimage.ubuntu.com/ubuntu-mate/releases/16.04/release/ubuntu-mate-16.04-desktop-amd64.iso
-    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-mate-16.04-desktop-amd64.iso
+    - test -f  cache/ubuntu-18.04.3-desktop-amd64.iso || wget -q -O cache/ubuntu-mate-18.04-desktop-amd64.iso http://cdimage.ubuntu.com/ubuntu-mate/releases/18.04/release/ubuntu-mate-18.04-desktop-amd64.iso
+    - bash ./ubuntu-iso-customization.sh -d -c cache/apt/ cache/ubuntu-mate-18.04-desktop-amd64.iso
   only:
     - estable

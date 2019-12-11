@@ -425,6 +425,21 @@ Type=Application
 Categories=Settings;HardwareSettings;
 Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share/applications/auri.desktop'
 
+# Webapp de Youtube Music
+#
+# Crea un lanzador para facilitar el acceso a este servicio web.
+sudo sh -c 'echo "#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=YouTube Music
+Exec=/opt/google/chrome/google-chrome --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
+Icon=chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default
+StartupWMClass=crx_cinhimbnkkaeohfgghhklpknlkffjgod
+Categories=Audio;Music;Player;AudioVideo;
+Keywords=Audio;Music;Song;Playlist;Last.fm;" > /usr/share/applications/youtubemusic.desktop'
+
 # POST-PROCESAMIENTO ###########################################################
 
 # Uso Horario

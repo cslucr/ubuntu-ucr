@@ -121,8 +121,8 @@ mkdir -p $WGET_CACHE || error_exit "Error al crear directorio para cache de wget
 # ubicados en /var/lib/apt/lists/
 
 sudo sed -i \
--e 's/^\/\/Unattended-Upgrade::MinimalSteps "false";/Unattended-Upgrade::MinimalSteps "true";/' \
--e 's/^\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/' \
+-e 's!^//Unattended-Upgrade::MinimalSteps "false";!Unattended-Upgrade::MinimalSteps "true";!' \
+-e 's!^//Unattended-Upgrade::Remove-Unused-Dependencies "false";!Unattended-Upgrade::Remove-Unused-Dependencies "true";!' \
 /etc/apt/apt.conf.d/50unattended-upgrades
 
 

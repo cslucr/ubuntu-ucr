@@ -245,9 +245,10 @@ packages="$packages yaru-theme-icon yaru-theme-sound"
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
-# - Qt 5 extra widget styles para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
-# - Soporte para sistema de archivos exfat
-packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-plugins exfat-fuse exfat-utils"
+# - Kvantum para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
+# - Soporte para archivos rar.
+# - Soporte para sistema de archivos exfat, hfs, ntfs.
+packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
@@ -502,10 +503,6 @@ rm $WGET_CACHE/libgoocanvas-common.deb $WGET_CACHE/libgoocanvas3.deb $WGET_CACHE
 
 
 # PERFIL PREDETERMINADO
-
-# Qt 5 extra widget styles para que aplicaciones Qt5 usen un estilo nativo
-sudo sh -c 'echo "export QT_QPA_PLATFORMTHEME=gtk2" >> /etc/skel/.profile'
-echo "export QT_QPA_PLATFORMTHEME=gtk2" >> ~/.profile
 
 # Aplicaciones al inicio
 sudo mkdir -p /etc/skel/.config/autostart

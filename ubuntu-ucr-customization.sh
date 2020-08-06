@@ -120,10 +120,10 @@ mkdir -p $WGET_CACHE || error_exit "Error al crear directorio para cache de wget
 # Consulte los valores 'Origin' y 'Suite' en los archivos *_InRelease o *_Release
 # ubicados en /var/lib/apt/lists/
 
-sudo sed -i \
--e 's!^//Unattended-Upgrade::MinimalSteps "false";!Unattended-Upgrade::MinimalSteps "true";!' \
--e 's!^//Unattended-Upgrade::Remove-Unused-Dependencies "false";!Unattended-Upgrade::Remove-Unused-Dependencies "true";!' \
-/etc/apt/apt.conf.d/50unattended-upgrades
+#sudo sed -i \
+#-e 's!^//Unattended-Upgrade::MinimalSteps "false";!Unattended-Upgrade::MinimalSteps "true";!' \
+#-e 's!^//Unattended-Upgrade::Remove-Unused-Dependencies "false";!Unattended-Upgrade::Remove-Unused-Dependencies "true";!' \
+#/etc/apt/apt.conf.d/50unattended-upgrades
 
 
 # Codecs, tipografias de Microsoft y Adobe Flash
@@ -142,11 +142,6 @@ packages="$packages openjdk-8-jdk" #OpenJDK Runtime Environment
 # Versión estable de LibO
 
 sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-2 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-2"
-
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-libreoffice-libreoffice-6-0:${distro_codename}";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
-
 packages="$packages libreoffice"
 
 # Firma digital
@@ -161,11 +156,6 @@ if [ "$arch" == 'x86_64' ]
 then
   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
-
-  #sudo sed -i \
-  #-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Google, Inc.:stable";/' \
-  #/etc/apt/apt.conf.d/50unattended-upgrades
-
   packages="$packages google-chrome-stable"
 else
   packages="$packages chromium-browser"
@@ -175,11 +165,6 @@ fi
 #
 # Ultima version estable
 sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
-
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-yg-jensge-shotwell:${distro_codename}";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
-
 packages="$packages shotwell"
 
 
@@ -196,11 +181,6 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C61A2656FB57B7E4D
 #
 # Ultima version estable
 sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
-
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"LP-PPA-otto-kesselgulasch-gimp:${distro_codename}";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
-
 packages="$packages gimp"
 
 # Spotify
@@ -209,11 +189,6 @@ packages="$packages gimp"
 # ancho de banda.
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo wget -qO - https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
-
-#sudo sed -i \
-#-e 's/Unattended-Upgrade::Allowed-Origins {/Unattended-Upgrade::Allowed-Origins {\n\t"Spotify LTD:stable";/' \
-#/etc/apt/apt.conf.d/50unattended-upgrades
-
 packages="$packages spotify-client"
 
 # Driver comunes

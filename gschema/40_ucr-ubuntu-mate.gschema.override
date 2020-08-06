@@ -1,5 +1,5 @@
 [x.dm.slick-greeter]
-background='/usr/share/backgrounds/ubuntu-ucr-bionic.png'
+background='/usr/share/backgrounds/ubuntu-ucr-focal.png'
 background-color='#005DA4'
 theme-name='Arc-Darker'
 icon-theme-name='Yaru'
@@ -13,7 +13,7 @@ gtk-theme='Arc-Darker'
 icon-theme='Yaru'
 
 [org.mate.background]
-picture-filename='/usr/share/backgrounds/ubuntu-ucr-bionic.png'
+picture-filename='/usr/share/backgrounds/ubuntu-ucr-focal.png'
 primary-color='#005DA4'
 secondary-color='#005DA4'
 
@@ -37,8 +37,4 @@ theme-name='Yaru'
 
 [org.mate.pluma]
 color-scheme='classic'
-
-[org.mate.panel]
-toplevel-id-list=['bottom']
-object-id-list=['briskmenu', 'firefox', 'notification-area', 'indicatorappletcomplete', 'clock', 'show-desktop', 'window-list', 'workspace-switcher', 'trashapplet', 'object-0', 'object-1', 'object-2', 'object-3', 'object-4', 'object-5', 'object-6', 'object-7', 'object-8']
 

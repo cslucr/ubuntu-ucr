@@ -327,17 +327,6 @@ then
 # location:/usr/share/applications/mate-display-properties.desktop
 # location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/applications.list'
 
-  # Se sobreescribe icono de menu de inicio de Numix para todos los tamanos, en su lugar se muestra el logo de Ubuntu
-  # sudo mkdir -p /etc/skel/.icons/Numix/{16,22,24,32,48,64,96,128}/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/16/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/22/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/24/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/32/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/48/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/64/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/96/places/
-  # sudo ln -s /usr/share/icons/ubuntu-mono-dark/apps/22/start-here.svg /etc/skel/.icons/Numix/128/places/
-
   # Configura pantalla de autenticacion
 #   sudo sh -c 'echo "[greeter]
 # background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg

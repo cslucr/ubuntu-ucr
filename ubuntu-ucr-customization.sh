@@ -186,13 +186,12 @@ packages="$packages flatpak"
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
 # - Shotwell, gestor de fotografías.
-# - Kvantum para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
 # - Soporte para archivos rar.
 # - Soporte para sistema de archivos exfat, hfs, ntfs.
 # - Drivers comunes para algunas tarjetas de red.
 # - Arc-theme, popular tema flat.
 # - Yaru theme (iconos, cursores, sonidos).
-packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g inux-firmware firmware-b43-installer arc-theme yaru-theme-icon yaru-theme-sound"
+packages="$packages unattended-upgrades caffeine vlc shutter shotwell rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g inux-firmware firmware-b43-installer arc-theme yaru-theme-icon yaru-theme-sound"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
@@ -202,7 +201,7 @@ packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-
 flathubs="$flathubs org.gimp.GIMP"
 
 # Paquetes innecesarios
-purgepackages="$purgepackages ubuntu-web-launchers"
+#purgepackages="$purgepackages ubuntu-web-launchers"
 
 # Aplicaciones al inicio
 autostart="$autostart /usr/share/applications/caffeine.desktop /usr/share/applications/caffeine-indicator.desktop"

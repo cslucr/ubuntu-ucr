@@ -313,20 +313,6 @@ then
   sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"
 
-  # Favoritos de menu avanzado
-#   sudo mkdir -p /etc/skel/.config/mate-menu
-#   sudo sh -c 'echo "location:/usr/share/applications/firefox.desktop
-# location:/usr/share/applications/google-chrome.desktop
-# location:/usr/share/applications/thunderbird.desktop
-# location:/usr/share/applications/spotify.desktop
-# separator
-# location:/usr/share/applications/libreoffice-writer.desktop
-# location:/usr/share/applications/libreoffice-calc.desktop
-# location:/usr/share/applications/libreoffice-impress.desktop
-# separator
-# location:/usr/share/applications/mate-display-properties.desktop
-# location:/usr/share/applications/auri.desktop" > /etc/skel/.config/mate-menu/applications.list'
-
   # Configura pantalla de autenticacion
 #   sudo sh -c 'echo "[greeter]
 # background = /usr/share/backgrounds/ubuntu-16.04-ucr-background.jpg

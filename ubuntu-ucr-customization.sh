@@ -166,12 +166,6 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C61A2656FB57B7E4D
 
 #packages="$packages dropbox python3-gpg"
 
-# GIMP
-#
-# Ultima version estable
-sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp || error_exit "Error al agregar PPA: otto-kesselgulasch/gimp"
-packages="$packages gimp"
-
 # Spotify
 #
 # Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
@@ -204,7 +198,7 @@ sudo add-apt-repository -y ppa:communitheme/ppa || error_exit "Error al agregar 
 packages="$packages yaru-theme-icon yaru-theme-sound"
 
 
-# Paquetes varios
+# Paquetes varios (apt)
 # - unattended-upgrades para actualizaciones automaticas
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
@@ -218,6 +212,10 @@ packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
+  
+# Paquetes varios (flathub)
+# - Gimp para rotar, recortar, balancear imagenes
+flathubs="$flathubs org.gimp.GIMP"
 
 # Paquetes innecesarios
 purgepackages="$purgepackages ubuntu-web-launchers"

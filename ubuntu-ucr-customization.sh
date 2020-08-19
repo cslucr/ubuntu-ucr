@@ -174,12 +174,6 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo wget -qO - https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
 packages="$packages spotify-client"
 
-# Driver comunes
-# Instala drivers que comunmente son necesarios para hacer funcionar tarjeta de internet (ethernet y wifi)
-# y dispositivos de audio
-
-packages="$packages linux-firmware firmware-b43-installer"
-
 # Arc theme (gtk, gnome-shell)
 #
 # Popular tema gtk que ofrece un mayor atractivo visual. Este se configura,
@@ -197,6 +191,11 @@ sudo add-apt-repository -y ppa:communitheme/ppa || error_exit "Error al agregar 
 
 packages="$packages yaru-theme-icon yaru-theme-sound"
 
+# Flatpak
+#
+# Soporte de paquetes en este formato.
+sudo add-apt-repository -y ppa:alexlarsson/flatpak || error_exit "Error al agregar PPA: lexlarsson/flatpak"
+packages="$packages flatpak"
 
 # Paquetes varios (apt)
 # - unattended-upgrades para actualizaciones automaticas
@@ -207,8 +206,8 @@ packages="$packages yaru-theme-icon yaru-theme-sound"
 # - Kvantum para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
 # - Soporte para archivos rar.
 # - Soporte para sistema de archivos exfat, hfs, ntfs.
-# - Flatpak para soporte de paquetes en este formato.
-packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g flatpak"
+# - Drivers comunes para algunas tarjetas de red
+packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g inux-firmware firmware-b43-installer"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi

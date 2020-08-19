@@ -174,14 +174,6 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo wget -qO - https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
 packages="$packages spotify-client"
 
-# Arc theme (gtk, gnome-shell)
-#
-# Popular tema gtk que ofrece un mayor atractivo visual. Este se configura,
-# una vez instalado, en la seccion correspondiente a entornos de escritorio.
-sudo add-apt-repository -y ppa:noobslab/themes || error_exit "Error al agregar PPA: noobslab/themes"
-
-packages="$packages arc-theme"
-
 # Yaru theme (iconos, cursores, sonidos)
 #
 # Conjundo de iconos visualmente atractivos y de facil lectura. Este es el
@@ -207,7 +199,8 @@ packages="$packages flatpak"
 # - Soporte para archivos rar.
 # - Soporte para sistema de archivos exfat, hfs, ntfs.
 # - Drivers comunes para algunas tarjetas de red
-packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g inux-firmware firmware-b43-installer"
+# - Arc-theme, popular tema flat
+packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g inux-firmware firmware-b43-installer arc-theme"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi

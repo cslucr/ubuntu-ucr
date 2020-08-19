@@ -140,33 +140,17 @@ packages="$packages openjdk-8-jdk" #OpenJDK Runtime Environment
 # LibreOffice 6 (Still)
 #
 # Versión estable de LibO
-
 sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-4 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-4"
 packages="$packages libreoffice"
 
 # Firma digital
 # TODO
 
-# Google Chrome o Chromium
+# Google Chrome
 #
-# Para sistemas de 64bits se anade el repositorio de Google Chrome. Este no
-# soporta sistemas de 32bis por lo que, en este caso, se instala Chromium, el
-# proyecto base de Google Chrome.
-if [ "$arch" == 'x86_64' ]
-then
-  sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
-  packages="$packages google-chrome-stable"
-else
-  packages="$packages chromium-browser"
-fi
-
-# Shotwell
-#
-# Ultima version estable
-sudo add-apt-repository -y ppa:yg-jensge/shotwell || error_exit "Error al agregar PPA: yg-jensge/shotwell"
-packages="$packages shotwell"
-
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || error_exit "Error al agregar llave para repositorio google-chrome"
+packages="$packages google-chrome-stable"
 
 # Dropbox
 #
@@ -220,10 +204,11 @@ packages="$packages yaru-theme-icon yaru-theme-sound"
 # - caffeine para inibir el descansador de pantalla, ideal para una exposicion
 # - vlc para reproduccion de videos
 # - Shutter para capturar la pantalla o solo secciones de ella. También permite editar la captura.
+# - Shotwell, gestor de fotografías.
 # - Kvantum para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
 # - Soporte para archivos rar.
 # - Soporte para sistema de archivos exfat, hfs, ntfs.
-packages="$packages unattended-upgrades caffeine vlc shutter qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g"
+packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi

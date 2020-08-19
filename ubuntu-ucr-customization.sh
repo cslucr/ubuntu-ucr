@@ -87,10 +87,15 @@ packages=""
 #  purgepackages="$purgepackages paquete1 paquete2 paquete3"
 purgepackages=""
 
+# En esta variable se iran concatenando los nombres de los programas flatpak, 
+# del repositorio flathub, que se instalaran, de la forma:
+#  flathubs="$flathubs ID1 ID2 ID3"
+flathubs=""
+
 # En esta variable se iran concatenando las rutas de
 # archivos .desktop, de aplicaciones que deben iniciar
 # al cargar sesion, de la forma:
-#  autostart="$autostart ruta1 ruta2 ruta2"
+#  autostart="$autostart ruta1 ruta2 ruta3"
 autostart=""
 
 # Crea directorio a donde descargar archivos con wget
@@ -208,7 +213,8 @@ packages="$packages yaru-theme-icon yaru-theme-sound"
 # - Kvantum para que aplicaciones Qt5, como VLC o VirtualBox, usen un estilo nativo.
 # - Soporte para archivos rar.
 # - Soporte para sistema de archivos exfat, hfs, ntfs.
-packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g"
+# - Flatpak para soporte de paquetes en este formato.
+packages="$packages unattended-upgrades caffeine vlc shutter shotwell qt5-style-kvantum qt5-style-kvantum-themes rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g flatpak"
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
@@ -230,6 +236,9 @@ sudo apt -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 if ! $APT_CACHED ; then
   sudo apt clean
 fi
+
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install -y flathub $flathubs
 
 #sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list # se elimina repositorio temporal
 #sudo rm /etc/apt/sources.list.d/sources-mirror-ucr.list.save

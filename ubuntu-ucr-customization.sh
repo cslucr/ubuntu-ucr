@@ -141,7 +141,7 @@ packages="$packages openjdk-8-jdk" #OpenJDK Runtime Environment
 #
 # Versión estable de LibO
 
-sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-2 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-2"
+sudo add-apt-repository -y ppa:libreoffice/libreoffice-6-4 || error_exit "Error al agregar PPA: libreoffice/libreoffice-6-4"
 packages="$packages libreoffice"
 
 # Firma digital

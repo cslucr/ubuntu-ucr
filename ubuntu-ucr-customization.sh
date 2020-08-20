@@ -294,7 +294,8 @@ then
   sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
   sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
 
-  sudo update-grub
+ # sudo update-grub
+  sudo update-initramfs -u
 
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
   sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/

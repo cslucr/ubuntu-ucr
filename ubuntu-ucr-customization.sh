@@ -231,7 +231,8 @@ sudo flatpak install -y flathub $flathubs
 # facilmente con el Editor de dconf (apt install dconf-editor)
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
-sudo cp "$BASEDIR"/backgrounds/*.jpg "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
+sudo find "$BASEDIR"/backgrounds -name *.jpg -exec cp {} /usr/share/backgrounds/ \;
+sudo find "$BASEDIR"/backgrounds -name *.png -exec cp {} /usr/share/backgrounds/ \;
 
 # Gnome-shell
 if grep -q "gnome-shell" /usr/share/xsessions/*

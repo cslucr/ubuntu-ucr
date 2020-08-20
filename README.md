@@ -18,9 +18,7 @@ Estas son algunas de sus características:
 ## Capturas de pantalla
 
 Ubuntu UCR 20.04 con entorno de escritorio Gnome-Shell, el predeterminado.
-#![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-1.png)
 
-#![Ubuntu 18.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/master/screenshot-ubuntu-2.png)
 
 Ubuntu MATE UCR 20.04. El entorno MATE requiere de menos recursos.
 ![Ubuntu 20.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/20.04/screenshot-ubuntu-mate-1.png)

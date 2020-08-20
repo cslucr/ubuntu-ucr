@@ -174,6 +174,13 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo wget -qO - https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
 packages="$packages spotify-client"
 
+# Anydesk
+#
+# Software para escritorio remoto.
+sudo wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
+sudo sh -c 'echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list'
+packages="$packages anydesk"
+
 # Flatpak
 #
 # Soporte de paquetes en este formato.

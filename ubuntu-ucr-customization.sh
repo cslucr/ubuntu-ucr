@@ -385,20 +385,6 @@ sudo timedatectl set-timezone America/Costa_Rica
 #   if grep -q "MATE" /usr/share/xsessions/*; then rm $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb; fi
 # fi
 
-# Correccion de Shutter para activar editor e indicador
-wget -c -O $WGET_CACHE/libgoocanvas-common.deb https://launchpad.net/ubuntu/+archive/primary/+files/libgoocanvas-common_1.0.0-1_all.deb
-wget -c -O $WGET_CACHE/libgoocanvas3.deb https://launchpad.net/ubuntu/+archive/primary/+files/libgoocanvas3_1.0.0-1_amd64.deb
-wget -c -O $WGET_CACHE/libgoo-canvas-perl.deb https://launchpad.net/ubuntu/+archive/primary/+files/libgoo-canvas-perl_0.06-2ubuntu3_amd64.deb
-
-sudo dpkg -i $WGET_CACHE/libgoocanvas-common.deb $WGET_CACHE/libgoocanvas3.deb $WGET_CACHE/libgoo-canvas-perl.deb
-sudo apt -yf install
-
-sudo apt -y install libappindicator-dev
-echo "yes" | sudo cpan -i Gtk2::AppIndicator
-
-rm $WGET_CACHE/libgoocanvas-common.deb $WGET_CACHE/libgoocanvas3.deb $WGET_CACHE/libgoo-canvas-perl.deb
-
-
 # PERFIL PREDETERMINADO
 
 # Aplicaciones al inicio

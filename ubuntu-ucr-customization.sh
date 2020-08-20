@@ -213,7 +213,6 @@ fi
 if grep -q "gnome-shell" /usr/share/xsessions/*
   then packages="$packages gnome-tweak-tool"
 fi
-  # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 # Paquetes varios (snaps)
 # - Telegram desktop, cliente de mensajería instantánea

@@ -203,9 +203,16 @@ packages="$packages flatpak"
 # - Drivers comunes para algunas tarjetas de red.
 # - Arc-theme, popular tema flat.
 # - Yaru theme (iconos, cursores, sonidos).
-packages="$packages unattended-upgrades caffeine thunderbird vlc shotwell rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g linux-firmware firmware-b43-installer arc-theme yaru-theme-icon yaru-theme-sound"
-# - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
-  if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
+# - OpenVPN y VPNC
+packages="$packages unattended-upgrades caffeine thunderbird vlc shotwell rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g linux-firmware firmware-b43-installer arc-theme yaru-theme-icon yaru-theme-sound openconnect network-manager-openconnect vpnc network-manager-vpnc"
+# - Plugin Gnome para OpenVPN y VPNC.
+if grep -q "gnome-shell" /usr/share/xsessions/*
+  then packages="$packages network-manager-openconnect-gnome network-manager-vpnc-gnome"
+fi
+# - Configuracion avanzada para Gnome.
+if grep -q "gnome-shell" /usr/share/xsessions/*
+  then packages="$packages gnome-tweak-tool"
+fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
 
 # Paquetes varios (snaps)

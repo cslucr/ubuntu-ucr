@@ -207,6 +207,10 @@ packages="$packages unattended-upgrades caffeine thunderbird vlc shotwell rar p7
 # - configuracion avanzada para reestablecer tema predeterminado o ajustes adicionales
   if grep -q "gnome-shell" /usr/share/xsessions/*;  then packages="$packages gnome-tweak-tool"; fi
   # if grep -q "MATE" /usr/share/xsessions/*;         then packages="$packages mate-tweak"; fi
+
+# Paquetes varios (snaps)
+# - Telegram desktop, cliente de mensajería instantánea
+snaps="$snaps telegram-desktop"
   
 # Paquetes varios (flathub)
 # - Gimp para rotar, recortar, balancear imagenes
@@ -246,8 +250,7 @@ sudo flatpak install -y flathub $flathubs
 # facilmente con el Editor de dconf (apt install dconf-editor)
 
 # Fondo de pantalla y la imagen en la pantalla de autenticacion
-sudo find "$BASEDIR"/backgrounds -name *.jpg -exec cp {} /usr/share/backgrounds/ \;
-sudo find "$BASEDIR"/backgrounds -name *.png -exec cp {} /usr/share/backgrounds/ \;
+sudo cp "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
 
 # Gnome-shell
 if grep -q "gnome-shell" /usr/share/xsessions/*

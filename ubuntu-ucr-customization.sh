@@ -356,24 +356,11 @@ sudo timedatectl set-timezone America/Costa_Rica
 # wget -c -O $WGET_CACHE/es_ANY.oxt https://github.com/sbosio/rla-es/releases/download/v2.2/es_ANY.oxt
 # sudo unopkg add --shared $WGET_CACHE/es_ANY.oxt
 
-
 # Calc
 # Este complemento permite eliminar las celdas vacias de una tabla en una hoja de calculo
 # ultima version en https://extensions.libreoffice.org/extensions/tools-for-calc-edit
 # wget -c -O $WGET_CACHE/toolsforedit.oxt "https://extensions.libreoffice.org/extensions/tools-for-calc-edit/1.0.0/@@download/file/toolsforedit.oxt"
 # sudo unopkg add --shared $WGET_CACHE/toolsforedit.oxt
-
-
-# Firmador BCCR
-# if [ "$arch" == 'x86' ]
-# then
-#   wget -c -O $WGET_CACHE/firmador-bccr.deb https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x86/firmador-bccr_3.0_i386.deb
-# else
-#   wget -c -O $WGET_CACHE/firmador-bccr.deb  https://www.firmadigital.go.cr/Bccr.Firma.Fva.InstaladoresMultiplataforma/Linux/x64/firmador-bccr_3.0_amd64.deb
-# fi
-#
-# sudo dpkg -i $WGET_CACHE/firmador-bccr.deb || error_exit "Error al instalar firmador-bccr"
-# sudo rm /etc/xdg/autostart/Firmador-BCCR.desktop
 
 # limpieza de cache de wget
 # if ! $WGET_CACHED ; then
@@ -382,7 +369,6 @@ sudo timedatectl set-timezone America/Costa_Rica
 #   rm $WGET_CACHE/es_ANY.oxt
 #   rm $WGET_CACHE/toolsforedit.oxt
 #   rm $WGET_CACHE/firmador-bccr.deb
-#   if grep -q "MATE" /usr/share/xsessions/*; then rm $WGET_CACHE/arc-theme_1488477732.766ae1a-0_all.deb; fi
 # fi
 
 # PERFIL PREDETERMINADO

@@ -208,10 +208,10 @@ packages="$packages unattended-upgrades caffeine thunderbird vlc shotwell rar p7
 
 # Paquetes varios para Gnome (apt)
 if grep -q "gnome-shell" /usr/share/xsessions/*
-  then
-    # - Plugin Gnome para OpenVPN y VPNC.
-    # - Configuracion avanzada para Gnome.
-    packages="$packages network-manager-openconnect-gnome network-manager-vpnc-gnome gnome-tweak-tool"
+then
+  # - Plugin Gnome para OpenVPN y VPNC.
+  # - Configuracion avanzada para Gnome.
+  packages="$packages network-manager-openconnect-gnome network-manager-vpnc-gnome gnome-tweak-tool"
 fi
 
 # Paquetes varios (snaps)

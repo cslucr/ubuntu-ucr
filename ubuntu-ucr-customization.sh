@@ -87,6 +87,11 @@ packages=""
 #  purgepackages="$purgepackages paquete1 paquete2 paquete3"
 purgepackages=""
 
+# En esta variable se iran concatenando los nombres de los programas snap, 
+# que se instalaran, de la forma:
+#  snaps="$snaps paquete1 paquete2 paquete3"
+snaps=""
+
 # En esta variable se iran concatenando los nombres de los programas flatpak, 
 # del repositorio flathub, que se instalaran, de la forma:
 #  flathubs="$flathubs ID1 ID2 ID3"
@@ -224,6 +229,8 @@ sudo apt -y autoremove || error_exit "Error al remover paquetes sin utilizar"
 if ! $APT_CACHED ; then
   sudo apt clean
 fi
+
+sudo snap install $snaps
 
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub $flathubs

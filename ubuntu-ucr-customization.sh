@@ -238,6 +238,18 @@ sudo find "$BASEDIR"/backgrounds -name *.png -exec cp {} /usr/share/backgrounds/
 # Gnome-shell
 if grep -q "gnome-shell" /usr/share/xsessions/*
 then
+  # Tema durante arranque
+  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-logo/ /usr/share/plymouth/themes/
+  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth 100
+  sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth
+
+  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-text/ /usr/share/plymouth/themes/
+  sudo cp "$BASEDIR"/plymouth/ubuntu-ucr-text.so /usr/lib/x86_64-linux-gnu/plymouth/
+  sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
+  sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
+
+  sudo update-initramfs -u || error_exit "Error al actualizar initramfs"
+
   # Plugins de Gnome-shell
   #
   # Como instalar una extension desde la linea de comandos:
@@ -294,8 +306,7 @@ then
   sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
   sudo update-alternatives --set text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth
 
- # sudo update-grub
-  sudo update-initramfs -u
+  sudo update-initramfs -u || error_exit "Error al actualizar initramfs"
 
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
   sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/

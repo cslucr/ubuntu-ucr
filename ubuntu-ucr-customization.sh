@@ -205,13 +205,13 @@ packages="$packages flatpak"
 # - Yaru theme (iconos, cursores, sonidos).
 # - OpenVPN y VPNC
 packages="$packages unattended-upgrades caffeine thunderbird vlc shotwell rar p7zip-rar exfat-fuse exfat-utils hfsplus hfsutils ntfs-3g linux-firmware firmware-b43-installer arc-theme yaru-theme-icon yaru-theme-sound openconnect network-manager-openconnect vpnc network-manager-vpnc"
-# - Plugin Gnome para OpenVPN y VPNC.
+
+# Paquetes varios para Gnome (apt)
 if grep -q "gnome-shell" /usr/share/xsessions/*
-  then packages="$packages network-manager-openconnect-gnome network-manager-vpnc-gnome"
-fi
-# - Configuracion avanzada para Gnome.
-if grep -q "gnome-shell" /usr/share/xsessions/*
-  then packages="$packages gnome-tweak-tool"
+  then
+    # - Plugin Gnome para OpenVPN y VPNC.
+    # - Configuracion avanzada para Gnome.
+    packages="$packages network-manager-openconnect-gnome network-manager-vpnc-gnome gnome-tweak-tool"
 fi
 
 # Paquetes varios (snaps)

@@ -301,14 +301,6 @@ then
   #
   # sudo update-grub
 
-  # Basado en https://lauri.võsandi.com/2015/03/dconf.html
-  # sudo mkdir -p /etc/dconf/db/mate.d/lock/
-  # sudo mkdir -p /etc/dconf/profile/
-  # sudo sh -c 'echo "user-db:user" > /etc/dconf/profile/user'
-  # sudo sh -c 'echo "system-db:mate" >> /etc/dconf/profile/user'
-  # sudo cp "$BASEDIR"/gschema/panel /etc/dconf/db/mate.d/panel
-  # sudo dconf update
-
   # Copia esquema que sobrescribe configuracion de MATE y lo compila
   sudo cp "$BASEDIR"/gschema/40_ucr-ubuntu-mate.gschema.override /usr/share/glib-2.0/schemas/
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/ || error_exit "Error al compilar gschemas"

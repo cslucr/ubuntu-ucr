@@ -242,19 +242,13 @@ then
   #
   # Como instalar una extension desde la linea de comandos:
   #  http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
-  # sudo wget -c -O $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip "https://extensions.gnome.org/download-extension/TopIcons@phocean.net.shell-extension.zip?version_tag=6608"
-  # sudo unzip $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip -d /usr/share/gnome-shell/extensions/TopIcons@phocean.net/
-  # sudo chmod -R 755 /usr/share/gnome-shell/extensions/TopIcons@phocean.net/
-  #
   #
   # sudo wget -c -O $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip "https://extensions.gnome.org/download-extension/mediaplayer@patapon.info.shell-extension.zip?version_tag=7152"
   # sudo unzip $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip -d /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
   # sudo chmod -R 755 /usr/share/gnome-shell/extensions/mediaplayer@patapon.info/
   #
-  #
   # if ! $WGET_CACHED ; then
   #   sudo rm $WGET_CACHE/mediaplayer@patapon.info.v57.shell-extension.zip
-  #   sudo rm $WGET_CACHE/TopIcons@phocean.net.shell-extension.zip
   # fi
 
   # Copia esquema que sobrescribe configuracion de Gnome-shell y lo compila

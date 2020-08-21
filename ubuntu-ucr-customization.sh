@@ -375,6 +375,9 @@ Keywords=Network;Wireless;Wi-Fi;Wifi;LAN;AURI;Eduroam;Internet;Red" > /usr/share
 # Se activa el uso horario para que la fecha este siempre en hora tica
 sudo timedatectl set-timezone America/Costa_Rica
 
+# Deshabilita Anydesk en el arranque
+sudo systemctl disable anydesk
+
 # Complementos para LibreOffice
 # LanguageTool.oxt (corrector gramatical)
 # ultima version en https://www.languagetool.org/download/

@@ -8,17 +8,14 @@ Estas son algunas de sus características:
 
 - Se basa en la versión de Ubuntu con soporte extendido, lo que ofrece mayor estabilidad y gran soporte técnico por parte de la comunidad.
 - Tema gráfico moderno y atractivo.
-- Versiones actualizadas del software base, como LibreOffice, Mozilla Firefox, Shotwell, Rhythmbox y otros.
-- Extras de terceros preinstalados, como tipografías Arial, Times New Roman, etc., plugins Oracle Java, Adobe Flash, o codecs multimedia.
-- Software adicional como Gimp, Google Chrome, VLC, Spotify o la herramienta de configuración de AURI y Eduroam.
-- Actualizaciones automáticas de seguridad. Estas son silenciosas y no requieren intervención del usuario.
-- Soporte para lectores de firma digital, certificados de la CA nacional y programas instalados del BCCR.
+- Extras de terceros preinstalados, como tipografías Arial, Times New Roman, etc., plugins Java o codecs multimedia.
+- Software adicional como Zoom, Telegram, Google Chrome, Gimp, VLC, Spotify o la herramienta de configuración de AURI y Eduroam.
 - Complementos para LibreOffice como sinónimos, corrección ortográfica, entre otros; los cuales permiten tener un mejor aprovechamiento de la herramienta.
 
 ## Capturas de pantalla
 
 Ubuntu UCR 20.04 con entorno de escritorio Gnome-Shell, el predeterminado.
-
+TODO
 
 Ubuntu MATE UCR 20.04. El entorno MATE requiere de menos recursos.
 ![Ubuntu 20.04 UCR](https://raw.githubusercontent.com/cslucr/ubuntu-ucr/20.04/screenshot-ubuntu-mate-1.png)

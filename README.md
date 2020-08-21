@@ -53,21 +53,20 @@ Se toma como base Ubuntu por las siguientes razones:
 
 ### Para personalizar una instalación en limpio:
 
-1. Realice una instalación en limpio de Ubuntu 18.04 LTS, funciona con Gnome-Shell y MATE.
-2. Conéctese a Internet
-3. Descargue el proyecto: `wget https://github.com/cslucr/ubuntu-ucr/archive/master.zip`
-4. Descomprima: `unzip master.zip`
-5. Ingrese al directorio: `cd ubuntu-ucr-master`
-6. De permisos de ejecución al script: `chmod +x ubuntu-ucr-customization.sh`
-7. Ejecútelo: `./ubuntu-ucr-customization.sh`
-8. Siga las instrucciones
+1. Realice una instalación en limpio de Ubuntu 20.04 LTS, funciona con Gnome-Shell y MATE.
+2. Conéctese a Internet.
+3. Descargue y descomprima el proyecto.
+4. Abra una terminal en el directorio del proyecto.
+5. De permisos de ejecución al script: `chmod +x ubuntu-ucr-customization.sh`
+6. Ejecútelo: `./ubuntu-ucr-customization.sh`
+7. Siga las instrucciones
 
 ### Para generar una imagen ISO
 
 El script *ubuntu-ucr-iso-generator.sh* toma una imagen ISO de Ubuntu y genera un ISO personalizado. El mismo descarga y ejecuta el script de perzonalización.
 1. Instale las herramientas requeridas: `sudo apt install squashfs-tools xorriso`
-2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 18.04 con Gnome-Shell o MATE.
-3. Descargue el script *ubuntu-ucr-iso-generator.sh*: `wget https://github.com/cslucr/ubuntu-ucr/raw/master/ubuntu-ucr-iso-generator.sh`
+2. Descargue un ISO soportado por este proyecto. Actualmente Ubuntu 20.04 con Gnome-Shell o MATE.
+3. Descargue el script *ubuntu-ucr-iso-generator.sh*.
 3. De permisos de ejecución al script: `chmod +x ubuntu-ucr-iso-generator.sh`
 4. Ejecútelo indicando la ruta al archivo ISO: `./ubuntu-ucr-iso-generator.sh ubuntu-18.04.x-desktop-arch.iso`
 

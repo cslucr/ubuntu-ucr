@@ -215,8 +215,9 @@ then
 fi
 
 # Paquetes varios (snaps)
-# - Telegram desktop, cliente de mensajería instantánea
-snaps="$snaps telegram-desktop"
+# - Telegram desktop, cliente de mensajería instantánea.
+# - Zoom, popular cliente para videoconferencias.
+snaps="$snaps telegram-desktop zoom-client"
   
 # Paquetes varios (flathub)
 # - Gimp para rotar, recortar, balancear imagenes

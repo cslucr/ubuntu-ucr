@@ -1,8 +1,0 @@
-[Plymouth Theme]
-Name=Ubuntu UCR
-Description=El tema original de Ubuntu con la paleta de colores UCR.
-ModuleName=script
-
-[script]
-ImageDir=/usr/share/plymouth/themes/ubuntu-ucr-logo
-ScriptFile=/usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.script

@@ -263,10 +263,6 @@ sudo cp "$BASEDIR"/backgrounds/*.png /usr/share/backgrounds/
 if grep -q "gnome-shell" /usr/share/xsessions/*
 then
   # Tema durante arranque
-  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-logo/ /usr/share/plymouth/themes/
-  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth 100
-  sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth
-
   sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-text/ /usr/share/plymouth/themes/
   sudo cp "$BASEDIR"/plymouth/ubuntu-ucr-text.so /usr/lib/x86_64-linux-gnu/plymouth/
   sudo update-alternatives --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-ucr-text/ubuntu-ucr-text.plymouth 100
@@ -321,9 +317,9 @@ fi
 if grep -q "MATE" /usr/share/xsessions/*
 then
   # Tema durante arranque
-  sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-logo/ /usr/share/plymouth/themes/
-  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth 100
-  sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/ubuntu-ucr-logo/ubuntu-ucr-logo.plymouth
+  sudo cp -r "$BASEDIR"/plymouth/spinner/ /usr/share/plymouth/themes/
+  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/spinner/spinner.plymouth 100
+  sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/spinner/spinner.plymouth
 
   sudo cp -r "$BASEDIR"/plymouth/ubuntu-ucr-text/ /usr/share/plymouth/themes/
   sudo cp "$BASEDIR"/plymouth/ubuntu-ucr-text.so /usr/lib/x86_64-linux-gnu/plymouth/

@@ -176,7 +176,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C61A2656FB57B7E4D
 # Alternativa a YouTube para escuchar musica, haciendo un uso mucho menor del
 # ancho de banda.
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo wget -qO - https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
+sudo wget -qO - https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - || error_exit "Error al agregar llave para repositorio spotify"
 packages="$packages spotify-client"
 
 # Anydesk
